@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <title>Metagenomic Visualization</title>
     <link rel="stylesheet" href="styles.css" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700&display=swap" rel="stylesheet">
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="js/Phylo.js" async></script>
     <script src="js/StackedBar.js" async></script>
@@ -16,15 +16,22 @@
 
 <body>
     <div class="header">
-        <h1>Visualization of Metagenomic Data</h1>
-        <p class="info">Authors:  LeAnn Lindsey, Kimberly Truong, Lourdes Valdez</p>
+        <header>
+            <h1>Visualization for Metagenomic Data</h1>
+            <div>Authors:  LeAnn Lindsey, Kimberly Truong, Lourdes Valdez</div>
+        </header>
     </div>
     <div class="wrapper">
         <div class="innerWrapper">
-            <div id="Phylo" class="view"></div>
+            <div id="Phylo" class="view">
+                <p>phylogenetic tree</p>
             </div>
-            <div id="StackedBar" class="view">  
-            </div>
+        </div>
+        <div id="stacked-barchart" class="view">
+            <p>stacked bar chart</p>
+        </div>
+        <div id="heatmap" class="view">  
+            <p>heatmap</p>
         </div>
     </div>
 </body>
