@@ -1,4 +1,4 @@
-class Tree {
+ class Tree {
     /**
      * Creates a Tree object representing the 
      * phylogeny of all microbial species present
