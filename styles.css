@@ -87,8 +87,34 @@ label {
 /* Stacked Bar Chart Styling */
 
 #stacked-barchart{
-  width: 600px;
+  width: 700px;
   display: inline-block;
 
 }
 
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  min-width: 75px;
+  height: 25px;
+  padding: 6px;
+  background: white;
+  stroke: gray;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.tooltip h1{
+  margin: auto;
+  font-size: 24px;
+  font-family: "Work Sans";
+  font-weight: lighter;
+
+}
+
+.tooltip h2 {
+  margin: auto;
+  font-size: 16px;
+  font-family: "Work Sans";
+  font-weight: lighter;
+}
