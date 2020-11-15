@@ -129,10 +129,11 @@ drawChart(){
       });
 }
 tooltipRender(stackedData) {
-    //let abundance = []
-    //make for loop or just figure out how to subtract
-    let text = "<h1>" + stackedData[1] + "</h1>"; //.charAt(0).toUpperCase()
-    //console.log(stackedData) //+ data['phrase'].slice(1) +
+    let abundance = stackedData[1] - stackedData[0];
+    let taxon = stackedData['data']
+    console.log(stackedData)
+    console.log(taxon)
+    let text = "<h1>" + taxon + "</h1>" + "<h2>" + abundance + "</h2>"; //.charAt(0).toUpperCase()
     return text;
     
 }
