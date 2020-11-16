@@ -2,5 +2,5 @@
 
 Note to TA:  
 
-Feedback from the Peer Review is saved in the +++ directory
-Process Book is also saved in the +++ directory
+The Process Book and the Feedback from the Peer Review is saved in the cs6630-reports directory
+
