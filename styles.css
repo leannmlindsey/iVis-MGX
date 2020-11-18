@@ -5,7 +5,17 @@ body{
 }
 
 header{
-  text-align: center
+  text-align: center;
+  background: #ffbb78;
+  color: white;
+}
+
+header h1{
+  text-shadow: 2px 2px black;
+}
+
+header div{
+  color: black;
 }
 
 .wrapper {
