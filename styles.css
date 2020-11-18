@@ -12,27 +12,46 @@ header{
   width: 1600px;
   margin: auto;
 }
-/* 
-.view {
-  width: 800px;
-  display: inline-block;
-  float: left;
-}  */
 
 .innerWrapper {
   width: 830px;
   display: inline-block;
   float: left;
 }
+
+.phylo_text{
+  background:lightgrey;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.stack_text{
+  background:lightgrey;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.heat_text{
+  background:lightgrey;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+
 /* Kimberly tree styling */
+#Phylo{
+  width: 700px;
+  height: 1000px;
+  overflow-y: scroll;
+}
 .node circle {
   fill: #fff;
   stroke: steelblue;
-  stroke-width: 3px;
+  stroke-width: 1px;
 }
 
 .node text {
-  font: 12px sans-serif;
+  font-size: 14px;
 }
 
 .link {
@@ -41,33 +60,8 @@ header{
   stroke-width: 2px;
 }
 
-/* Tree Styling 
-
-.node circle {
-  fill: #999;
-}
-
-.node text {
-  font: 10px sans-serif;
-}
-
-.node--internal circle {
-  fill: #555;
-}
-
-.node--internal text {
-  text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
-}
-
-.link {
-  fill: none;
-  stroke: #555;
-  stroke-opacity: 0.4;
-  stroke-width: 1.5px;
-} */
-
 form {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Work Sans";
   position: absolute;
   left: 10px;
   top: 10px;
@@ -80,9 +74,12 @@ label {
 /* Heat Map Styling */
 
 #heatmap{
-  width: 800px;
-  display: block
+  width: 700px;
+  height: 500px;
+  float: right;
+  overflow: scroll;
 }
+
 
 /* Stacked Bar Chart Styling */
 

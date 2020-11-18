@@ -1,31 +1,44 @@
 class sBar{
     constructor(data){
         this.data = data;
+        this.select_subset=[];
 
+        this.subsetData(data);
         this.drawChart(data);
+        
 
     }
 
-// this worked with LeAnn by transposing the data and deleting the header that was being read in.
-    //ideas to fix this
-        //read in multiple files
-        //transpose within the script
-        //make sure there are no headers/numbered headers
+    subsetData(){
 
-
-
+        this.select_subset = this.data.map((item) => {
+        return {
+        group: item.group,
+        "Bacteria.Actinobacteria": item["Bacteria.Actinobacteria"],
+        "Bacteria.Bacteroidetes": item["Bacteria.Bacteroidetes"],
+        "Bacteria.Deferribacteres": item["Bacteria.Deferribacteres"], 
+        "Bacteria.Firmicutes": item["Bacteria.Firmicutes"],
+        "Bacteria.Planctomycetes": item["Bacteria.Planctomycetes"],
+        "Bacteria.Proteobacteria": item["Bacteria.Proteobacteria"], 
+        "Bacteria.Synergistetes": item["Bacteria.Synergistetes"], 
+        "Bacteria.Tenericutes": item["Bacteria.Tenericutes"],
+        };
+        });
+        console.log(this.select_subset) //because of the dots you must use the bracket notation 
+        //no idea how to make it generalizable.
+        
+        
+        }
 
 
 drawChart(){
 
 //set margins and dimensions
     let margin = ({top: 10, right: 30, bottom: 200, left: 50});
-    let width = 460 - margin.left - margin.right;
+    let width = 760 - margin.left - margin.right;
     let height = 400 - margin.top - margin.bottom;
 
 //append svg to page body
-    var dataT=d3.transpose(this.data)
-    
     let stack_svg = d3.select('#stacked-barchart')
         .append('svg')
             .attr("width", width + margin.left + margin.right)
@@ -35,21 +48,21 @@ drawChart(){
 
 
 
-    //List of experimental sample type(x-axis)
-    let subgroups = this.data.columns.slice(1);
-
-    console.log(subgroups)
-
     //List of taxon(y-axis)
-    let groups = d3.map(this.data, function(d){
+    let subgroups = d3.keys(this.select_subset[1]);
+    console.log(subgroups)
+    
+
+    //List of experimental sample type(x-axis)
+    let groups = d3.map(this.select_subset, function(d){
         return(d.group)}).keys();
   
-    //console.log(subgroups.slice(0,1))
+    
     console.log(groups)
 
     //Add X axis
     let x = d3.scaleBand()
-        .domain(groups)//if you add subgroups it looks cool but wrong(must be groups but then it gets ruined)
+        .domain(groups)
         .range([0, width])
         .padding([0.2])
     let xaxis = stack_svg.append('g')
@@ -80,15 +93,15 @@ drawChart(){
     
     //color palette = one color per different taxon
     let color = d3.scaleOrdinal()
-        .domain(subgroups)
-        .range(["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#d62728", "#ff9896", "#9467bd", "#c5b0d5", "#e377c2", "#f7b6d2", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"]);
-   
-
+        .domain(subgroups) 
+        .range(["#bcbd22","#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#98df8a","#ff9896","#9467bd","#c5b0d5","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5"]);
+        //["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#ff9896", "#98df8a", "#9467bd", "#c5b0d5", "#e377c2", "#f7b6d2", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"]);
+        //"#d62728"--red "#bcbd22"
   
     //stack the data per subgroup
     let stackedData = d3.stack()
-        .keys(subgroups) //should be subgroup //group for it to render something
-        (this.data);
+        .keys(subgroups) 
+        (this.select_subset);
     console.log(stackedData)
     
     //show the bars
@@ -130,9 +143,9 @@ drawChart(){
 }
 tooltipRender(stackedData) {
     let abundance = stackedData[1] - stackedData[0];
-    let taxon = stackedData['data']
-    console.log(stackedData)
-    console.log(taxon)
+    let taxon = stackedData.data
+    //console.log(stackedData)
+    //console.log(taxon)
     let text = "<h1>" + taxon + "</h1>" + "<h2>" + abundance + "</h2>"; //.charAt(0).toUpperCase()
     return text;
     

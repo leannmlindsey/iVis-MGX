@@ -8,7 +8,7 @@
 
     constructor(data) {
         this.data = data; 
-        this.margin = { top: 10, right: 90, bottom: 30, left: 90}
+        this.margin = { top: 10, right: 0, bottom: 30, left: 90} //margin right used to be 90
         this.width = 1000 - this.margin.left - this.margin.right; 
         this.height = 1000 - this.margin.top - this.margin.bottom; 
 
@@ -22,6 +22,13 @@
           .classed('tree-svg', true)
           .attr("width", this.width + this.margin.left + this.margin.right)
           .attr("height", this.height + this.margin.top + this.margin.bottom)
+          .call(d3.zoom().on("zoom", function() {
+              svg.attr("transform", d3.event.transform)
+          }))
+        // let tax_ranks=["Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species"]
+        //   svg.append("text").text(tax_ranks).attr("x1","10").attr("y1", "10"); 
+        //above code not rendering properly, eitherway it would be better to do something like the last homework where the labels
+        //update depending on expansion. I didn't do it on my homework 6 hehe..
 
         let treeGroup = d3.select('.tree-svg').append('g')
             .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")"); 
@@ -89,7 +96,7 @@
                 .attr('class', 'node')
                 .attr('r', 1e-6)
                 .attr("transform", "translate(" + that.margin.left + "," + that.margin.top + ")")
-                .style("fill", d => d._children ? "lightsteelblue" : "#fff");
+                .style("fill", d => d._children ? "#aec7e8" : "#fff");
             
             // add labels for the nodes 
             nodeEnter.append('text')
@@ -111,7 +118,7 @@
             // update the node attributes and style 
             nodeUpdate.select('circle.node')
                 .attr('r', 10)
-                .style("fill", d => d._children ? "lightsteelblue" : "#fff")
+                .style("fill", d => d._children ? "#aec7e8" : "#fff")
                 .attr('cursor', 'pointer');
             
             // remove any exiting nodes 

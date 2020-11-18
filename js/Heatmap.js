@@ -20,10 +20,12 @@ class HeatMap {
         // append the svg object to the body of the page
         var svg = d3.select("#heatmap")
             .append("svg")
+            .classed("heat-svg", true)
             .attr("width", this.width + this.margin.left + this.margin.right)
             .attr("height", this.height + this.margin.top + this.margin.bottom)
             .append("g")
             .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+            
 
 
 // //Read the data
@@ -47,6 +49,7 @@ class HeatMap {
                 .padding(0.01);
             svg.append("g")
                 .attr("transform", "translate(0," + 0 + ")")
+                .style("font-family", "Work Sans")
                 .call(d3.axisTop(x))
                 .selectAll("text")
                   .attr("y", 0)
@@ -54,18 +57,21 @@ class HeatMap {
                   .attr("dy", ".35em")
                   .attr("transform", "rotate(-30)")
                   .style("text-anchor", "start")
+                  .style("font-family", "Work Sans");
+                  
 
-            // Build X scales and axis:
+            // Build Y scales and axis:
             var y = d3.scaleBand()
                 .range([ this.height, 0 ])
                 .domain(geneList)
                 .padding(0.01);
                 svg.append("g")
                   .call(d3.axisLeft(y));
+                svg.selectAll(".tick text").style("font-family", "Work Sans");
 
             // Build color scale
             var myColor = d3.scaleLinear()
-                .range(["white", "#69b3a2"])
+                .range(["white", "#1f77b4"]) // //"#69b3a2"
                 .domain([1,100])
 
             svg.selectAll()
