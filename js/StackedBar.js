@@ -1,42 +1,20 @@
 class sBar{
     constructor(data){
         this.data = data;
-        this.select_subset=[];
-
-        this.subsetData(data);
-        this.drawChart(data);
+        this.select_subset=data;
+        
+        //this.subsetData(data);
+        this.drawChart(data, 6);
         
 
     }
 
-    subsetData(){
-
-        this.select_subset = this.data.map((item) => {
-        return {
-        group: item.group,
-        "Bacteria.Actinobacteria": item["Bacteria.Actinobacteria"],
-        "Bacteria.Bacteroidetes": item["Bacteria.Bacteroidetes"],
-        "Bacteria.Deferribacteres": item["Bacteria.Deferribacteres"], 
-        "Bacteria.Firmicutes": item["Bacteria.Firmicutes"],
-        "Bacteria.Planctomycetes": item["Bacteria.Planctomycetes"],
-        "Bacteria.Proteobacteria": item["Bacteria.Proteobacteria"], 
-        "Bacteria.Synergistetes": item["Bacteria.Synergistetes"], 
-        "Bacteria.Tenericutes": item["Bacteria.Tenericutes"],
-        };
-        });
-        console.log(this.select_subset) //because of the dots you must use the bracket notation 
-        //no idea how to make it generalizable.
-        
-        
-        }
-
-
-drawChart(){
+drawChart(data, level){
 
 //set margins and dimensions
     let margin = ({top: 10, right: 30, bottom: 200, left: 50});
     let width = 760 - margin.left - margin.right;
-    let height = 400 - margin.top - margin.bottom;
+    let height = 800 - margin.top - margin.bottom;
 
 //append svg to page body
     let stack_svg = d3.select('#stacked-barchart')
@@ -46,13 +24,12 @@ drawChart(){
         .append('g')
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-
-
-    //List of taxon(y-axis)
-    let subgroups = d3.keys(this.select_subset[1]);
+//create the subset to draw the correct level of the tree
+//level=1 kingdom, level=2 phylum, etc.
+    let subgroups = createSubset(this.data,level)
+    console.log('subgroups')
     console.log(subgroups)
     
-
     //List of experimental sample type(x-axis)
     let groups = d3.map(this.select_subset, function(d){
         return(d.group)}).keys();
@@ -94,15 +71,18 @@ drawChart(){
     //color palette = one color per different taxon
     let color = d3.scaleOrdinal()
         .domain(subgroups) 
-        .range(["#bcbd22","#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#98df8a","#ff9896","#9467bd","#c5b0d5","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5"]);
-        //["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#ff9896", "#98df8a", "#9467bd", "#c5b0d5", "#e377c2", "#f7b6d2", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"]);
+        .range(["#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#98df8a","#ff9896","#9467bd","#c5b0d5","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5", "#bcbd22",]);
+        //.range(["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#ff9896", "#98df8a", "#9467bd", "#c5b0d5", "#e377c2", "#f7b6d2", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"]);
         //"#d62728"--red "#bcbd22"
   
     //stack the data per subgroup
     let stackedData = d3.stack()
         .keys(subgroups) 
+        //.keys(['Bacteria.Actinobacteria','Bacteria.Synergistetes'])
         (this.select_subset);
+    console.log('stacked data')
     console.log(stackedData)
+    
     
     //show the bars
     let rects = stack_svg.append('g')
@@ -125,13 +105,26 @@ drawChart(){
     let tooltip = d3.select('#stacked-barchart').append('div').classed('tooltip', true).style("opacity",0);
     let that = this;
     rects.on('mouseover', function (d, i) {
+       // what subgroup are we hovering?
+       var subgroupName = d3.select(this.parentNode).datum().key; // This was the tricky part
+       var subgroupValue = d.data[subgroupName];
+       
+
         //show tooltip
         tooltip.transition()
             .duration(200)
             .style("opacity", .9);
-        tooltip.html(that.tooltipRender(d) + "<br/>")
+        tooltip.html(that.tooltipRender(d, subgroupName, subgroupValue))
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY - 28) + "px");
+        
+        //this section will highlight all of the rects of same species, if they
+        //are classed in a specific way with the name as a class 
+        // Reduce opacity of all rect to 0.2
+        //d3.selectAll(".myRect").style("opacity", 0.2)
+        // Highlight all rects of this subgroup with opacity 0.8. It is possible to select them since they have a specific class = their name.
+        //d3.selectAll("."+subgroupName)
+            //.style("opacity", 1)
   
       });
       //hover function for circle selection
@@ -141,13 +134,36 @@ drawChart(){
               .style("opacity", 0);
       });
 }
-tooltipRender(stackedData) {
-    let abundance = stackedData[1] - stackedData[0];
-    let taxon = stackedData.data
-    //console.log(stackedData)
+tooltipRender(stackedData,subgroupName, subgroupValue) {
+    let abundance = subgroupValue //stackedData[1] - stackedData[0]; old way commented out
+    //console.log('subgroupName')
+    //console.log(subgroupName)
+    //console.log('subgroupValue')
+    //console.log(subgroupValue)
+    let taxon = subgroupName.split(".")
     //console.log(taxon)
-    let text = "<h1>" + taxon + "</h1>" + "<h2>" + abundance + "</h2>"; //.charAt(0).toUpperCase()
+    
+    let text = "<h1>" + taxon.slice(-1) + "</h1>" + "<h2>" + abundance + "</h2>"; //.charAt(0).toUpperCase()
     return text;
     
 }
+}
+function createSubset(data, level){
+    //console.log(data.columns)
+    //console.log(level)
+    var indexList = []
+    for (let key in data[1]) {
+        let num = key.split('.')
+        
+        if (num.length == level) {
+            //console.log('success!  we have a match!')
+            //console.log(num.length);
+            //console.log(level)
+            indexList.push(key)
+        }
+      }
+    //console.log(indexList)
+    return indexList;
+    
+
 }

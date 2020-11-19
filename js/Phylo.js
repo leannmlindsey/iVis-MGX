@@ -6,12 +6,12 @@
      * @param data data from taxonomyInputFile.csv 
      */
 
-    constructor(data) {
+    constructor(data, stackedbar) {
         this.data = data; 
         this.margin = { top: 10, right: 0, bottom: 30, left: 90} //margin right used to be 90
         this.width = 1000 - this.margin.left - this.margin.right; 
         this.height = 1000 - this.margin.top - this.margin.bottom; 
-
+        this.stackedbar = stackedbar;
 
     }
 
@@ -25,8 +25,8 @@
           .call(d3.zoom().on("zoom", function() {
               svg.attr("transform", d3.event.transform)
           }))
-        // let tax_ranks=["Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species"]
-        //   svg.append("text").text(tax_ranks).attr("x1","10").attr("y1", "10"); 
+        //let tax_ranks=["Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species"]
+        //svg.append("text").text(tax_ranks).attr("x1","100").attr("y1", "100"); 
         //above code not rendering properly, eitherway it would be better to do something like the last homework where the labels
         //update depending on expansion. I didn't do it on my homework 6 hehe..
 
@@ -46,7 +46,8 @@
 
         let root = stratify(this.data)
             .sort(function(a, b) { return (a.height - b.height) || a.id.localeCompare(b.id); });
-        console.log(root)
+        console.log('this is the root of the tree')
+        console.log(root.data.id)
 
         root.x0 = this.height / 2; 
         root.y0 = 0; 
@@ -187,6 +188,14 @@
 
             // Toggle children on click.
             function click(d) {
+                console.log('node has been clicked')
+                console.log('This is the clicked node id')
+                console.log(d.data.id)
+                var nameStr = d.data.id.split('.')
+                console.log(nameStr)
+                console.log(nameStr.length)
+                var level = nameStr.length + 1
+                //this.stackedbar.drawChart(level)
                 if (d.children) {
                     d._children = d.children;
                     d.children = null;

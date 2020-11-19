@@ -31,19 +31,19 @@ header div{
 
 .phylo_text{
   background:lightgrey;
-  padding: 5px;
+  padding: 2px;
   border-radius: 8px;
 }
 
 .stack_text{
   background:lightgrey;
-  padding: 5px;
+  padding: 2px;
   border-radius: 8px;
 }
 
 .heat_text{
   background:lightgrey;
-  padding: 5px;
+  padding: 2px;
   border-radius: 8px;
 }
 
@@ -53,6 +53,7 @@ header div{
   width: 700px;
   height: 1000px;
   overflow-y: scroll;
+  overflow-x: scroll;
 }
 .node circle {
   fill: #fff;
@@ -84,9 +85,9 @@ label {
 /* Heat Map Styling */
 
 #heatmap{
-  width: 700px;
-  height: 500px;
-  float: right;
+  width: 1500px;
+  height: 1500px;
+  float: left;
   overflow: scroll;
 }
 
@@ -102,8 +103,9 @@ label {
 div.tooltip {
   position: absolute;
   text-align: center;
-  min-width: 75px;
-  height: 25px;
+  min-width: 100px;
+  width: auto;
+  height: auto;
   padding: 6px;
   background: white;
   stroke: gray;
