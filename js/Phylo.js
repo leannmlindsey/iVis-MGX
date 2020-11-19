@@ -6,17 +6,18 @@
      * @param data data from taxonomyInputFile.csv 
      */
 
-    constructor(data, stackedbar) {
+    constructor(data,data2) {
         this.data = data; 
         this.margin = { top: 10, right: 0, bottom: 30, left: 90} //margin right used to be 90
         this.width = 1000 - this.margin.left - this.margin.right; 
         this.height = 1000 - this.margin.top - this.margin.bottom; 
-        this.stackedbar = stackedbar;
-
+        let stackedbar = new sBar(data2); 
+        this.stackedbar = stackedbar
+        this.level = 2
     }
 
     drawTree() {
-        
+        this.stackedbar.drawChart(this.level)
         let that = this; 
         let svg = d3.select('#Phylo').append('svg')
           .classed('tree-svg', true)
@@ -57,7 +58,7 @@
         console.log("Collapsing after the second level: ", root)
 
         update(root); 
-
+        
         // collapse the node and all its children 
         function collapse(d) {
             if (d.children) {
@@ -71,7 +72,7 @@
 
             // assign x and y coordinate properties to each node 
             let treeData = treemap(root);
-
+        
             // compute the new tree layout
             let nodes = treeData.descendants(), 
                 links = treeData.descendants().slice(1); 
@@ -194,8 +195,9 @@
                 var nameStr = d.data.id.split('.')
                 console.log(nameStr)
                 console.log(nameStr.length)
-                var level = nameStr.length + 1
-                //this.stackedbar.drawChart(level)
+                this.level = nameStr.length + 1
+                console.log('changed this.level on click')
+                console.log(this.level)
                 if (d.children) {
                     d._children = d.children;
                     d.children = null;

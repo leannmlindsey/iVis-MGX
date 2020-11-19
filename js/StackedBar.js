@@ -4,12 +4,12 @@ class sBar{
         this.select_subset=data;
         
         //this.subsetData(data);
-        this.drawChart(data, 6);
+        //this.drawChart(4);
         
 
     }
 
-drawChart(data, level){
+drawChart(level){
 
 //set margins and dimensions
     let margin = ({top: 10, right: 30, bottom: 200, left: 50});
@@ -78,7 +78,7 @@ drawChart(data, level){
     //stack the data per subgroup
     let stackedData = d3.stack()
         .keys(subgroups) 
-        //.keys(['Bacteria.Actinobacteria','Bacteria.Synergistetes'])
+        .order(d3.stackOrderNone) 
         (this.select_subset);
     console.log('stacked data')
     console.log(stackedData)

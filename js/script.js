@@ -8,10 +8,10 @@
         console.log(data2)
         console.log('taxonomyInputFile.csv')
         
-        const phyloTree = new Tree(data); 
+        const phyloTree = new Tree(data,data2); 
         phyloTree.drawTree(); 
 
-        let stackedbar = new sBar(data2);
+        
         let heatMap = new HeatMap(data, data3);
         heatMap.drawHeatmap();
      });
