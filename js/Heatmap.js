@@ -13,7 +13,7 @@ class HeatMap {
         this.width = 1000 - this.margin.left - this.margin.right; 
         this.height = 22000 - this.margin.top - this.margin.bottom; 
 
-    console.log('constructed new heatmap')
+    // console.log('constructed new heatmap')
     }
 
     drawHeatmap() {
@@ -28,8 +28,8 @@ class HeatMap {
             
 
             let mySamples = this.data.columns.slice(1);
-            console.log('mySamples =')
-            console.log(mySamples)
+            // console.log('mySamples =')
+            // console.log(mySamples)
             // Labels of row and columns
             //var mySamples = this.data.columns.slice(1,14)
             var geneList = []

@@ -6,12 +6,18 @@
         console.log(data)
         console.log('stackedBarInputSmallT.csv')
         console.log(data2)
-        console.log('taxonomyInputFile.csv')
-        
-        const phyloTree = new Tree(data,data2); 
-        phyloTree.drawTree(); 
+      //   console.log('taxonomyInputFile.csv')
 
-        
+        const phyloTree = new Tree(data, updateLevel); 
+        const barChart = new sBar(data2)
+        phyloTree.drawTree()
+
         let heatMap = new HeatMap(data, data3);
         heatMap.drawHeatmap();
+        
+        function updateLevel(levelNum) {
+            console.log('updateLevel was called with level: ', levelNum);
+            barChart.drawChart(levelNum);
+        }
+
      });

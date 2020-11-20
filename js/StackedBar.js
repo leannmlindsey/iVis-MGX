@@ -27,15 +27,15 @@ drawChart(level){
 //create the subset to draw the correct level of the tree
 //level=1 kingdom, level=2 phylum, etc.
     let subgroups = createSubset(this.data,level)
-    console.log('subgroups')
-    console.log(subgroups)
+    // console.log('subgroups')
+    // console.log(subgroups)
     
     //List of experimental sample type(x-axis)
     let groups = d3.map(this.select_subset, function(d){
         return(d.group)}).keys();
   
     
-    console.log(groups)
+    // console.log(groups)
 
     //Add X axis
     let x = d3.scaleBand()
@@ -80,8 +80,8 @@ drawChart(level){
         .keys(subgroups) 
         .order(d3.stackOrderNone) 
         (this.select_subset);
-    console.log('stacked data')
-    console.log(stackedData)
+    // console.log('stacked data')
+    // console.log(stackedData)
     
     
     //show the bars
@@ -98,7 +98,7 @@ drawChart(level){
             .enter().append("rect")
                 .attr("x", function(d){return x(d.data.group); })
                 .attr("y", function(d){return y(d[1]); })
-                .attr("height", function(d){return y(d[0])- y(d[1]); })
+                .attr("height", function(d){ return y(d[0])- y(d[1]); })
                 .attr("width", x.bandwidth());
 
     //Add the tooltip labels on mouseover

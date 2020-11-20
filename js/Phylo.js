@@ -1,4 +1,4 @@
- class Tree {
+class Tree {
     /**
      * Creates a Tree object representing the 
      * phylogeny of all microbial species present
@@ -6,26 +6,34 @@
      * @param data data from taxonomyInputFile.csv 
      */
 
-    constructor(data,data2) {
+    constructor(data, updateLevel) {
         this.data = data; 
-        this.margin = { top: 10, right: 0, bottom: 30, left: 90} //margin right used to be 90
-        this.width = 1000 - this.margin.left - this.margin.right; 
+        this.margin = { top: 10, right: 90, bottom: 30, left: 90} //margin right used to be 90
+        this.width = 1300 - this.margin.left - this.margin.right; 
         this.height = 1000 - this.margin.top - this.margin.bottom; 
-        let stackedbar = new sBar(data2); 
-        this.stackedbar = stackedbar
-        this.level = 2
+        this.updateLevel = updateLevel; 
+        // let stackedbar = new sBar(data2); 
+        // this.stackedbar = stackedbar
+        // this.level = 4
     }
 
     drawTree() {
-        this.stackedbar.drawChart(this.level)
+        // this.stackedbar.drawChart(this.level)
         let that = this; 
+
+        d3.select("#Phylo")
+          .append('div')
+          .attr('class', 'tooltip')
+          .style('opacity', 0)
+
         let svg = d3.select('#Phylo').append('svg')
           .classed('tree-svg', true)
           .attr("width", this.width + this.margin.left + this.margin.right)
           .attr("height", this.height + this.margin.top + this.margin.bottom)
           .call(d3.zoom().on("zoom", function() {
-              svg.attr("transform", d3.event.transform)
+            svg.attr("transform", d3.event.transform)
           }))
+
         //let tax_ranks=["Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species"]
         //svg.append("text").text(tax_ranks).attr("x1","100").attr("y1", "100"); 
         //above code not rendering properly, eitherway it would be better to do something like the last homework where the labels
@@ -33,7 +41,7 @@
 
         let treeGroup = d3.select('.tree-svg').append('g')
             .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")"); 
-
+        
         // declare a tree layout and assign size 
         let treemap = d3.tree().size([this.height, this.width]); 
 
@@ -47,18 +55,15 @@
 
         let root = stratify(this.data)
             .sort(function(a, b) { return (a.height - b.height) || a.id.localeCompare(b.id); });
-        console.log('this is the root of the tree')
-        console.log(root.data.id)
 
         root.x0 = this.height / 2; 
         root.y0 = 0; 
 
         // collapse after the second level 
-        root.children.forEach(collapse); 
-        console.log("Collapsing after the second level: ", root)
+        root.children.forEach(collapse);
 
         update(root); 
-        
+
         // collapse the node and all its children 
         function collapse(d) {
             if (d.children) {
@@ -70,6 +75,7 @@
 
         function update(source) {
 
+
             // assign x and y coordinate properties to each node 
             let treeData = treemap(root);
         
@@ -77,8 +83,12 @@
             let nodes = treeData.descendants(), 
                 links = treeData.descendants().slice(1); 
             
+            console.log(nodes)
+            let maxDepth = Math.max.apply(null, nodes.map(d => d.depth))
+            that.updateLevel(maxDepth+1)
+
             // Normalize for fixed-depth.
-            nodes.forEach(function(d){ d.y = d.depth * 130});
+            nodes.forEach(function(d){ d.y = d.depth * 150});
 
             /************ NODES SECTION  ***************/
             // update the nodes 
@@ -137,6 +147,43 @@
             nodeExit.select('text')
                 .style('fill-opacity', 1e-6);
             
+            const tooltip = d3.select('.tooltip'); 
+            nodeUpdate.on("mouseover", function(d,i) {
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", 1); 
+        
+                tooltip.html(tooltipRender(d))
+                    .style("left", `${d3.event.pageX}px`)
+                    .style("top", `${d3.event.pageY}px`); 
+            })
+                .on("mouseleave", function(d, i) {
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+            })
+
+            /**
+             * Returns html that can be used to render the tooltip.
+             * @param data 
+             * @returns {string}
+             */
+            function tooltipRender(data) {
+
+                if (data._children) {
+                    var text = "<h2> Children: " + data._children.length + "</h2>";
+                }
+                else if (data.children) {
+                    var text = "<h2> Children: " + data.children.length + "</h2>";
+                }
+                else {
+                    var text = "<h2> Children: 0 </h2>";
+                }
+
+                return text; 
+            }
+
+            
             // ****************** links section ***************************
 
             // Update the links...
@@ -189,15 +236,17 @@
 
             // Toggle children on click.
             function click(d) {
-                console.log('node has been clicked')
-                console.log('This is the clicked node id')
-                console.log(d.data.id)
-                var nameStr = d.data.id.split('.')
-                console.log(nameStr)
-                console.log(nameStr.length)
-                this.level = nameStr.length + 1
-                console.log('changed this.level on click')
-                console.log(this.level)
+                // console.log('node has been clicked')
+                // console.log('This is the clicked node id')
+                // console.log(d.data.id)
+                // var nameStr = d.data.id.split('.')
+                // console.log(nameStr)
+                // console.log(nameStr.length)
+                // this.level = nameStr.length + 1
+                // console.log('changed this.level on click')
+                // console.log(this.level)
+                console.log(d)
+
                 if (d.children) {
                     d._children = d.children;
                     d.children = null;
@@ -205,7 +254,9 @@
                     d.children = d._children;
                     d._children = null;
                 }
+
                 update(d);
+                // that.updateLevel(d.depth+2)
             }
         }
         
