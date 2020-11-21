@@ -117,7 +117,7 @@ label {
 /* Heat Map Styling */
 
 #heatmap{
-  width: 1200px;
+  width: 1000px;
   height: 900px;
   float: left;
   overflow-y: scroll;

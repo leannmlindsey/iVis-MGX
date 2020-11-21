@@ -9,7 +9,7 @@ class HeatMap {
     constructor(data, data2) {
         this.data = data; 
         this.data2 = data2;
-        this.margin = { top: 100, right: 30, bottom: 30, left: 250}
+        this.margin = { top: 100, right: 100, bottom: 30, left: 400}
         this.width = 1200 - this.margin.left - this.margin.right; 
         this.height = 15000 - this.margin.top - this.margin.bottom; 
 
