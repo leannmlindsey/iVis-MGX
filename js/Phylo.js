@@ -236,15 +236,6 @@ class Tree {
 
             // Toggle children on click.
             function click(d) {
-                // console.log('node has been clicked')
-                // console.log('This is the clicked node id')
-                // console.log(d.data.id)
-                // var nameStr = d.data.id.split('.')
-                // console.log(nameStr)
-                // console.log(nameStr.length)
-                // this.level = nameStr.length + 1
-                // console.log('changed this.level on click')
-                // console.log(this.level)
                 console.log(d)
 
                 if (d.children) {

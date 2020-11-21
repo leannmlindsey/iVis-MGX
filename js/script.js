@@ -16,6 +16,9 @@
 
         let heatMap = new HeatMap(data, data3);
         heatMap.drawHeatmap();
+
+        let violinPlot = new ViolinPlot(data, data3);
+        violinPlot.drawViolinPlot();
         
         function updateLevel(levelNum) {
             console.log('updateLevel was called with level: ', levelNum);
