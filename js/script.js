@@ -1,4 +1,4 @@
- Promise.all([d3.csv('./data/taxonomyInputFile.csv'), d3.csv('./data/stackedBarInputFullT.csv'), d3.csv('./data/flatHeatmapData.csv')]).then(( [data, data2, data3]) =>
+ Promise.all([d3.csv('./data/taxonomyInputFile.csv'), d3.csv('./data/stackedBarInputFullT.csv'), d3.csv('./data/flatHeatmapDataSmall.csv')]).then(( [data, data2, data3]) =>
      {
 
         console.log('Loading Data')
