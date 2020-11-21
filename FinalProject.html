@@ -17,32 +17,45 @@
     <div class="header">
         <header>
             <h1>Visualization for Metagenomic Data</h1>
+            <h2>Black-eared Mice Gut Microbiome</h2>
             <div>Authors:  LeAnn Lindsey, Kimberly Truong, Lourdes Valdez</div>
         </header>
     </div>
     <div class="wrapper">
-        <div class="innerWrapper">
-            <div id="Phylo" class="view">
-                <h3>Black-eared Mice Gut Microbiome</h3>
-                <div class="phylo_text">
+        <div class="innerWrapper"> 
+            <h3>Phylogenetic Tree</h3>
+            <div class="phylo_text">
                 <p>This phylogenetic tree shows the species found in all host samples.</p>
                 <p>Click on the nodes to expand or collapse each branch. You can also zoom in or out and scroll for enhanced visualization.</p>
-                </div>
             </div>
+            <div id="Phylo" class="view"> </div> 
         </div>
-        <div id="stacked-barchart" class="view">
-            <h3>Species Abundances per Experiment</h3>
+        <div class="innerWrapperRight"> 
+            <h3>Species Abundance per Sample</h3>
             <div class="stack_text">
             <p>The stacked bar chart shows the taxon abunance within each group of experimental samples.</p>
             <p>Hover over each stacked bar to see the taxon it corresponds to and the percentage of abundance within the chosen experimental group.</p>
             </div>
-        </div>
-        <div id="heatmap" class="view">  
-            <h3>Gene Abundances per Experiment</h3>
-            <div class="heat_text">
-            <p>The heatmap shows the gene abundance within each species organized by experimental group.</p>
-            <p>Hover over each square for information on percent abundance and gene function. Scroll down to more species.</p>
+            <div id="stacked-barchart" class="view">
+                <h3 id='stackedLabel'>Level: Phylum</h3>
             </div>
+        </div>
+        <div class="innerWrapperBottomLeft">
+            <h3>Gene Abundance by Sample</h3>
+                <div class="heat_text">
+                <p>The heatmap shows the abundance of each gene by sample.  This is a selection of the top 1000 differentially expressed genes</p>
+                <p>Hover over each square for information on abundance and gene function. Scroll down to see more genes.</p>
+                </div>
+            <div id="heatmap" class="view">      
+            </div>
+        </div>
+        <div class="innerWrapperBottomRight">
+            <h3>Gene Detail</h3>
+            <div class="violin_text">
+                <p>The violin plot shows the gene abundance by sample for a selected gene separated by experimental condition.</p>
+                <p>Click on a gene in the heatmap to update.</p>
+            </div>
+            <div id="violinplot" class="view">  </div>
         </div>
     </div>
 </body>

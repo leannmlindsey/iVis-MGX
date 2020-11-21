@@ -13,7 +13,9 @@ header{
 header h1{
   text-shadow: 2px 2px black;
 }
-
+header h2{
+  color: #36454f;
+}
 header div{
   color: black;
 }
@@ -24,24 +26,53 @@ header div{
 }
 
 .innerWrapper {
-  width: 830px;
+  width: 900px;
   display: inline-block;
   float: left;
 }
+.innerWrapperRight {
+  width: 700px;
+  display: inline-block;
+  float: left;
+}
+.innerWrapperBottomLeft {
+  width: 1200px;
+  display: inline-block;
+  float: left;
+}
+.innerWrapperBottomRight {
+  width: 400px;
+  display: inline-block;
+  float: right;
+}
 
 .phylo_text{
+  height: 120px;
+  width: 880px;
   background:lightgrey;
   padding: 2px;
   border-radius: 8px;
 }
 
 .stack_text{
+  height: 120px;
+  width: 700px;
   background:lightgrey;
   padding: 2px;
   border-radius: 8px;
 }
 
 .heat_text{
+  height: 120px;
+  width: 1180px;
+  background:lightgrey;
+  padding: 2px;
+  border-radius: 8px;
+}
+
+.violin_text{
+  height: 120px;
+  width: 400px;
   background:lightgrey;
   padding: 2px;
   border-radius: 8px;
@@ -50,10 +81,10 @@ header div{
 
 /* Kimberly tree styling */
 #Phylo{
-  width: 700px;
-  height: 1000px;
-  overflow-y: scroll;
-  overflow-x: scroll;
+  width: 900px;
+  height: 800px;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 .node circle {
@@ -86,10 +117,17 @@ label {
 /* Heat Map Styling */
 
 #heatmap{
-  width: 1500px;
-  height: 1500px;
+  width: 1200px;
+  height: 900px;
   float: left;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+
+#violinplot{
+  width: 400px;
+  height: 400px;
+  float: right;
 }
 
 

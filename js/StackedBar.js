@@ -70,7 +70,35 @@ updateChart(level){
         //create the subset to draw the correct level of the tree
         //level=1 kingdom, level=2 phylum, etc.
         let subgroups = createSubset(this.data,level);
+        let labelText = "Level: Phylum"
+        switch(level){
+            case 0:
+                labelText = "";
+                break;
+            case 1:
+                labelText = "Level: Kingdom";
+                break;
+            case 2:
+                labelText = "Level: Phylum";
+                break;
+            case 3:
+                labelText = "Level: Class";
+                break;
+            case 4:
+                labelText = "Level: Order";
+                break;
+            case 5:
+                labelText = "Level: Family";
+                break;
+            case 6:
+                labelText = "Level: Genus"
+                break;
+            case 7:
+                labelText = "Level: Species"
 
+        }
+        let levelLabel=d3.select('#stackedLabel')
+            .text(labelText)
 
         //color scale
         let color = d3.scaleOrdinal()

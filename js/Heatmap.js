@@ -9,9 +9,9 @@ class HeatMap {
     constructor(data, data2) {
         this.data = data; 
         this.data2 = data2;
-        this.margin = { top: 150, right: 150, bottom: 150, left: 400}
-        this.width = 1000 - this.margin.left - this.margin.right; 
-        this.height = 22000 - this.margin.top - this.margin.bottom; 
+        this.margin = { top: 100, right: 30, bottom: 30, left: 250}
+        this.width = 1200 - this.margin.left - this.margin.right; 
+        this.height = 15000 - this.margin.top - this.margin.bottom; 
 
     // console.log('constructed new heatmap')
     }
