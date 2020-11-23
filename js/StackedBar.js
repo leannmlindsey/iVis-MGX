@@ -122,6 +122,7 @@ updateChart(level){
             .enter().append('g')
                 .attr("fill", function(d){
                     return color(d.key); })
+                .attr("class", function(d){return "myRect " + d.key.split(".")[1]})
                 .selectAll("rect")
                 .data(function(d){
                     return d; });
@@ -148,37 +149,44 @@ updateChart(level){
 
 
         //Add the tooltip labels on mouseover
-            let tooltip = d3.select('#stacked-barchart').append('div').classed('tooltip', true).style("opacity",0);
-            // let that = this;
+        let tooltip = d3.select('#stacked-barchart').append('div').classed('tooltip', true).style("opacity",0);
+            
                 rects.on('mouseover', function (d, i) {
-                // what subgroup are we hovering?
-                var subgroupName = d3.select(this.parentNode).datum().key; // This was the tricky part
-                var subgroupValue = d.data[subgroupName];
+                    //subgroup being hovered over
+                    var subgroupName = d3.select(this.parentNode).datum().key; 
+                    console.log(subgroupName)
+                    var subgroupValue = d.data[subgroupName];
+                    //Reduce opacity of all rectangles
+                    d3.selectAll(".myRect").style("opacity", 0.2);
+                    //Increase opacity of rect being hovered over
+                    let taxon = subgroupName.split(".")
+                    d3.selectAll("."+ taxon[1])
+                        .style("opacity",1);
+
+
        
 
-        //show tooltip
-            tooltip.transition()
-                .duration(200)
-                .style("opacity", .9);
-            tooltip.html(that.tooltipRender(d, subgroupName, subgroupValue))
-                .style("left", (d3.event.pageX) + "px")
-                .style("top", (d3.event.pageY - 28) + "px");
+            //show tooltip
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                tooltip.html(that.tooltipRender(d, subgroupName, subgroupValue))
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
         
-        //this section will highlight all of the rects of same species, if they
-        //are classed in a specific way with the name as a class 
-        // Reduce opacity of all rect to 0.2
-        //d3.selectAll(".myRect").style("opacity", 0.2)
-        // Highlight all rects of this subgroup with opacity 0.8. It is possible to select them since they have a specific class = their name.
-        //d3.selectAll("."+subgroupName)
-            //.style("opacity", 1)
+
   
-      });
-      //hover function for circle selection
-      rects.on("mouseout", function (d) {
-          tooltip.transition()
-              .duration(500)
-              .style("opacity", 0);
-      });
+                });
+            //hover function for circle selection
+            rects.on("mouseout", function (d) {
+
+                 d3.selectAll(".myRect").style("opacity", 1)
+
+
+                tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            });
 }
 tooltipRender(stackedData,subgroupName, subgroupValue) {
     let abundance = subgroupValue //stackedData[1] - stackedData[0]; old way commented out
