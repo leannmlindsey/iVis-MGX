@@ -6,6 +6,8 @@
         console.log(data)
         console.log('stackedBarInputSmallT.csv')
         console.log(data2)
+        console.log('flatHeatmapDataSmall.csv')
+        console.log(data3)
       //   console.log('taxonomyInputFile.csv')
 
         const phyloTree = new Tree(data, updateLevel); 
