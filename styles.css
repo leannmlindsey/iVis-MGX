@@ -166,3 +166,7 @@ div.tooltip {
   font-family: "Work Sans";
   font-weight: lighter;
 }
+
+.legend-svg{
+  float:right;
+}

@@ -5,7 +5,7 @@ class sBar{
      
         //set margins and dimensions
         this.margin = ({top: 10, right: 30, bottom: 200, left: 50});
-        this.width = 760 - this.margin.left - this.margin.right;
+        this.width = 460 - this.margin.left - this.margin.right;//used to be 760
         this.height = 800 - this.margin.top - this.margin.bottom;
 
         //List of experimental sample type(x-axis)
@@ -20,6 +20,8 @@ class sBar{
         this.y = d3.scaleLinear()
             .domain([0,100])
             .range([this.height, 0]);
+
+        this.padding = 40;
         
         
         
@@ -61,6 +63,14 @@ drawChart(){
         .style("font-size", "smaller")
         .style("font-family", "Work Sans")
         .text("Taxon Abundance"); 
+    
+    //svg for legend
+    let legend = d3.select('#stacked-barchart').append('svg')
+        .classed("legend-svg", true)
+        .attr("width", "230")
+        .attr("height", "800")
+        .append('g')
+        .attr('class', 'legend');
     
 }
 
@@ -146,6 +156,34 @@ updateChart(level){
                 .attr("y", function(d){return that.y(d[1]); })
                 .attr("height", function(d){ return that.y(d[0])- that.y(d[1]); })
                 .attr("width", that.x.bandwidth());
+                
+            let legend = d3.select('.legend');
+
+            legend.selectAll('rect')
+                .data(stackedData)
+                .join('rect')
+                .attr('x', 0)
+                .attr('y', function(d, i){
+                return i * 18;
+                })
+                .attr('width', 12)
+                .attr('height', 12)
+                .attr("fill", function(d){
+                return color(d.key); 
+                });
+            
+            legend.selectAll('text')
+            .data(stackedData)
+            .join('text')
+            .text(function(d){
+            return d.key.split(".").slice(-1);
+            })
+            .attr('x', 18)
+            .attr('y', function(d, i){
+            return i * 18;
+             })
+            .attr('text-anchor', 'start')
+            .attr('alignment-baseline', 'hanging');
 
 
         //Add the tooltip labels on mouseover
