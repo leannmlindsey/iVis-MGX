@@ -32,7 +32,7 @@ drawChart(){
     //append svg to page body
     let stack_svg = d3.select('#stacked-barchart')
         .append('svg')
-            .attr("width", this.width + this.margin.left + this.margin.right)
+            .attr("width", this.width + this.margin.left+10 + this.margin.right)
             .attr("height", this.height + this.margin.top + this.margin.bottom)
             .classed('stack-svg',true)
         .append('g')
@@ -43,7 +43,7 @@ drawChart(){
         .attr("transform", "translate(0," + this.height + ")")
         .call(d3.axisBottom(this.x).tickSizeOuter(0))
        xaxis.selectAll(".tick text")
-         .attr("transform", "translate (0,15) rotate (-90)")
+         .attr("transform", "translate (5,15) rotate (-30)")
          .attr("text-anchor", "end")
          .attr("font-family", "Work Sans");
 
@@ -154,13 +154,17 @@ updateChart(level){
                 rects.on('mouseover', function (d, i) {
                     //subgroup being hovered over
                     var subgroupName = d3.select(this.parentNode).datum().key; 
-                    console.log(subgroupName)
                     var subgroupValue = d.data[subgroupName];
                     //Reduce opacity of all rectangles
-                    d3.selectAll(".myRect").style("opacity", 0.2);
+                    d3.selectAll(".myRect")
+                        .transition()
+                        .duration(0)
+                        .style("opacity", 0.2);
                     //Increase opacity of rect being hovered over
                     let taxon = subgroupName.split(".")
                     d3.selectAll("."+ taxon[1])
+                        .transition()
+                        .duration(800)
                         .style("opacity",1);
 
 
@@ -180,7 +184,10 @@ updateChart(level){
             //hover function for circle selection
             rects.on("mouseout", function (d) {
 
-                 d3.selectAll(".myRect").style("opacity", 1)
+                 d3.selectAll(".myRect")
+                    .transition()
+                    .duration(1000)
+                    .style("opacity", 1)
 
 
                 tooltip.transition()
