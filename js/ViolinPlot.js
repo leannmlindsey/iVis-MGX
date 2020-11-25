@@ -12,7 +12,7 @@ class ViolinPlot {
         this.data3 = data3;
         this.margin = { top: 100, right: 30, bottom: 30, left: 40}
         this.width = 700 - this.margin.left - this.margin.right; 
-        this.height = 700 - this.margin.top - this.margin.bottom; 
+        this.height = 350 - this.margin.top - this.margin.bottom; 
         this.updateViolinChart = updateViolinChart;
   
         // Color scale for dots
@@ -22,7 +22,7 @@ class ViolinPlot {
 
         // Build and Show the Y scale
         this.y = d3.scaleLinear()
-          .domain([0,1000])          
+          .domain([0,650])          
           .range([this.height, 0])
         
         // Build and Show the X scale. It is a band scale like for a boxplot: each group has an dedicated RANGE on the axis. This range has a length of x.bandwidth
@@ -120,8 +120,10 @@ class ViolinPlot {
    var jitterWidth = 40
    var circles = d3.select(".violin-svg")
      .selectAll("circle")
+     
      .data(subsetGene)
      .join("circle")
+     .attr("transform", function(d){ return("translate(" + that.margin.left +" ," + that.margin.top + ")") } ) // Translation on the right to be at the group position
        .attr("cx", function(d){
          return(that.x(d.Condition) + 3*that.x.bandwidth()/4 -( Math.random()*(2*jitterWidth) ))})
        .attr("cy", function(d){
