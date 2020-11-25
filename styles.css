@@ -36,12 +36,12 @@ header div{
   float: left;
 }
 .innerWrapperBottomLeft {
-  width: 1200px;
+  width: 880px;
   display: inline-block;
   float: left;
 }
 .innerWrapperBottomRight {
-  width: 400px;
+  width: 700px;
   display: inline-block;
   float: right;
 }
@@ -64,7 +64,7 @@ header div{
 
 .heat_text{
   height: 120px;
-  width: 1180px;
+  width: 880px;
   background:lightgrey;
   padding: 2px;
   border-radius: 8px;
@@ -72,7 +72,7 @@ header div{
 
 .violin_text{
   height: 120px;
-  width: 400px;
+  width: 700px;
   background:lightgrey;
   padding: 2px;
   border-radius: 8px;
@@ -117,7 +117,7 @@ label {
 /* Heat Map Styling */
 
 #heatmap{
-  width: 1000px;
+  width: 880px;
   height: 900px;
   float: left;
   overflow-y: scroll;
@@ -125,7 +125,7 @@ label {
 }
 
 #violinplot{
-  width: 400px;
+  width: 650px;
   height: 400px;
   float: right;
 }

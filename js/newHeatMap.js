@@ -6,17 +6,17 @@ class HeatMap {
      * @param data data from taxonomyInputFile.csv 
      */
 
-    constructor(data, data2) {
+    constructor(data, data2,updateViolinChart) {
         this.data = data; 
         this.data2 = data2;
         this.margin = { top: 100, right: 100, bottom: 30, left: 400}
-        this.width = 1200 - this.margin.left - this.margin.right; 
-        this.height = 15000 - this.margin.top - this.margin.bottom; 
-
-    // console.log('constructed new heatmap')
+        this.width = 1000 - this.margin.left - this.margin.right; 
+        this.height = 5000 - this.margin.top - this.margin.bottom; 
+        this.updateViolinChart = updateViolinChart
     }
 
     drawHeatmap() {
+        var that = this;
         // append the svg object to the body of the page
         var svg = d3.select("#heatmap")
             .append("svg")
@@ -117,7 +117,6 @@ class HeatMap {
         let rectsSVG =  svg.selectAll()
                 .data(this.data2) 
                 .enter()
-        
         let rects = rectsSVG.append("rect")
                   .attr("x", function(d) { return x(d.Sample) })
                   .attr("y", function(d) { return y(d.GeneFamily) })
@@ -127,7 +126,12 @@ class HeatMap {
                   .on("mouseover", mouseover)
                   .on("mousemove", mousemove)
                   .on("mouseleave", mouseleave)
+                  .on('click', click);
 
+        function click(d) {
+                    console.log(d)
+                    that.updateViolinChart(d)
+        } 
     }
     
 

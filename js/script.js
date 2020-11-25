@@ -1,4 +1,4 @@
-Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInputFullT.csv'),d3.csv('./data/flatHeatmapDataSmall.csv')]).then(([data,data2,data3]) =>
+Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInputFullT.csv'),d3.csv('./data/flatHeatMapConditionSmall.csv')]).then(([data,data2,data3]) =>
      {
 
         console.log('Loading Data')
@@ -16,7 +16,7 @@ Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInp
         barChart.drawChart()
         barChart.updateChart(2)
 
-        let heatMap = new HeatMap(data, data3);
+        let heatMap = new HeatMap(data, data3,updateViolinChart);
         heatMap.drawHeatmap();
 
         let violinPlot = new ViolinPlot(data, data3);
@@ -26,6 +26,11 @@ Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInp
             console.log('updateLevel was called with level: ', levelNum);
             // barChart.drawChart(levelNum);
             barChart.updateChart(levelNum);
+        }
+
+        function updateViolinChart(gene) {
+             console.log('updateViolinChart was called with gene: ', gene);
+             violinPlot.updateViolinPlot(gene);
         }
 
      });
