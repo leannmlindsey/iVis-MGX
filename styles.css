@@ -16,8 +16,13 @@ header h1{
 header h2{
   color: #36454f;
 }
+
 header div{
   color: black;
+}
+label {
+  font-family: "Work Sans";
+  font-weight: bold;
 }
 
 .wrapper {
@@ -83,8 +88,8 @@ header div{
 #Phylo{
   width: 900px;
   height: 800px;
-  overflow-y: auto;
-  overflow-x: auto;
+  overflow-y: scroll;
+  overflow-x: scroll;
 }
 
 .node circle {
@@ -170,3 +175,16 @@ div.tooltip {
 .legend-svg{
   float:right;
 }
+
+input[type='radio'] { 
+  float: left;
+  margin-left:20px;
+  margin-right:20px;
+  
+}
+
+h1, h2, h3, h4, h5, h6{
+  margin-top:10px;
+  margin-bottom:5px;
+}
+

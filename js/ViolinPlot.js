@@ -52,6 +52,7 @@ class ViolinPlot {
           .attr("transform", "translate(0," + this.height + ")")
           .call(d3.axisBottom(this.x))
 
+
 	}
 	updateViolinPlot(gene){
      console.log('made it to updateViolinPlot')
@@ -94,33 +95,35 @@ class ViolinPlot {
      var xNum = d3.scaleLinear()
        .range([0, this.x.bandwidth()])
        .domain([-maxNum,maxNum])
-
+     
+     
      var that=this;
      console.log(sumstat)
      // Add the shape to this svg!
      var svg = d3.select(".violin-svg")
-       .selectAll("myViolin")
+       .selectAll("myViolins")
        .data(sumstat)
-       .enter()        // So now we are working group per group
+       .enter()
        .append("g")
+         .attr('class','violins')
          .attr("transform", function(d){ return("translate(" + (that.x(d.key) + + that.margin.left) +" ," + that.margin.top + ")") } ) // Translation on the right to be at the group position
-       .append("path")
-           .datum(function(d){ return(d.value)})     // So now we are working bin per bin
-           .style("stroke", "none")
-           .style("fill", function(d,i){ return that.myColor(d)})
-   	   .style("opacity", "0.6")
+         .append("path")
+         .datum(function(d){ return(d.value)})     // So now we are working bin per bin
+         .style("stroke", "none")
+         .style("fill", function(d,i){ return that.myColor(d)})
+   	     .style("opacity", "0.6")
            .attr("d", d3.area()
                .x0(function(d){ return(xNum(-d.length)) } )
                .x1(function(d){ return(xNum(d.length)) } )
                .y(function(d){ return(that.y(d.x0)) } )
                .curve(d3.curveCatmullRom)    // This makes the line smoother to give the violin appearance. Try d3.curveStep to see the difference
          )
-
+        
+      
 // Add individual points with jitter
    var jitterWidth = 40
    var circles = d3.select(".violin-svg")
      .selectAll("circle")
-     
      .data(subsetGene)
      .join("circle")
      .attr("transform", function(d){ return("translate(" + that.margin.left +" ," + that.margin.top + ")") } ) // Translation on the right to be at the group position
@@ -132,7 +135,51 @@ class ViolinPlot {
        .style("fill", function(d){ return(that.myColor(d.Condition))})
        .attr("stroke", "white")
 
-// })
-// }
+    let vlabelTextG = "Gene: "
+    let vlevelLabelG=d3.select('#violinLabelGene')
+            .data(subsetGene)
+            .text(d => {
+              let gene = d.GeneFamily.split("|")
+              return "Gene: " + gene[0]})
+    let vlabelTextS = "Species: "
+    let vlevelLabelS=d3.select('#violinLabelSpecies')
+            .data(subsetGene)
+            .text(d => {
+              let gene = d.GeneFamily.split("|")
+              return "Species: " + gene[1]})
+  
+    // let legend = d3.select('#violinplot').select('.legend')
+
+    // console.log(subsetGene)
+    // legend.selectAll('rect')
+    //        .data(subsetGene)
+    //        .join('rect')
+    //        .attr('x', 0)
+    //        .attr('y', function(d, i){
+    //        console.log(i)
+    //        return i * 18;
+    //        })
+    //        .attr('width', 12)
+    //        .attr('height', 12)
+    //        .attr("fill", function(d){
+    //          console.log(that.myColor(d.Condition))
+    //        return that.myColor(d.Condition); 
+    //        });
+       
+    // legend.selectAll('text')
+    //    .data(subsetGene)
+    //    .join('text')
+    //    .text(function(d){
+    //      console.log(d.GeneFamily)
+    //    return d.GeneFamily;
+    //    })
+    //    .attr('x', 18)
+    //    .attr('y', function(d, i){
+    //    return i * 18;
+    //     })
+    //    .attr('text-anchor', 'start')
+    //    .attr('alignment-baseline', 'hanging');
+
+
 }
 }

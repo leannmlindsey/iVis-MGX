@@ -11,12 +11,27 @@ class HeatMap {
         this.data2 = data2;
         this.margin = { top: 100, right: 100, bottom: 30, left: 400}
         this.width = 1000 - this.margin.left - this.margin.right; 
-        this.height = 5000 - this.margin.top - this.margin.bottom; 
+        this.maxHeight=data2.length
+        this.height = this.maxHeight - this.margin.top - this.margin.bottom; 
         this.updateViolinChart = updateViolinChart
     }
 
     drawHeatmap() {
+        console.log(this.maxHeight)
         var that = this;
+        let heatmapData = this.data2
+        console.log(heatmapData)
+        const buttons = d3.selectAll('input');
+        buttons.on('change', function(d) {
+            console.log('button changed to ' + this.value);
+            const selection = this.value;
+            if (selection == 'geneFamily') {
+                heatmapData = this.data2;
+            } else if (selection == 'pathways') {
+                heatmapData = this.data3;
+            }
+        });
+
         // append the svg object to the body of the page
         var svg = d3.select("#heatmap")
             .append("svg")
@@ -33,7 +48,7 @@ class HeatMap {
             // Labels of row and columns
             //var mySamples = this.data.columns.slice(1,14)
             var geneList = []
-            this.data2.forEach(function (d) {
+                heatmapData.forEach(function (d) {
                 geneList.push(d.GeneFamily)
             });
 
@@ -131,6 +146,8 @@ class HeatMap {
         function click(d) {
                     console.log(d)
                     that.updateViolinChart(d)
+
+        
         } 
     }
     

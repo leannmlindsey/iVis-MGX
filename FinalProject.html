@@ -47,7 +47,13 @@
                 <p>The heatmap shows the abundance of each gene by sample.  This is a selection of the top 1000 differentially expressed genes</p>
                 <p>Hover over each square for information on abundance and gene function. Scroll down to see more genes.</p>
                 </div>
-            <div id="heatmap" class="view">      
+                <div id = "radio" class="radio-div">
+                    <h3>Choose Data Input for Heatmap</h3>
+                        <input type="radio" name="heatmapFile" value="geneFamily" checked>View Genes in Heatmap</br>
+                        <input type="radio" name="heatmapFile" value="pathways">View Pathways in Heatmap</br>
+                </div>
+            <div id="heatmap" class="view"> 
+                   
             </div>
         </div>
         <div class="innerWrapperBottomRight">
@@ -56,7 +62,14 @@
                 <p>The violin plot shows the gene abundance by sample for a selected gene separated by experimental condition.</p>
                 <p>Click on a gene in the heatmap to update.</p>
             </div>
-            <div id="violinplot" class="view">  </div>
+            <div id="violinLables" class="view">  
+                <h3 id='violinLabelGene'>Gene: </h3>
+                <h3 id='violinLabelSpecies'>Species: </h3>
+            </div>
+            <div id="violinplot" class="view">  
+            
+            </div>
+
         </div>
     </div>
 </body>

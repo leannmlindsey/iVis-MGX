@@ -10,7 +10,7 @@ class Tree {
         this.data = data; 
         this.margin = { top: 10, right: 90, bottom: 30, left: 90} //margin right used to be 90
         this.width = 1300 - this.margin.left - this.margin.right; 
-        this.height = 1000 - this.margin.top - this.margin.bottom; 
+        this.height = 750 - this.margin.top - this.margin.bottom; 
         this.updateLevel = updateLevel; 
         // let stackedbar = new sBar(data2); 
         // this.stackedbar = stackedbar
