@@ -4,7 +4,7 @@ class sBar{
         this.select_subset=data;
      
         //set margins and dimensions
-        this.margin = ({top: 10, right: 30, bottom: 200, left: 50});
+        this.margin = ({top: 10, right: 30, bottom: 200, left: 80});
         this.width = 460 - this.margin.left - this.margin.right;//used to be 760
         this.height = 800 - this.margin.top - this.margin.bottom;
 
