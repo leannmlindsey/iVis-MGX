@@ -17,10 +17,8 @@ class HeatMap {
     }
 
     drawHeatmap() {
-        console.log(this.maxHeight)
         var that = this;
         let heatmapData = this.data2
-        console.log(heatmapData)
         const buttons = d3.selectAll('input');
         buttons.on('change', function(d) {
             console.log('button changed to ' + this.value);
@@ -78,7 +76,6 @@ class HeatMap {
             var yAxis = d3.axisLeft(y)
 
             yAxis.tickFormat(d => { 
-                console.log(d);
                 var label = d.split('|') 
                 return label[0]})
                 svg.append("g")

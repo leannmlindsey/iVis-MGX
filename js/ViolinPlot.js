@@ -35,7 +35,6 @@ class ViolinPlot {
 
     drawViolinPlot(){
 	      var that = this;
-        console.log(this.data3)
         // append the svg object to the body of the page
         var svg = d3.select("#violinplot")
             .append("svg")

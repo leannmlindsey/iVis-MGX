@@ -113,7 +113,7 @@ updateChart(level){
             .domain(subgroups) 
             .range(["#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#98df8a","#ff9896","#9467bd","#c5b0d5","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5", "#bcbd22",]);
         let that=this
-        console.log('subgroups',subgroups)
+        
 
         //stack the data per subgroup
         let stackedData = d3.stack()

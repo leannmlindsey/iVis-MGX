@@ -68,7 +68,7 @@ class Tree {
         // collapse after the second level 
         root.children.forEach(collapse);
         root.children.forEach(getId)
-        console.log(this.subgroups) //sets initial domain for color mapping 
+     
         update(root); 
 
         // collapse the node and all its children 
@@ -80,9 +80,9 @@ class Tree {
             }
         }
         function getId(d) {
-            console.log(d.id)
+            //console.log(d.id)
             that.subgroups.push(d.id)
-            console.log(that.subgroups)
+            //console.log(that.subgroups)
         }
 
         function update(source) {
@@ -95,7 +95,7 @@ class Tree {
             let nodes = treeData.descendants(), 
                 links = treeData.descendants().slice(1); 
             
-            console.log(nodes)
+           
             let maxDepth = Math.max.apply(null, nodes.map(d => d.depth))
             that.updateLevel(maxDepth+1)
 
