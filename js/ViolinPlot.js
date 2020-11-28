@@ -52,22 +52,54 @@ class ViolinPlot {
           .attr("transform", "translate(0," + this.height + ")")
           .call(d3.axisBottom(this.x))
 
+        // Add a clipPath: everything out of this area won't be drawn.
+        //var clip = svg.append("defs").append("svg:clipPath")
+          //.attr("id", "clip")
+          //.append("svg:rect")
+          //.attr("width", this.width )
+          //.attr("height",this.height )
+          //.attr("x", 0)
+          //.attr("y", 0);
+
 
 	}
 	updateViolinPlot(gene){
      console.log('made it to updateViolinPlot')
      console.log('gene')
      console.log(gene)
+     //var idleTimeout
+     // A function that set idleTimeOut to null
+    //function idled() { idleTimeout = null; }
+    // var extent = d3.event.selection
+    //  console.log('extent')
+    //  console.log(extent)
+    //  console.log(idleTimeout)
+     // If no selection, back to initial coordinate. Otherwise, update X axis domain
+    // if(!extent){
+    //   if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
+    //   this.y.domain([0,650])
+    // }else{
+    //   this.y.domain([ this.y.invert(extent[0]), this.y.invert(extent[1]) ])
+    //   scatter.select(".brush").call(brush.move, null) // This remove the grey brush area as soon as the selection has been done
+    // }
+    // Update axis and circle position
+    //yAxis.transition().duration(1000).call(d3.axisBottom(x))
 
      // Features of the histogram
      var histogram = d3.histogram()
        .domain(this.y.domain())
-       .thresholds(this.y.ticks(20))    
+       .thresholds(this.y.ticks(5))    
        .value(d => d)
 
       //enter lOOP here that searches through data and finds the GeneFamily that matches
       var subsetGene = this.data3.filter(function (d) {return (d.GeneFamily == gene.GeneFamily) })
       console.log(subsetGene)
+      const numbers = subsetGene.map(d => +d.Value);
+      var maxY=d3.extent(numbers)
+      console.log(maxY)
+      this.y.domain(maxY)
+      
+      
      // Compute the binning for each group of the dataset
      var sumstat = d3.nest()  // nest function allows to group the calculation per level of a factor
        .key(function(d) { 
@@ -102,6 +134,7 @@ class ViolinPlot {
      // Add the shape to this svg!
      var svg = d3.select(".violin-svg")
        .selectAll("myViolins")
+       //.attr("clip-path", "url(#clip)")
        .data(sumstat)
        .enter()
        .append("g")
@@ -123,6 +156,7 @@ class ViolinPlot {
 // Add individual points with jitter
    var jitterWidth = 40
    var circles = d3.select(".violin-svg")
+      //.attr("clip-path", "url(#clip)")
      .selectAll("circle")
      .data(subsetGene)
      .join("circle")
@@ -148,38 +182,10 @@ class ViolinPlot {
               let gene = d.GeneFamily.split("|")
               return "Species: " + gene[1]})
   
-    // let legend = d3.select('#violinplot').select('.legend')
-
-    // console.log(subsetGene)
-    // legend.selectAll('rect')
-    //        .data(subsetGene)
-    //        .join('rect')
-    //        .attr('x', 0)
-    //        .attr('y', function(d, i){
-    //        console.log(i)
-    //        return i * 18;
-    //        })
-    //        .attr('width', 12)
-    //        .attr('height', 12)
-    //        .attr("fill", function(d){
-    //          console.log(that.myColor(d.Condition))
-    //        return that.myColor(d.Condition); 
-    //        });
-       
-    // legend.selectAll('text')
-    //    .data(subsetGene)
-    //    .join('text')
-    //    .text(function(d){
-    //      console.log(d.GeneFamily)
-    //    return d.GeneFamily;
-    //    })
-    //    .attr('x', 18)
-    //    .attr('y', function(d, i){
-    //    return i * 18;
-    //     })
-    //    .attr('text-anchor', 'start')
-    //    .attr('alignment-baseline', 'hanging');
-
+    // d3.select(".violin-svg")
+    //         .call( d3.brushY()                     
+    //           .extent( [ [0,0], [700,350] ])
+    //         )
 
 }
 }

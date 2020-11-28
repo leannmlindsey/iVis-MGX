@@ -131,8 +131,9 @@ updateChart(level){
             .data(stackedData)
             .enter().append('g')
                 .attr("fill", function(d){
+                    console.log(d.key)
                     return color(d.key); })
-                .attr("class", function(d){return "myRect " + d.key.split(".")[1]})
+                .attr("class", function(d){return "myRect " + d.key.split(".").slice(-1)})
                 .selectAll("rect")
                 .data(function(d){
                     return d; });
@@ -170,7 +171,24 @@ updateChart(level){
                 .attr('height', 12)
                 .attr("fill", function(d){
                 return color(d.key); 
-                });
+                })
+                .attr("class", function(d){return "legendRect " + d.key.split(".").slice(-1)})
+                
+                .on("mouseover", function (d) {
+                    let taxon = d.key.split(".").slice(-1);
+                    //console.log(taxon[1])
+                    d3.selectAll("."+ taxon)        
+                      .style("opacity",0.2);             
+               })
+                .on("mouseout", function (d) {
+                    d3.selectAll(".legendRect")
+                       .style("opacity", 1)
+                    d3.selectAll(".myRect")
+                       .style("opacity", 1)
+               })
+                
+                .on('click', click);
+                ;
             
             legend.selectAll('text')
             .data(stackedData)
@@ -183,9 +201,42 @@ updateChart(level){
             return i * 18;
              })
             .attr('text-anchor', 'start')
-            .attr('alignment-baseline', 'hanging');
+            .attr('alignment-baseline', 'hanging')
+            .attr("class", function(d){return "legendText " + d.key.split(".").slice(-1)})
+            .on("mouseover", function (d) {
+              
+                let taxon = d.key.split(".").slice(-1);
+                //console.log(taxon[1])
 
+                d3.selectAll(".legendText")
+                  .style("opacity",1)
+                       
+                //Increase opacity of rect being hovered over
+                d3.selectAll("."+ taxon)
+                  .style("opacity",0.2)
+           })
+            .on("mouseout", function (d) {
+                d3.selectAll(".legendRect")
+                  .style("opacity", 1)
+                d3.selectAll(".myRect")
+                  .style("opacity", 1)
 
+                d3.selectAll("text")
+                   .transition()
+                   .duration(1000)
+                   .style("opacity", 1)
+           })
+            .on('click', click);
+
+        function click(d) {
+                    console.log(d.key)
+                    //that.updateChart(level)
+                    let taxon = d.key.split(".").slice(-1);
+                    d3.selectAll("."+ taxon)
+                      .attr("class","filtered")
+                      .style("opacity",0.2)
+                      .attr('fill','grey')
+        } 
         //Add the tooltip labels on mouseover
         let tooltip = d3.select('#stacked-barchart').append('div').classed('tooltip', true).style("opacity",0);
             
@@ -199,8 +250,8 @@ updateChart(level){
                         .duration(0)
                         .style("opacity", 0.2);
                     //Increase opacity of rect being hovered over
-                    let taxon = subgroupName.split(".")
-                    d3.selectAll("."+ taxon[1])
+                    let taxon = subgroupName.split(".").slice(-1)
+                    d3.selectAll("."+ taxon)
                         .transition()
                         .duration(800)
                         .style("opacity",1);
