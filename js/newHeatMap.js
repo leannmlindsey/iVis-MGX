@@ -9,8 +9,8 @@ class HeatMap {
     constructor(data, data2,updateViolinChart) {
         this.data = data; 
         this.data2 = data2;
-        this.margin = { top: 100, right: 100, bottom: 30, left: 400}
-        this.width = 1000 - this.margin.left - this.margin.right; 
+        this.margin = { top: 100, right: 100, bottom: 30, left: 200}
+        this.width = 900 - this.margin.left - this.margin.right; 
         this.maxHeight=data2.length
         this.height = this.maxHeight - this.margin.top - this.margin.bottom; 
         this.updateViolinChart = updateViolinChart
@@ -75,8 +75,14 @@ class HeatMap {
                 .range([ this.height, 0 ])
                 .domain(geneList)
                 .padding(0.01);
+            var yAxis = d3.axisLeft(y)
+
+            yAxis.tickFormat(d => { 
+                console.log(d);
+                var label = d.split('|') 
+                return label[0]})
                 svg.append("g")
-                  .call(d3.axisLeft(y));
+                  .call(yAxis);
                 svg.selectAll(".tick text").style("font-family", "Work Sans");
 
             // Build color scale
