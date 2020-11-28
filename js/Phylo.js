@@ -67,7 +67,6 @@ class Tree {
 
         // collapse after the second level 
         root.children.forEach(collapse);
-        root.children.forEach(getId)
      
         update(root); 
 
@@ -84,6 +83,20 @@ class Tree {
             that.subgroups.push(d.id)
             //console.log(that.subgroups)
         }
+        function updateSubgroups(level) {
+            that.subgroups = []
+    
+            for (let i = 0; i < that.data.length; i++ ) {
+                let clade = that.data[i].id.split(".").length
+                if (clade == (level)){
+                     that.subgroups.push(that.data[i].id)
+                 }  
+            };
+            //reset the color scale to align with new level 
+            that.color = d3.scaleOrdinal()
+                .domain(that.subgroups) 
+                .range(["#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#98df8a","#ff9896","#9467bd","#c5b0d5","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5", "#bcbd22",]);
+        }
 
         function update(source) {
 
@@ -94,10 +107,10 @@ class Tree {
             // compute the new tree layout
             let nodes = treeData.descendants(), 
                 links = treeData.descendants().slice(1); 
-            
            
             let maxDepth = Math.max.apply(null, nodes.map(d => d.depth))
             that.updateLevel(maxDepth+1)
+            updateSubgroups(maxDepth+1) //updating subgroups updates the colors on the nodes 
 
             // Normalize for fixed-depth.
             nodes.forEach(function(d){ d.y = d.depth * 150});
@@ -120,8 +133,8 @@ class Tree {
                 .attr('class', 'node')
                 .attr('r', 1e-6)
                 .attr("transform", "translate(" + that.margin.left + "," + that.margin.top + ")")
-                .style("fill", d => d._children ? "#aec7e8" : "#fff");
-                //.style("fill", d => d._children ? that.color(d.id) : "#fff");
+                //.style("fill", d => d._children ? "#aec7e8" : "#fff");
+                .style("fill", d => d._children ? that.color(d.id) : "#fff");
             // add labels for the nodes 
             nodeEnter.append('text')
                 .attr("dy", ".35em")
@@ -142,8 +155,21 @@ class Tree {
             // update the node attributes and style 
             nodeUpdate.select('circle.node')
                 .attr('r', 10)
-                .style("fill", d => d._children ? "#aec7e8" : "#fff") //old node coloring system
+                //.style("fill", d => d._children ? "#aec7e8" : "#fff") //old node coloring system
                 //.style("fill", d => d._children ? that.color(d.id): "#fff") //nodes colored to match the stacked bar
+                .style("fill", d => {
+                    if (d._children) {
+                        if (d.depth == maxDepth){
+                            //console.log(d.depth)
+                            return that.color(d.id)
+                        } else {
+                        return '#aec7e8'
+                        }
+                    } else {
+                        return "#fff"
+                    }
+                    
+                })
                 .attr('cursor', 'pointer');
             
             // remove any exiting nodes 
@@ -249,7 +275,6 @@ class Tree {
 
             // Toggle children on click.
             function click(d) {
-                console.log(d)
 
                 if (d.children) {
                     d._children = d.children;
