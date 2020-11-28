@@ -12,9 +12,15 @@ class Tree {
         this.width = 1300 - this.margin.left - this.margin.right; 
         this.height = 750 - this.margin.top - this.margin.bottom; 
         this.updateLevel = updateLevel; 
+        this.subgroups = []
         // let stackedbar = new sBar(data2); 
         // this.stackedbar = stackedbar
         // this.level = 4
+
+        //color scale
+        this.color = d3.scaleOrdinal()
+            .domain(this.subgroups) //domain will be set on drawTree when subgroups is defined
+            .range(["#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#98df8a","#ff9896","#9467bd","#c5b0d5","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5", "#bcbd22",]);
     }
 
     drawTree() {
@@ -61,7 +67,8 @@ class Tree {
 
         // collapse after the second level 
         root.children.forEach(collapse);
-
+        root.children.forEach(getId)
+        console.log(this.subgroups) //sets initial domain for color mapping 
         update(root); 
 
         // collapse the node and all its children 
@@ -71,6 +78,11 @@ class Tree {
                 d._children.forEach(collapse);
                 d.children = null; 
             }
+        }
+        function getId(d) {
+            console.log(d.id)
+            that.subgroups.push(d.id)
+            console.log(that.subgroups)
         }
 
         function update(source) {
@@ -109,7 +121,7 @@ class Tree {
                 .attr('r', 1e-6)
                 .attr("transform", "translate(" + that.margin.left + "," + that.margin.top + ")")
                 .style("fill", d => d._children ? "#aec7e8" : "#fff");
-            
+                //.style("fill", d => d._children ? that.color(d.id) : "#fff");
             // add labels for the nodes 
             nodeEnter.append('text')
                 .attr("dy", ".35em")
@@ -130,7 +142,8 @@ class Tree {
             // update the node attributes and style 
             nodeUpdate.select('circle.node')
                 .attr('r', 10)
-                .style("fill", d => d._children ? "#aec7e8" : "#fff")
+                .style("fill", d => d._children ? "#aec7e8" : "#fff") //old node coloring system
+                //.style("fill", d => d._children ? that.color(d.id): "#fff") //nodes colored to match the stacked bar
                 .attr('cursor', 'pointer');
             
             // remove any exiting nodes 
@@ -255,3 +268,4 @@ class Tree {
 
 
 }
+

@@ -112,8 +112,8 @@ updateChart(level){
         let color = d3.scaleOrdinal()
             .domain(subgroups) 
             .range(["#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#98df8a","#ff9896","#9467bd","#c5b0d5","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5", "#bcbd22",]);
-
         let that=this
+        console.log('subgroups',subgroups)
 
         //stack the data per subgroup
         let stackedData = d3.stack()
@@ -303,8 +303,8 @@ function createSubset(data, level, filtered){
     //console.log(level)
     var indexList = []
     for (let key in data[1]) {
-        console.log('made it to create Subset')
-        console.log('key',key)
+        //console.log('made it to create Subset')
+        //console.log('key',key)
         let num = key.split('.') //counts the levels by counting the clade separator '.'
         
         if (num.length == level) {
@@ -321,7 +321,7 @@ function createSubset(data, level, filtered){
         }
       }  
     } 
-    console.log('final indexList',indexList)
+    //console.log('final indexList',indexList)
     return indexList;
     
 
