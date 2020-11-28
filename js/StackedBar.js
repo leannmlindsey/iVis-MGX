@@ -2,6 +2,7 @@ class sBar{
     constructor(data){
         this.data = data;
         this.select_subset=data;
+        this.filtered = [] //an array to keep track of which species will be filtered out of the dataset 
      
         //set margins and dimensions
         this.margin = ({top: 10, right: 30, bottom: 200, left: 80});
@@ -22,9 +23,6 @@ class sBar{
             .range([this.height, 0]);
 
         this.padding = 40;
-        
-        
-        
 
     }
 
@@ -79,7 +77,7 @@ updateChart(level){
         //List of taxons
         //create the subset to draw the correct level of the tree
         //level=1 kingdom, level=2 phylum, etc.
-        let subgroups = createSubset(this.data,level);
+        let subgroups = createSubset(this.data,level, this.filtered);
         let labelText = "Level: Phylum"
         switch(level){
             case 0:
@@ -131,7 +129,7 @@ updateChart(level){
             .data(stackedData)
             .enter().append('g')
                 .attr("fill", function(d){
-                    console.log(d.key)
+                    //console.log(d.key)
                     return color(d.key); })
                 .attr("class", function(d){return "myRect " + d.key.split(".").slice(-1)})
                 .selectAll("rect")
@@ -236,6 +234,10 @@ updateChart(level){
                       .attr("class","filtered")
                       .style("opacity",0.2)
                       .attr('fill','grey')
+                    console.log('this.filtered', that.filtered)
+                    that.filtered.push(d.key)
+                    console.log('filtered list', that.filtered)
+                    that.updateChart(level)
         } 
         //Add the tooltip labels on mouseover
         let tooltip = d3.select('#stacked-barchart').append('div').classed('tooltip', true).style("opacity",0);
@@ -295,21 +297,31 @@ tooltipRender(stackedData,subgroupName, subgroupValue) {
     
 }
 }
-function createSubset(data, level){
+function createSubset(data, level, filtered){
+
     //console.log(data.columns)
     //console.log(level)
     var indexList = []
     for (let key in data[1]) {
-        let num = key.split('.')
+        console.log('made it to create Subset')
+        console.log('key',key)
+        let num = key.split('.') //counts the levels by counting the clade separator '.'
         
         if (num.length == level) {
-            //console.log('success!  we have a match!')
-            //console.log(num.length);
-            //console.log(level)
             indexList.push(key)
         }
       }
-    //console.log(indexList)
+    //now filter the indexList if anything is filtered out 
+    for ( let item in filtered){
+      //console.log('item',filtered[item])
+      for (let key in indexList){
+          //console.log('key', indexList[key])
+        if (indexList[key] == filtered[item]) {
+            indexList.splice(key, 1);
+        }
+      }  
+    } 
+    console.log('final indexList',indexList)
     return indexList;
     
 
