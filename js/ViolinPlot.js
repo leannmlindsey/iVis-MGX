@@ -51,38 +51,10 @@ class ViolinPlot {
           .attr("transform", "translate(0," + this.height + ")")
           .call(d3.axisBottom(this.x))
 
-        // Add a clipPath: everything out of this area won't be drawn.
-        //var clip = svg.append("defs").append("svg:clipPath")
-          //.attr("id", "clip")
-          //.append("svg:rect")
-          //.attr("width", this.width )
-          //.attr("height",this.height )
-          //.attr("x", 0)
-          //.attr("y", 0);
-
 
 	}
 	updateViolinPlot(gene){
-     console.log('made it to updateViolinPlot')
-     console.log('gene')
-     console.log(gene)
-     //var idleTimeout
-     // A function that set idleTimeOut to null
-    //function idled() { idleTimeout = null; }
-    // var extent = d3.event.selection
-    //  console.log('extent')
-    //  console.log(extent)
-    //  console.log(idleTimeout)
-     // If no selection, back to initial coordinate. Otherwise, update X axis domain
-    // if(!extent){
-    //   if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
-    //   this.y.domain([0,650])
-    // }else{
-    //   this.y.domain([ this.y.invert(extent[0]), this.y.invert(extent[1]) ])
-    //   scatter.select(".brush").call(brush.move, null) // This remove the grey brush area as soon as the selection has been done
-    // }
-    // Update axis and circle position
-    //yAxis.transition().duration(1000).call(d3.axisBottom(x))
+     
 
      // Features of the histogram
      var histogram = d3.histogram()
@@ -92,10 +64,10 @@ class ViolinPlot {
 
       //enter lOOP here that searches through data and finds the GeneFamily that matches
       var subsetGene = this.data3.filter(function (d) {return (d.GeneFamily == gene.GeneFamily) })
-      console.log(subsetGene)
+      //console.log(subsetGene)
       const numbers = subsetGene.map(d => +d.Value);
       var maxY=d3.extent(numbers)
-      console.log(maxY)
+      //console.log(maxY)
       this.y.domain(maxY)
       
       
@@ -129,11 +101,10 @@ class ViolinPlot {
      
      
      var that=this;
-     console.log(sumstat)
+     //console.log(sumstat)
      // Add the shape to this svg!
      var svg = d3.select(".violin-svg")
        .selectAll("myViolins")
-       //.attr("clip-path", "url(#clip)")
        .data(sumstat)
        .enter()
        .append("g")
@@ -155,7 +126,6 @@ class ViolinPlot {
 // Add individual points with jitter
    var jitterWidth = 40
    var circles = d3.select(".violin-svg")
-      //.attr("clip-path", "url(#clip)")
      .selectAll("circle")
      .data(subsetGene)
      .join("circle")
@@ -181,7 +151,7 @@ class ViolinPlot {
               let gene = d.GeneFamily.split("|")
               return "Species: " + gene[1]})
   
-    // d3.select(".violin-svg")
+    // d3.select(".violin-svg")  //tried brushing but decided to just rescale axis on every click of gene
     //         .call( d3.brushY()                     
     //           .extent( [ [0,0], [700,350] ])
     //         )

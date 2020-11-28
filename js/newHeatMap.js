@@ -147,7 +147,7 @@ class HeatMap {
                   .on('click', click);
 
         function click(d) {
-                    console.log(d)
+                    //console.log(d)
                     that.updateViolinChart(d)
 
         
