@@ -96,7 +96,7 @@ class Sunburst {
 
     function click(d) {
     console.log(d.data.data.id)
-    let level = d.data.data.id.split(".").length-1
+    let level = d.data.data.id.split(".").length
     console.log(level)
     that.updateLevel(level)
     svg.transition()
