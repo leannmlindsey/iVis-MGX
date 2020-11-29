@@ -9,6 +9,7 @@
     <script src="https://unpkg.com/d3-simple-slider"></script>
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="js/StackedBar.js" async></script>
+    <script src="js/sunburst.js" async></script>
     <script src="js/Phylo.js" async></script>
     <script src="js/ViolinPlot.js" async></script>
     <script src="js/newHeatMap.js" async></script>
@@ -29,6 +30,11 @@
             <div class="phylo_text">
                 <p>This phylogenetic tree shows the species found in all host samples.</p>
                 <p>Click on the nodes to expand or collapse each branch. You can also zoom in or out and scroll for enhanced visualization.</p>
+            </div>
+            <div id = "radio" class="radio-div">
+                <h3>Choose View:</h3>
+                    <input type="radio" name="Phylo" value="Phylo" checked>View Phylogenetic Tree</br>
+                    <input type="radio" name="Sunburst" value="Sunburst">View Sunburst Plot</br>
             </div>
             <div id="Phylo" class="view"> </div> 
         </div>
