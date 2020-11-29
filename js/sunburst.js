@@ -95,16 +95,20 @@ class Sunburst {
 
 
     function click(d) {
+    console.log(d.data.data.id)
+    let level = d.data.data.id.split(".").length-1
+    console.log(level)
+    that.updateLevel(level)
     svg.transition()
       .duration(750)
       .tween("scale", function() {
-        var xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
-            yd = d3.interpolate(y.domain(), [d.y0, 1]),
-            yr = d3.interpolate(y.range(), [d.y0 ? 20 : 0, radius]);
-        return function(t) { x.domain(xd(t)); y.domain(yd(t)).range(yr(t)); };
+        var xd = d3.interpolate(that.x.domain(), [d.x0, d.x1]),
+            yd = d3.interpolate(that.y.domain(), [d.y0, 1]),
+            yr = d3.interpolate(that.y.range(), [d.y0 ? 20 : 0, that.radius]);
+        return function(t) { that.x.domain(xd(t)); that.y.domain(yd(t)).range(yr(t)); };
       })
       .selectAll("path")
-      .attrTween("d", function(d) { return function() { return arc(d); }; });
+      .attrTween("d", function(d) { return function() { return that.arc(d); }; });
     }
   }
 }

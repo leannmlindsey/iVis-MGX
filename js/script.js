@@ -13,8 +13,8 @@ Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInp
         const phyloTree = new Tree(data, updateLevel); 
         const sunburst = new Sunburst(data,updateLevel);
         const barChart = new sBar(data2);
-        phyloTree.drawTree()
-        //sunburst.drawSunburst()
+        //phyloTree.drawTree()
+        sunburst.drawSunburst()
         barChart.drawChart()
         barChart.updateChart(2)
 

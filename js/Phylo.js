@@ -40,11 +40,6 @@ class Tree {
             svg.attr("transform", d3.event.transform)
           }))
 
-        //let tax_ranks=["Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species"]
-        //svg.append("text").text(tax_ranks).attr("x1","100").attr("y1", "100"); 
-        //above code not rendering properly, eitherway it would be better to do something like the last homework where the labels
-        //update depending on expansion. I didn't do it on my homework 6 hehe..
-
         let treeGroup = d3.select('.tree-svg').append('g')
             .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")"); 
         
