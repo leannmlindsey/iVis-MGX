@@ -61,6 +61,9 @@ drawChart(){
         .style("font-size", "smaller")
         .style("font-family", "Work Sans")
         .text("Taxon Abundance"); 
+
+    let rects = d3.select('.stack-svg').append('g').classed('bars', true)
+        .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")")
     
     //svg for legend
     let legend = d3.select('#stacked-barchart').append('svg')
@@ -122,39 +125,41 @@ updateChart(level){
             (this.select_subset);
 
         //show the bars
-        let rects = d3.select('.stack-svg').append('g')
+        let rects = d3.select('.stack-svg').select('.bars') //.append('g')
             .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")")
             .selectAll('g')
             //enter in stack data, loop key per key, group per group
             .data(stackedData)
-            .enter().append('g')
+            //.enter().append('g')
+            .join('g')
                 .attr("fill", function(d){
                     //console.log(d.key)
                     return color(d.key); })
                 .attr("class", function(d){return "myRect " + d.key.split(".").slice(-1)})
                 .selectAll("rect")
                 .data(function(d){
-                    return d; });
+                    return d; })
+                .join('rect')
 
-        rects.exit().remove()
+    //     rects.exit().remove()
 
-    let enterRects = rects.enter().append('rect');
-            enterRects
-                .attr("x", function(d){return that.x(d.data.group); })
-                .attr("y", function(d){return that.y(d[1]); })
-                .attr("height", function(d){ return that.y(d[0])- that.y(d[1]); })
-                .attr("width", that.x.bandwidth());
+    // let enterRects = rects.enter().append('rect');
+    //         enterRects
+                 .attr("x", function(d){return that.x(d.data.group); })
+                 .attr("y", function(d){return that.y(d[1]); })
+                 .attr("height", function(d){ return that.y(d[0])- that.y(d[1]); })
+                 .attr("width", that.x.bandwidth());
             
-            rects=rects.merge(enterRects)
+    //         rects=rects.merge(enterRects)
 
-            rects
-               .transition()
-               .duration(300)
-               .delay(140)
-                .attr("x", function(d){return that.x(d.data.group); })
-                .attr("y", function(d){return that.y(d[1]); })
-                .attr("height", function(d){ return that.y(d[0])- that.y(d[1]); })
-                .attr("width", that.x.bandwidth());
+             rects
+                .transition()
+                .duration(300)
+                .delay(140)
+                 .attr("x", function(d){return that.x(d.data.group); })
+                 .attr("y", function(d){return that.y(d[1]); })
+                 .attr("height", function(d){ return that.y(d[0])- that.y(d[1]); })
+                 .attr("width", that.x.bandwidth());
                 
             let legend = d3.select('.legend');
 
