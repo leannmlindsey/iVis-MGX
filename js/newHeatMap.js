@@ -22,7 +22,7 @@ class HeatMap {
     drawHeatmap() {
         var that = this;
         let heatmapData = this.data2
-        const buttons = d3.selectAll('input');
+        const buttons = d3.selectAll('#choosefile-radio');
         buttons.on('change', function(d) {
             console.log('button changed to ' + this.value);
             const selection = this.value;

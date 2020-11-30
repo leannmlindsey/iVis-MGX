@@ -31,10 +31,10 @@
                 <p>This phylogenetic tree shows the species found in all host samples.</p>
                 <p>Click on the nodes to expand or collapse each branch. You can also zoom in or out and scroll for enhanced visualization.</p>
             </div>
-            <div id = "radio" class="radio-div">
+            <div id = "chooseview-radio" class="radio-div">
                 <h3>Choose View:</h3>
-                    <input type="radio" name="Phylo" value="Phylo" checked>View Phylogenetic Tree</br>
-                    <input type="radio" name="Sunburst" value="Sunburst">View Sunburst Plot</br>
+                    <input type="radio" name="phylosun" value="Phylo" checked>View Phylogenetic Tree</br>
+                    <input type="radio" name="phylosun" value="Sunburst">View Sunburst Plot</br>
                 <h3 id='sunburstLabel'></h3>
             </div>
             <div id="Phylo" class="view"> </div> 
@@ -56,7 +56,7 @@
                 <p>The heatmap shows the abundance of each gene by sample.  This is a selection of the top 1000 differentially expressed genes</p>
                 <p>Hover over each square for information on abundance and gene function. Scroll down to see more genes.</p>
                 </div>
-                <div id = "radio" class="radio-div">
+                <div id = "choosefile-radio" class="radio-div">
                     <h3>Choose Data Input for Heatmap</h3>
                         <input type="radio" name="heatmapFile" value="geneFamily" checked>View Genes in Heatmap</br>
                         <input type="radio" name="heatmapFile" value="pathways">View Pathways in Heatmap</br>

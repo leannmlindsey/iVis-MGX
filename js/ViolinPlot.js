@@ -145,13 +145,12 @@ updateViolinPlot(gene){
    .data(subsetGene)
    .join("circle")
    .attr("transform", function(d){ return("translate(" + that.margin.left +" ," + that.margin.top + ")") } ) // Translation on the right to be at the group position
-   //.attr("transform", function(d){ return("translate(" + (that.x(d.Condition) + + that.margin.left) +" ," + that.margin.top + ")") } ) // Translation on the right to be at the group position 
    .attr("cx", function(d){
        return(that.x(d.Condition) + 2.3*that.x.bandwidth()/4 -( Math.random()*(2*jitterWidth)-2 ))})
-     .attr("cy", function(d){
+   .attr("cy", function(d){
        return(that.y(parseInt(d.Value)))})
-     .attr("r", 5)
-     .style("fill", function(d){ return(that.myColor(d.Condition))})
+   .attr("r", 5)
+   .style("fill", function(d){ return(that.myColor(d.Condition))})
      .attr("stroke", "white")
      .on("mouseover", function(d){
        console.log(d);

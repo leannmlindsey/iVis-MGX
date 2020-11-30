@@ -34,6 +34,8 @@ class Tree {
         // this.stackedbar.drawChart(this.level)
         let that = this; 
 
+        //remove the sunburst svg if a sunburst exists before drawing a tree 
+        d3.select("#Phylo").selectAll('svg').remove()
 
         d3.select("#Phylo")
           .append('div')

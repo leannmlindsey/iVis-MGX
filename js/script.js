@@ -43,6 +43,17 @@ Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInp
         heatMap.drawHeatmap();
         violinPlot.drawViolinPlot();
         updateViolinChart(sampleGene)
+
+        const buttons = d3.selectAll('#chooseview-radio').selectAll('input');
+        buttons.on('change', function(d) {
+          console.log('button changed to ' + this.value);
+          const selection = this.value;
+          if (selection == 'Phylo') {
+              phyloTree.drawTree()
+          } else if (selection == 'Sunburst') {
+              sunburst.drawSunburst("Monarch_Wild_248")
+          }
+      });
         
         //functions that need to be available to all .js scripts 
         //these functions enable the interactivity between graphs
@@ -63,7 +74,7 @@ Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInp
         //updates the sunburst chart based on data from one sample 
         function updateSunburstChart(sample) {
           console.log('updateSunburstChart was called with gene: ', sample);
-          sunburst.updateSunburst(sample);
+          sunburst.drawSunburst(sample);
      }
 
      });
