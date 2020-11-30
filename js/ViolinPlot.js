@@ -10,11 +10,11 @@ class ViolinPlot {
   constructor(data, data3,updateViolinChart) {
       this.data = data; 
       this.data3 = data3;
-      this.margin = { top: 100, right: 30, bottom: 30, left: 40}
-      this.width = 700 - this.margin.left - this.margin.right; 
+      this.margin = { top: 30, right: 30, bottom: 30, left: 30}
+      this.width = 670 - this.margin.left - this.margin.right; 
       this.height = 350 - this.margin.top - this.margin.bottom; 
       this.updateViolinChart = updateViolinChart;
-
+      
       // Color scale for dots
       this.myColor = d3.scaleOrdinal()
         .range(["#1f77b4", "#ff7f0e"])
@@ -49,11 +49,13 @@ class ViolinPlot {
 
       svg.append("g")
         .attr("transform", "translate(0," + this.height + ")")
-        .call(d3.axisBottom(this.x))
-
+        .call(d3.axisBottom(this.x))   
 
 }
+
+
 updateViolinPlot(gene){
+    console.log(gene.GeneFamily)
     //enter lOOP here that searches through data and finds the GeneFamily that matches
     var subsetGene = this.data3.filter(function (d) {return (d.GeneFamily == gene.GeneFamily) })
     //console.log(subsetGene)
@@ -62,7 +64,7 @@ updateViolinPlot(gene){
     var maxY=d3.max(numbers)
     //console.log(maxY)
     this.y = d3.scaleLinear()
-      .domain([0,maxY])          
+      .domain([0,maxY*1.25])          
       .range([this.height, 0])
     d3.select(".yAxis")
       .call( d3.axisLeft(this.y) )
@@ -111,7 +113,7 @@ updateViolinPlot(gene){
    //Note: I had to do it this way because datum does not work with join
    //remove all previous violin paths
    d3.select(".violin-svg").selectAll(".violins").selectAll("path").remove()
-   console.log('removed violins before redrawing ')
+   
    //draw new violins 
    var svg = d3.select(".violin-svg")
      .selectAll(".violins")
@@ -136,19 +138,95 @@ updateViolinPlot(gene){
       
     
 // Add individual points with jitter
- var jitterWidth = 40
+ var jitterWidth = 30
  var circles = d3.select(".violin-svg")
    .selectAll("circle")
    .data(subsetGene)
    .join("circle")
    .attr("transform", function(d){ return("translate(" + that.margin.left +" ," + that.margin.top + ")") } ) // Translation on the right to be at the group position
-     .attr("cx", function(d){
-       return(that.x(d.Condition) + 3*that.x.bandwidth()/4 -( Math.random()*(2*jitterWidth) ))})
+   //.attr("transform", function(d){ return("translate(" + (that.x(d.Condition) + + that.margin.left) +" ," + that.margin.top + ")") } ) // Translation on the right to be at the group position 
+   .attr("cx", function(d){
+       return(that.x(d.Condition) + 2.3*that.x.bandwidth()/4 -( Math.random()*(2*jitterWidth)-2 ))})
      .attr("cy", function(d){
        return(that.y(parseInt(d.Value)))})
      .attr("r", 5)
      .style("fill", function(d){ return(that.myColor(d.Condition))})
      .attr("stroke", "white")
+     .on("mouseover", function(d){
+       console.log(d);
+       tooltip.style("opacity", 0.9)
+       d3.select(this)
+        .style("opacity", 0.9)
+     })
+     .on("mouseout", function(d){
+      tooltip              
+      .html("Sample: " + d.Sample + "Value: " + d.Value)
+      .style("left", (d3.event.pageX) + "px")
+      .style("top", (d3.event.pageY - 28) + "px");
+    })
+     .on("mouseleave", function(d){
+      tooltip.style("opacity", 0)
+                 d3.select(this)
+                    .style("stroke", "none")
+                    .style("opacity", 0.8)
+    })
+
+
+  //create tooltip with information about which sample 
+  var tooltip = d3.select(".violins")
+                 .append("div")
+                 .style("opacity", 0)
+                 .attr("class", "tooltip")
+                 .style("background-color", "white")
+                 //.style("border", "solid")
+                 //.style("border-width", "2px")
+                 //.style("border-radius", "5px")
+                 .style("padding", "5px")
+                
+         // Three function that change the tooltip when user hover / move / leave a cell
+        var mouseover = function(d) {
+                 //console.log(d)
+                 tooltip.style("opacity", 0.9)
+                 d3.select(this)
+                 //.style("stroke", "black")
+                 .style("opacity", 0.9)
+        }
+         var mousemove = function(d) {
+                 tooltip
+                     
+                    .html("Sample: " + d.Sample + "Value: " + d.Value)
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+        }
+        var mouseleave = function(d) {
+                 tooltip.style("opacity", 0)
+                 d3.select(this)
+                    .style("stroke", "none")
+                    .style("opacity", 0.8)
+        }
+        
+        d3.select("#saveButton").on("click", function() {
+          console.log('saving gene')
+          d3.select("#GeneToSaveLabel")
+            .data(subsetGene)
+            .append("a")
+            .attr("href", function(d) {
+              let gene = d.GeneFamily.split("|")
+              let uniref = gene[0].split("_")
+              console.log("https://www.uniprot.org/uniprot/"+uniref[1])
+              return "https://www.uniprot.org/uniprot/"+uniref[1]
+            })
+            .html(function(d) {
+              let gene = d.GeneFamily.split("|")
+              return gene[0] + "<br></br>"
+            })
+            .attr("target", "_blank")
+
+          }) 
+
+
+
+  //update labels with Gene specific information 
 
   let vlabelTextG = "Gene: "
   let vlevelLabelG=d3.select('#violinLabelGene')

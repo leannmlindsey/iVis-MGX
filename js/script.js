@@ -13,7 +13,7 @@ Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInp
         //prepare a universal color mapping
         let colorMap = data2.columns;
         colorMap.shift()
-        console.log(colorMap)
+        //console.log(colorMap)
 
         let sortedColorMap = colorMap.sort(function(a, b){
             return a.length - b.length;
@@ -28,16 +28,19 @@ Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInp
         const phyloTree = new Tree(data, data2, updateLevel, color); 
         const sunburst = new Sunburst(data, data2, updateLevel, color);
         const barChart = new sBar(data2,updateSunburstChart, color);
-        phyloTree.drawTree()
-        //sunburst.drawSunburst('Monarch_Wild_249')
+        //phyloTree.drawTree()
+        sunburst.drawSunburst('Monarch_Wild_248')
         barChart.drawChart()
         barChart.updateChart(2)
 
         let heatMap = new HeatMap(data, data3,updateViolinChart);
         heatMap.drawHeatmap();
 
+        let sampleGene = {GeneFamily: "UniRef90_A0A062X980|g__Lactobacillus.s__Lactobacillus_murinus", Sample: "NoMonarch_Wild_260", Value: "28.3265682948", Condition: "No-Monarch"}
+
         let violinPlot = new ViolinPlot(data, data3);
         violinPlot.drawViolinPlot();
+        updateViolinChart(sampleGene)
         
         function updateLevel(levelNum) {
             console.log('updateLevel was called with level: ', levelNum);
@@ -52,7 +55,7 @@ Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInp
 
         function updateSunburstChart(sample) {
           console.log('updateSunburstChart was called with gene: ', sample);
-          sunburst.drawSunburst(sample);
+          sunburst.updateSunburst(sample);
      }
 
      });

@@ -9,17 +9,17 @@ class Sunburst {
   constructor(data, data2, updateLevel, color) {
       this.data = data;
       this.data2 = data2; 
-      this.margin = { top: 30, right: 200, bottom: 30, left: 30} 
+      this.margin = { top: 100, right: 200, bottom: 30, left: 30} 
       //this.width = 1300 - this.margin.left - this.margin.right; 
       //this.height = 750 - this.margin.top - this.margin.bottom;
       this.width = 1200 - this.margin.left - this.margin.right; 
-      this.height = 750 - this.margin.top - this.margin.bottom; 
+      this.height = 650 - this.margin.top - this.margin.bottom; 
 
       this.radius = (Math.min(this.width, this.height) / 2) - 10;
       this.updateLevel = updateLevel; 
       this.subgroups = []
       this.formatNumber = d3.format(",d");
-      this.sample = 'Monarch_Wild_249' //the sample initially shown in the sunburst plot 
+      this.sample = 'Monarch_Wild_248' //the sample initially shown in the sunburst plot 
       this.x = d3.scaleLinear()
         .range([0, 2 * Math.PI]);
 
@@ -65,7 +65,7 @@ class Sunburst {
           .style('opacity', 0)
 
     let svg = d3.select('#Phylo').append('svg')
-          .classed('tree-svg', true)
+          .classed('sunburst-svg', true)
           .attr("width", this.width + this.margin.left + this.margin.right)
           .attr("height", this.height + this.margin.top + this.margin.bottom)
           .append('g')
@@ -73,11 +73,12 @@ class Sunburst {
           .call(d3.zoom().on("zoom", function() {
             svg.attr("transform", d3.event.transform)
           }))
-  
+    
+
     var root= this.stratify(this.data)
         .sort(function(a, b) { return (a.height - b.height) || a.id.localeCompare(b.id); });
-    console.log(this.data)
-    console.log(root)
+    //console.log(this.data)
+    //console.log(root)
   
     root = d3.hierarchy(root);
     //  root.sum(function(d) { console.log(d.data[this.sample])
@@ -102,29 +103,20 @@ class Sunburst {
       .text(function(d) { 
         //console.log(d.data.id);
 	      //console.log(d.data.data[this.sample]);
-        return d.data.id + "\n" + that.formatNumber(d.data[this.sample]) 
-      });
+        return d.data.id + "\n" + that.formatNumber(d.data[this.sample])});
 
-      // let svgLabel = d3.select('#Phylo').append('svg')
-      //   .selectAll("text")
-      //   .data(this.sample)
-      //   .enter().append("text")
-      //   .text( function (d) { return d})
-      //   .attr("x", function(d) { return 0; })
-      //   .attr("y", function(d) { return 0; })
-      //   .attr("font-family", "sans-serif")
-      //   .attr("font-size", "100px")               
-      //   .attr("fill", "black");
-        
+    
+    
 
     function click(d) {
+    console.log('made it to click1')
     console.log(d.data.data.id)
     let level = d.data.data.id.split(".").length
     console.log(level)
     that.updateLevel(level)
     svg.transition()
       .duration(750)
-      .tween("scale", function() {
+      .tween("scale", function() { console.log('made it to tween click1')
         var xd = d3.interpolate(that.x.domain(), [d.x0, d.x1]),
             yd = d3.interpolate(that.y.domain(), [d.y0, 1]),
             yr = d3.interpolate(that.y.range(), [d.y0 ? 20 : 0, that.radius]);
@@ -150,4 +142,58 @@ class Sunburst {
     }
 
   }
+
+  updateSunburst(sample) {
+    this.sample = sample;
+    let that=this;
+    var root= this.stratify(this.data)
+        .sort(function(a, b) { return (a.height - b.height) || a.id.localeCompare(b.id); });
+    
+    root = d3.hierarchy(root);
+        //  root.sum(function(d) { console.log(d.data[this.sample])
+        //	return parseInt(d.data[this.sample]); });
+    root.sum(function(d) { 
+        return !d.children || d.children.length === 0 ? parseInt(d.data[that.sample]) :0; });
+      
+
+    let svg = d3.select('.sunburst-svg')
+      .selectAll("path")
+      .data(this.partition(root).descendants())
+      //.enter().append("path")
+      .join("path")
+      .attr("d", this.arc)
+      .style("fill", function(d) { 
+        //console.log(d.data.id)
+        //console.log(that.color(d.data.id))
+        return that.color((d.children ? d : d.parent).data.id); })
+      //.style("fill", d => that.color(d.data.id))
+      .on("click", click2)
+      .append("title")
+      .text(function(d) { 
+        //console.log(d.data.id);
+        //console.log(d.data.data[this.sample]);
+        return d.data.id + "\n" + that.formatNumber(d.data[this.sample]) 
+      });
+
+      function click2(d) {
+        console.log('made it to click2')
+        console.log(d.data.data.id)
+        let level = d.data.data.id.split(".").length
+        console.log(level)
+        that.updateLevel(level)
+        svg.transition()
+          .duration(750)
+          .tween("scale", function() { console.log('made it to tween click2')
+            var xd = d3.interpolate(that.x.domain(), [d.x0, d.x1]),
+                yd = d3.interpolate(that.y.domain(), [d.y0, 1]),
+                yr = d3.interpolate(that.y.range(), [d.y0 ? 20 : 0, that.radius]);
+            return function(t) { that.x.domain(xd(t)); that.y.domain(yd(t)).range(yr(t)); };
+          })
+          .selectAll("path")
+          .attrTween("d", function(d) { return function() { return that.arc(d); }; });
+        }
+
+        
+  }
 }
+

@@ -8,7 +8,7 @@ class sBar{
         //set margins and dimensions
         this.margin = ({top: 10, right: 30, bottom: 200, left: 80});
         this.width = 460 - this.margin.left - this.margin.right;//used to be 760
-        this.height = 800 - this.margin.top - this.margin.bottom;
+        this.height = 700 - this.margin.top - this.margin.bottom;
 
         //List of experimental sample type(x-axis)
         this.groups = d3.map(this.select_subset, function(d){
@@ -201,8 +201,8 @@ updateChart(level){
                 })
                 .attr('width', 12)
                 .attr('height', 12)
-                .attr("fill", function(d){
-                return that.color(d.key); 
+                .attr("fill", function(d){  //add if filtered then grey three lists keys on level and filtered and subset
+                return that.color(d.key);   //keys on level used to make legend filtered grey subset to draw bars
                 })
                 .attr("class", function(d){return "legendRect " + d.key.split(".").slice(-1)})
                 
