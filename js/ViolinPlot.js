@@ -54,25 +54,25 @@ class ViolinPlot {
 
 }
 updateViolinPlot(gene){
-   
+    //enter lOOP here that searches through data and finds the GeneFamily that matches
+    var subsetGene = this.data3.filter(function (d) {return (d.GeneFamily == gene.GeneFamily) })
+    //console.log(subsetGene)
+    const numbers = subsetGene.map(d => +d.Value);  
+    
+    var maxY=d3.max(numbers)
+    //console.log(maxY)
+    this.y = d3.scaleLinear()
+      .domain([0,maxY])          
+      .range([this.height, 0])
+    d3.select(".yAxis")
+      .call( d3.axisLeft(this.y) )
 
-   // Features of the histogram
-   var histogram = d3.histogram()
+    // Features of the histogram
+    var histogram = d3.histogram()
      .domain(this.y.domain())
      .thresholds(this.y.ticks(5))    
      .value(d => d)
 
-    //enter lOOP here that searches through data and finds the GeneFamily that matches
-    var subsetGene = this.data3.filter(function (d) {return (d.GeneFamily == gene.GeneFamily) })
-    //console.log(subsetGene)
-    const numbers = subsetGene.map(d => +d.Value);
-    var maxY=d3.max(numbers)
-    //console.log(maxY)
-    this.y = d3.scaleLinear()
-        .domain([0,maxY])          
-        .range([this.height, 0])
-    d3.select(".yAxis")
-        .call( d3.axisLeft(this.y) )
     
     
    // Compute the binning for each group of the dataset
