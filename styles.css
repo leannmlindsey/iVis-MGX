@@ -51,6 +51,12 @@ label {
   display: inline-block;
   float: right;
 }
+.innerWrapperBottomSection
+{
+  width: 1600px;
+  display: inline-block;
+  float: left;
+}
 
 .phylo_text{
   height: 120px;
@@ -79,6 +85,14 @@ label {
 .violin_text{
   height: 120px;
   width: 700px;
+  background:lightgrey;
+  padding: 2px;
+  border-radius: 8px;
+}
+
+.acknowlege_text{
+  height: auto;
+  width: 1600px;
   background:lightgrey;
   padding: 2px;
   border-radius: 8px;
