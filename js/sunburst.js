@@ -55,7 +55,9 @@ class Sunburst {
     console.log(this.sample)
     let that = this; 
 
-    console.log(this.data[0].id)
+    let labelText = this.sample 
+    let levelLabel=d3.select('#sunburstLabel')
+            .text("Sunburst for Sample:  " + labelText)
 
     d3.select("#Phylo")
           .append('div')
@@ -103,7 +105,17 @@ class Sunburst {
         return d.data.id + "\n" + that.formatNumber(d.data[this.sample]) 
       });
 
-
+      // let svgLabel = d3.select('#Phylo').append('svg')
+      //   .selectAll("text")
+      //   .data(this.sample)
+      //   .enter().append("text")
+      //   .text( function (d) { return d})
+      //   .attr("x", function(d) { return 0; })
+      //   .attr("y", function(d) { return 0; })
+      //   .attr("font-family", "sans-serif")
+      //   .attr("font-size", "100px")               
+      //   .attr("fill", "black");
+        
 
     function click(d) {
     console.log(d.data.data.id)

@@ -92,10 +92,10 @@ class Tree {
                      that.subgroups.push(that.data[i].id)
                  }  
             };
-            //reset the color scale to align with new level 
-            that.color = d3.scaleOrdinal()
-                .domain(that.subgroups) 
-                .range(["#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#98df8a","#ff9896","#9467bd","#c5b0d5","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5", "#bcbd22",]);
+            // //reset the color scale to align with new level 
+            // that.color = d3.scaleOrdinal()
+            //     .domain(that.subgroups) 
+            //     .range(["#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#98df8a","#ff9896","#9467bd","#c5b0d5","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5", "#bcbd22",]);
         }
 
         function update(source) {
