@@ -4,7 +4,7 @@ Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInp
         console.log('Loading Data')
         console.log('taxonomyInputFile.csv')
         console.log(data)
-        console.log('stackedBarInputSmallT.csv')
+        console.log('stackedBarInputFullT.csv')
         console.log(data2)
         console.log('flatHeatmapDataSmall.csv')
         console.log(data3)

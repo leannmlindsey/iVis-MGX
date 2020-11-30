@@ -4,7 +4,10 @@ class HeatMap {
      * abundance of all the genes present in a selected data set
      * 
      * @param data data from taxonomyInputFile.csv 
-     */
+     * @param data2 data from flatHeatMapDataSmall.csv 
+     * @param updateViolinChart gives access to function in script.js which updates the violin chart
+     **/
+    
 
     constructor(data, data2,updateViolinChart) {
         this.data = data; 

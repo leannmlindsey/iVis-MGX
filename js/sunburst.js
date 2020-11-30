@@ -3,7 +3,11 @@ class Sunburst {
    * Creates a Tree object representing the 
    * phylogeny of all microbial species present
    * 
-   * @param data data from taxonomyInputFile.csv 
+   * @param data data from taxonomyInputFile.csv
+   * @param data2 data from stackedBarInputFullT.csv
+   * @param updateLevel ives access to function in script.js which updates the bar chart chart
+   * @param color universal color map to create consistent colors throughout the site  
+   * 
    */
 
   constructor(data, data2, updateLevel, color) {

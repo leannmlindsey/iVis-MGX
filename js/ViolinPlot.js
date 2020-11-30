@@ -5,6 +5,7 @@ class ViolinPlot {
    * 
    * @param data data from taxonomyInputFile.csv 
    * @param data3 data from flatHeatmapData.csv
+   * @param updateViolinChart gives access to function in script.js which updates the violin chart
    */
 
   constructor(data, data3,updateViolinChart) {
@@ -158,7 +159,7 @@ updateViolinPlot(gene){
        d3.select(this)
         .style("opacity", 0.9)
      })
-     .on("mouseout", function(d){
+     .on("mousemove", function(d){
       tooltip              
       .html("Sample: " + d.Sample + "Value: " + d.Value)
       .style("left", (d3.event.pageX) + "px")
@@ -172,8 +173,8 @@ updateViolinPlot(gene){
     })
 
 
-  //create tooltip with information about which sample 
-  var tooltip = d3.select(".violins")
+    //create tooltip with information about which sample 
+    var tooltip = d3.select(".violin-svg")
                  .append("div")
                  .style("opacity", 0)
                  .attr("class", "tooltip")
@@ -183,27 +184,6 @@ updateViolinPlot(gene){
                  //.style("border-radius", "5px")
                  .style("padding", "5px")
                 
-         // Three function that change the tooltip when user hover / move / leave a cell
-        var mouseover = function(d) {
-                 //console.log(d)
-                 tooltip.style("opacity", 0.9)
-                 d3.select(this)
-                 //.style("stroke", "black")
-                 .style("opacity", 0.9)
-        }
-         var mousemove = function(d) {
-                 tooltip
-                     
-                    .html("Sample: " + d.Sample + "Value: " + d.Value)
-                    .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 28) + "px");
-        }
-        var mouseleave = function(d) {
-                 tooltip.style("opacity", 0)
-                 d3.select(this)
-                    .style("stroke", "none")
-                    .style("opacity", 0.8)
-        }
         
         d3.select("#saveButton").on("click", function() {
           console.log('saving gene')
