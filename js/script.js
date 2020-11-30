@@ -10,11 +10,26 @@ Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInp
         console.log(data3)
       //   console.log('taxonomyInputFile.csv')
 
-        const phyloTree = new Tree(data, updateLevel); 
-        const sunburst = new Sunburst(data,updateLevel);
-        const barChart = new sBar(data2);
+        //prepare a universal color mapping
+        let colorMap = data2.columns;
+        colorMap.shift()
+        console.log(colorMap)
+
+        let sortedColorMap = colorMap.sort(function(a, b){
+            return a.length - b.length;
+          });
+
+        let colors = ['#dbdb8d','#ffbb78',"#c5b0d5","#aec7e8","#9467bd","#1f77b4","#98df8a","#ff9896","#ff7f0e","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5",]
+        //color scale
+        let color = d3.scaleOrdinal()
+            .domain(sortedColorMap) 
+            .range(colors);
+       
+        const phyloTree = new Tree(data, data2, updateLevel, color); 
+        const sunburst = new Sunburst(data, data2, updateLevel, color);
+        const barChart = new sBar(data2,updateSunburstChart, color);
         //phyloTree.drawTree()
-        sunburst.drawSunburst()
+        sunburst.drawSunburst('Monarch_Wild_249')
         barChart.drawChart()
         barChart.updateChart(2)
 
@@ -34,5 +49,10 @@ Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInp
              console.log('updateViolinChart was called with gene: ', gene);
              violinPlot.updateViolinPlot(gene);
         }
+
+        function updateSunburstChart(sample) {
+          console.log('updateSunburstChart was called with gene: ', sample);
+          sunburst.drawSunburst(sample);
+     }
 
      });

@@ -6,26 +6,31 @@ class Tree {
      * @param data data from taxonomyInputFile.csv 
      */
 
-    constructor(data, updateLevel) {
-        this.data = data; 
+    constructor(data, data2, updateLevel, color) {
+        this.data = data;
+        this.data2 = data2; 
         this.margin = { top: 10, right: 90, bottom: 30, left: 90} //margin right used to be 90
         this.width = 1300 - this.margin.left - this.margin.right; 
         this.height = 750 - this.margin.top - this.margin.bottom; 
         this.updateLevel = updateLevel; 
         this.subgroups = []
+        this.color = color;
         // let stackedbar = new sBar(data2); 
         // this.stackedbar = stackedbar
         // this.level = 4
 
-        //color scale
-        this.color = d3.scaleOrdinal()
-            .domain(this.subgroups) //domain will be set on drawTree when subgroups is defined
-            .range(["#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#98df8a","#ff9896","#9467bd","#c5b0d5","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5", "#bcbd22",]);
-    }
+        // //color scale
+        // this.color = d3.scaleOrdinal()
+        //     .domain(this.subgroups) //domain will be set on drawTree when subgroups is defined
+        //     .range(["#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#98df8a","#ff9896","#9467bd","#c5b0d5","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5", "#bcbd22",]);
+   
+        
+        }
 
     drawTree() {
         // this.stackedbar.drawChart(this.level)
         let that = this; 
+
 
         d3.select("#Phylo")
           .append('div')

@@ -1,9 +1,10 @@
 class sBar{
-    constructor(data){
+    constructor(data,updateSunburstChart, color){
         this.data = data;
         this.select_subset=data;
         this.filtered = [] //an array to keep track of which species will be filtered out of the dataset 
-     
+        this.updateSunburstChart = updateSunburstChart;
+
         //set margins and dimensions
         this.margin = ({top: 10, right: 30, bottom: 200, left: 80});
         this.width = 460 - this.margin.left - this.margin.right;//used to be 760
@@ -21,13 +22,17 @@ class sBar{
         this.y = d3.scaleLinear()
             .domain([0,100])
             .range([this.height, 0]);
+        
+        this.color = color;
 
         this.padding = 40;
 
     }
 
 drawChart(){
+    let that = this;
 
+    
 
     //append svg to page body
     let stack_svg = d3.select('#stacked-barchart')
@@ -45,7 +50,29 @@ drawChart(){
        xaxis.selectAll(".tick text")
          .attr("transform", "translate (5,15) rotate (-30)")
          .attr("text-anchor", "end")
-         .attr("font-family", "Work Sans");
+         .attr("font-family", "Work Sans")
+         .attr("class", function(d){return "xAxisText " + d})
+         .on("mouseover", function (d) {
+           
+            d3.selectAll(".xAxisText")
+                  .style("opacity",.2)
+            
+           
+            //Decrease opacity of rect being hovered over
+            d3.selectAll("."+ d)
+                .style("opacity",1)
+                        
+        })
+         .on("mouseout", function (d) {
+            d3.selectAll(".xAxisText")
+                  .style("opacity",1)
+       })
+        
+         .on('click', function(d){
+            console.log("Sample Chosen for Sunburst:", d) 
+            that.updateSunburstChart(d)
+         });
+        // ;
 
     //Draw y-axis
     stack_svg.append('g')
@@ -76,11 +103,12 @@ drawChart(){
 }
 
 updateChart(level){
+        let subgroups = createSubset(this.data,level, this.filtered);
 
         //List of taxons
         //create the subset to draw the correct level of the tree
         //level=1 kingdom, level=2 phylum, etc.
-        let subgroups = createSubset(this.data,level, this.filtered);
+        
         let labelText = "Level: Phylum"
         switch(level){
             case 0:
@@ -111,11 +139,12 @@ updateChart(level){
         let levelLabel=d3.select('#stackedLabel')
             .text(labelText)
 
-        //color scale
-        let color = d3.scaleOrdinal()
-            .domain(subgroups) 
-            .range(["#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#98df8a","#ff9896","#9467bd","#c5b0d5","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5", "#bcbd22",]);
-        let that=this
+        // //color scale
+        // let color = d3.scaleOrdinal()
+        //     .domain(subgroups) 
+        //     .range(["#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#98df8a","#ff9896","#9467bd","#c5b0d5","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5", "#bcbd22",]);
+         let that=this
+
         
 
         //stack the data per subgroup
@@ -134,7 +163,7 @@ updateChart(level){
             .join('g')
                 .attr("fill", function(d){
                     //console.log(d.key)
-                    return color(d.key); })
+                    return that.color(d.key); })
                 .attr("class", function(d){return "myRect " + d.key.split(".").slice(-1)})
                 .selectAll("rect")
                 .data(function(d){
@@ -173,7 +202,7 @@ updateChart(level){
                 .attr('width', 12)
                 .attr('height', 12)
                 .attr("fill", function(d){
-                return color(d.key); 
+                return that.color(d.key); 
                 })
                 .attr("class", function(d){return "legendRect " + d.key.split(".").slice(-1)})
                 
@@ -329,5 +358,9 @@ function createSubset(data, level, filtered){
     //console.log('final indexList',indexList)
     return indexList;
     
+
+}
+
+function filterSubset(data, subset, filtered){
 
 }
