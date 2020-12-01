@@ -56,7 +56,7 @@ class ViolinPlot {
 
 
 updateViolinPlot(gene){
-    console.log(gene.GeneFamily)
+    //console.log(gene.GeneFamily)
     //enter lOOP here that searches through data and finds the GeneFamily that matches
     var subsetGene = this.data3.filter(function (d) {return (d.GeneFamily == gene.GeneFamily) })
     //console.log(subsetGene)

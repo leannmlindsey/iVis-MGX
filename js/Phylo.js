@@ -46,9 +46,9 @@ class Tree {
           .classed('tree-svg', true)
           .attr("width", this.width + this.margin.left + this.margin.right)
           .attr("height", this.height + this.margin.top + this.margin.bottom)
-          .call(d3.zoom().on("zoom", function() {
-            svg.attr("transform", d3.event.transform)
-          }))
+        //   .call(d3.zoom().on("zoom", function() {
+        //     svg.attr("transform", d3.event.transform)
+        //   }))
 
         let treeGroup = d3.select('.tree-svg').append('g')
             .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")"); 

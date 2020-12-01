@@ -1,14 +1,26 @@
 class sBar{
     constructor(data,updateSunburstChart, color){
         this.data = data;
-        this.select_subset=data;
-        this.filtered = [] //an array to keep track of which species will be filtered out of the dataset 
         this.updateSunburstChart = updateSunburstChart;
+        this.color = color;
+        this.select_subset=data;
+         
+        
 
         //set margins and dimensions
         this.margin = ({top: 10, right: 30, bottom: 200, left: 80});
         this.width = 460 - this.margin.left - this.margin.right;//used to be 760
         this.height = 700 - this.margin.top - this.margin.bottom;
+        this.padding = 40;
+
+        //an array to keep track of which species will be filtered out of the dataset
+        this.filtered = [] 
+        //this.unfilteredSubgroups = []//includes list of all species at one level, everthing that should be in the legend, unfiltered
+
+        //an array with all of the species listed, used for color mapping and for filtering for legend
+       
+       
+        
 
         //List of experimental sample type(x-axis)
         this.groups = d3.map(this.select_subset, function(d){
@@ -23,16 +35,13 @@ class sBar{
             .domain([0,100])
             .range([this.height, 0]);
         
-        this.color = color;
 
-        this.padding = 40;
+        
 
     }
 
 drawChart(){
     let that = this;
-
-    
 
     //append svg to page body
     let stack_svg = d3.select('#stacked-barchart')
@@ -103,7 +112,12 @@ drawChart(){
 }
 
 updateChart(level){
+        let that = this;
         let subgroups = createSubset(this.data,level, this.filtered);
+
+        //I had to pass back as an array because Javascript doesn't allow you to pass back two variables                                           
+        //console.log('unfilteredSubgroups', subgroups[1]) 
+        //console.log('filteredSubgroups', subgroups[0])
 
         //List of taxons
         //create the subset to draw the correct level of the tree
@@ -139,19 +153,13 @@ updateChart(level){
         let levelLabel=d3.select('#stackedLabel')
             .text(labelText)
 
-        // //color scale
-        // let color = d3.scaleOrdinal()
-        //     .domain(subgroups) 
-        //     .range(["#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#98df8a","#ff9896","#9467bd","#c5b0d5","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5", "#bcbd22",]);
-         let that=this
-
-        
-
         //stack the data per subgroup
         let stackedData = d3.stack()
-            .keys(subgroups) 
+            .keys(subgroups[0]) 
             .order(d3.stackOrderNone) 
-            (this.select_subset);
+            (this.select_subset)
+
+        console.log('stackedData', d3.keys(stackedData)) //just prints 0-7
 
         //show the bars
         let rects = d3.select('.stack-svg').select('.bars') //.append('g')
@@ -169,17 +177,10 @@ updateChart(level){
                 .data(function(d){
                     return d; })
                 .join('rect')
-
-    //     rects.exit().remove()
-
-    // let enterRects = rects.enter().append('rect');
-    //         enterRects
-                 .attr("x", function(d){return that.x(d.data.group); })
-                 .attr("y", function(d){return that.y(d[1]); })
-                 .attr("height", function(d){ return that.y(d[0])- that.y(d[1]); })
-                 .attr("width", that.x.bandwidth());
-            
-    //         rects=rects.merge(enterRects)
+                  .attr("x", function(d){return that.x(d.data.group); })
+                  .attr("y", function(d){return that.y(d[1]); })
+                  .attr("height", function(d){ return that.y(d[0])- that.y(d[1]); })
+                  .attr("width", that.x.bandwidth());
 
              rects
                 .transition()
@@ -193,7 +194,7 @@ updateChart(level){
             let legend = d3.select('.legend');
 
             legend.selectAll('rect')
-                .data(stackedData)
+                .data(subgroups[1])
                 .join('rect')
                 .attr('x', 0)
                 .attr('y', function(d, i){
@@ -202,12 +203,12 @@ updateChart(level){
                 .attr('width', 12)
                 .attr('height', 12)
                 .attr("fill", function(d){  //add if filtered then grey three lists keys on level and filtered and subset
-                return that.color(d.key);   //keys on level used to make legend filtered grey subset to draw bars
+                return that.color(d);   //keys on level used to make legend filtered grey subset to draw bars
                 })
-                .attr("class", function(d){return "legendRect " + d.key.split(".").slice(-1)})
+                .attr("class", function(d){return "legendRect " + d.split(".").slice(-1)})
                 
                 .on("mouseover", function (d) {
-                    let taxon = d.key.split(".").slice(-1);
+                    let taxon = d.split(".").slice(-1);
                     //console.log(taxon[1])
                     d3.selectAll("."+ taxon)        
                       .style("opacity",0.2);             
@@ -223,10 +224,10 @@ updateChart(level){
                 ;
             
             legend.selectAll('text')
-            .data(stackedData)
+            .data(subgroups[1])
             .join('text')
             .text(function(d){
-            return d.key.split(".").slice(-1);
+            return d.split(".").slice(-1);
             })
             .attr('x', 18)
             .attr('y', function(d, i){
@@ -234,16 +235,16 @@ updateChart(level){
              })
             .attr('text-anchor', 'start')
             .attr('alignment-baseline', 'hanging')
-            .attr("class", function(d){return "legendText " + d.key.split(".").slice(-1)})
+            .attr("class", function(d){return "legendText " + d.split(".").slice(-1)})
             .on("mouseover", function (d) {
               
-                let taxon = d.key.split(".").slice(-1);
+                let taxon = d.split(".").slice(-1);
                 //console.log(taxon[1])
 
                 d3.selectAll(".legendText")
                   .style("opacity",1)
                        
-                //Increase opacity of rect being hovered over
+                //lower opacity of rect being hovered over
                 d3.selectAll("."+ taxon)
                   .style("opacity",0.2)
            })
@@ -253,6 +254,7 @@ updateChart(level){
                 d3.selectAll(".myRect")
                   .style("opacity", 1)
 
+
                 d3.selectAll("text")
                    .transition()
                    .duration(1000)
@@ -261,17 +263,35 @@ updateChart(level){
             .on('click', click);
 
         function click(d) {
-                    console.log(d.key)
+                    //console.log(d)
                     //that.updateChart(level)
-                    let taxon = d.key.split(".").slice(-1);
-                    d3.selectAll("."+ taxon)
-                      .attr("class","filtered")
-                      .style("opacity",0.2)
-                      .attr('fill','grey')
-                    console.log('this.filtered', that.filtered)
-                    that.filtered.push(d.key)
-                    console.log('filtered list', that.filtered)
-                    that.updateChart(level)
+                    let taxon = d.split(".").slice(-1);
+                    let taxonFull = d
+                    //console.log('test')
+                    //console.log(that.filtered.includes(taxonFull))
+                    //first check to see if the taxon is already filtered
+                    if (that.filtered.includes(taxonFull)) {
+                        d3.selectAll("." + taxon)
+                            .attr('fill','black') //change color back to black 
+                                                    //remove taxon from that.filtered and redraw
+                        const index = that.filtered.indexOf(taxonFull);
+                        //console.log('this.filtered', that.filtered)
+                        if (index > -1) {
+                            that.filtered.splice(index, 1);
+                        }
+                        //console.log('filtered list', that.filtered)
+                        that.updateChart(level)
+                    } else {
+
+                        d3.selectAll("."+ taxon)
+                          .attr("class","filtered")
+                          .style("opacity",0.2)
+                          .attr('fill','#DCDCDC')
+                        //console.log('this.filtered', that.filtered)
+                        that.filtered.push(d)
+                        //console.log('filtered list', that.filtered)
+                        that.updateChart(level)
+                    }
         } 
         //Add the tooltip labels on mouseover
         let tooltip = d3.select('#stacked-barchart').append('div').classed('tooltip', true).style("opacity",0);
@@ -332,19 +352,20 @@ tooltipRender(stackedData,subgroupName, subgroupValue) {
 }
 }
 function createSubset(data, level, filtered){
-
-    //console.log(data.columns)
-    //console.log(level)
+    
+    
     var indexList = []
+    var unfilteredSubgroups = []
     for (let key in data[1]) {
-        //console.log('made it to create Subset')
-        //console.log('key',key)
         let num = key.split('.') //counts the levels by counting the clade separator '.'
-        
         if (num.length == level) {
             indexList.push(key)
         }
       }
+    
+    unfilteredSubgroups=[...indexList];  //copies the array by value not by reference 
+    //console.log('unfilteredSubgroups', unfilteredSubgroups)     //so we can keep track of filtered and unfiltered for the bar chart and the legend respectively
+    //console.log('indexList prior to filtering',indexList)
     //now filter the indexList if anything is filtered out 
     for ( let item in filtered){
       //console.log('item',filtered[item])
@@ -355,12 +376,10 @@ function createSubset(data, level, filtered){
         }
       }  
     } 
+    //console.log('indexList after filtering',indexList)
     //console.log('final indexList',indexList)
-    return indexList;
+    return [indexList, unfilteredSubgroups]
     
 
 }
 
-function filterSubset(data, subset, filtered){
-
-}

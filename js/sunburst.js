@@ -75,9 +75,9 @@ class Sunburst {
           .attr("height", this.height + this.margin.top + this.margin.bottom)
           .append('g')
           .attr("transform", "translate(" + this.width / 2 + "," + (this.height / 2) + ")")
-          .call(d3.zoom().on("zoom", function() {
-            svg.attr("transform", d3.event.transform)
-          }))
+          // .call(d3.zoom().on("zoom", function() {
+          //   svg.attr("transform", d3.event.transform)
+          // }))
       
       var root= this.stratify(this.data)
         .sort(function(a, b) { return (a.height - b.height) || a.id.localeCompare(b.id); });
