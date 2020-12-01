@@ -8,7 +8,7 @@ class sBar{
         
 
         //set margins and dimensions
-        this.margin = ({top: 10, right: 30, bottom: 200, left: 80});
+        this.margin = ({top: 10, right: 30, bottom: 200, left: 140});
         this.width = 460 - this.margin.left - this.margin.right;//used to be 760
         this.height = 700 - this.margin.top - this.margin.bottom;
         this.padding = 40;
@@ -65,16 +65,20 @@ drawChart(){
            
             d3.selectAll(".xAxisText")
                   .style("opacity",.2)
+                  
             
            
-            //Decrease opacity of rect being hovered over
+            //Decrease opacity of text being hovered over
             d3.selectAll("."+ d)
                 .style("opacity",1)
+                .style("font-size","16px")
+                
                         
         })
          .on("mouseout", function (d) {
             d3.selectAll(".xAxisText")
                   .style("opacity",1)
+                  .style("font-size","10px")
        })
         
          .on('click', function(d){
