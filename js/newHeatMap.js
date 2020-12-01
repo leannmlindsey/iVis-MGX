@@ -5,33 +5,45 @@ class HeatMap {
      * 
      * @param data data from taxonomyInputFile.csv 
      * @param data2 data from flatHeatMapDataSmall.csv 
+     * @param data4 data from pathabundance_stratifiedFINAL.csv
      * @param updateViolinChart gives access to function in script.js which updates the violin chart
      **/
     
 
-    constructor(data, data2,updateViolinChart) {
+    constructor(data, data2, data4, updateViolinChart) {
         this.data = data; 
         this.data2 = data2;
-        this.margin = { top: 100, right: 100, bottom: 30, left: 200}
+        this.data4 = data4;
+        this.margin = { top: 100, right: 100, bottom: 30, left: 250}
         this.width = 900 - this.margin.left - this.margin.right; 
         this.maxHeight=data2.length
         this.height = this.maxHeight - this.margin.top - this.margin.bottom; 
         this.updateViolinChart = updateViolinChart
+        this.heatmapData = data2;
     }
 
     drawHeatmap() {
         var that = this;
-        let heatmapData = this.data2
-        const buttons = d3.selectAll('#choosefile-radio');
+       
+        const currentSelection = d3.select('input[name="heatmapFile"]:checked').node().value;
+        console.log(currentSelection)
+        if (currentSelection == 'geneFamily') {
+            console.log('defining heatmapdata')
+            that.heatmapData = that.data2
+        } else {
+            that.heatmapData = that.data4
+        }
+        console.log(that.heatmapData)
+
+        //set up "on change" for the buttons to change data between geneFamilies and pathways
+        const buttons = d3.selectAll('#choosefile-radio').selectAll('input');
         buttons.on('change', function(d) {
-            console.log('button changed to ' + this.value);
-            const selection = this.value;
-            if (selection == 'geneFamily') {
-                heatmapData = this.data2;
-            } else if (selection == 'pathways') {
-                heatmapData = this.data3;
-            }
+            that.drawHeatmap();
+            that.updateViolinChart(that.heatmapData[161])
         });
+
+        //erase the previous svg so we can redraw
+        d3.select("#heatmap").select('svg').remove()
 
         // append the svg object to the body of the page
         var svg = d3.select("#heatmap")
@@ -44,12 +56,9 @@ class HeatMap {
             
 
             let mySamples = this.data.columns.slice(1);
-            // console.log('mySamples =')
-            // console.log(mySamples)
-            // Labels of row and columns
-            //var mySamples = this.data.columns.slice(1,14)
+            
             var geneList = []
-                heatmapData.forEach(function (d) {
+                that.heatmapData.forEach(function (d) {
                 geneList.push(d.GeneFamily)
             });
 
@@ -138,7 +147,7 @@ class HeatMap {
         }
 
         let rectsSVG =  svg.selectAll()
-                .data(this.data2) 
+                .data(this.heatmapData) 
                 .enter()
         let rects = rectsSVG.append("rect")
                   .attr("x", function(d) { return x(d.Sample) })
@@ -152,7 +161,7 @@ class HeatMap {
                   .on('click', click);
 
         function click(d) {
-                    //console.log(d)
+                    console.log(d)
                     that.updateViolinChart(d)
 
         

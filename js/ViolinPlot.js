@@ -8,9 +8,11 @@ class ViolinPlot {
    * @param updateViolinChart gives access to function in script.js which updates the violin chart
    */
 
-  constructor(data, data3,updateViolinChart) {
+  constructor(data, data3,data4,updateViolinChart) {
       this.data = data; 
       this.data3 = data3;
+      this.data4 = data4;
+      this.heatmapData = data3;
       this.margin = { top: 30, right: 30, bottom: 30, left: 30}
       this.width = 670 - this.margin.left - this.margin.right; 
       this.height = 350 - this.margin.top - this.margin.bottom; 
@@ -31,6 +33,8 @@ class ViolinPlot {
         .range([ 0, this.width ])
         .domain(["Monarch", "No-Monarch"])
         .padding(0.05)     // This is important: it is the space between 2 groups. 0 means no padding. 1 is the maximum.
+
+           
       }
 
 
@@ -52,13 +56,30 @@ class ViolinPlot {
         .attr("transform", "translate(0," + this.height + ")")
         .call(d3.axisBottom(this.x))   
 
+        const currentSelection = d3.select('input[name="heatmapFile"]:checked').node().value;
+        console.log(currentSelection)
+        
+       
+  
+      //set up "on change" for the buttons to change data between geneFamilies and pathways
+      
+
 }
 
 
 updateViolinPlot(gene){
+    let that = this;
+   
+    const currentSelection = d3.select('input[name="heatmapFile"]:checked').node().value;
+    
+    if (currentSelection == 'geneFamily') {
+      that.heatmapData = that.data3
+    } else {
+      that.heatmapData = that.data4
+    }
     //console.log(gene.GeneFamily)
     //enter lOOP here that searches through data and finds the GeneFamily that matches
-    var subsetGene = this.data3.filter(function (d) {return (d.GeneFamily == gene.GeneFamily) })
+    var subsetGene = that.heatmapData.filter(function (d) {return (d.GeneFamily == gene.GeneFamily) })
     //console.log(subsetGene)
     const numbers = subsetGene.map(d => +d.Value);  
     
@@ -107,7 +128,7 @@ updateViolinPlot(gene){
      .domain([-maxNum,maxNum])
    
    
-   var that=this;
+   
    //console.log(sumstat)
    // Add the shape to this svg!
 
@@ -192,8 +213,15 @@ updateViolinPlot(gene){
             .attr("href", function(d) {
               let gene = d.GeneFamily.split("|")
               let uniref = gene[0].split("_")
-              console.log("https://www.uniprot.org/uniprot/"+uniref[1])
-              return "https://www.uniprot.org/uniprot/"+uniref[1]
+              const currentSelection = d3.select('input[name="heatmapFile"]:checked').node().value;
+    
+              if (currentSelection == 'geneFamily') {
+                return "https://www.uniprot.org/uniprot/"+uniref[1]
+              } else {
+                let metacyc=uniref[0].split(":")
+                return "https://metacyc.org/META/NEW-IMAGE?type=PATHWAY&object="+metacyc[0]
+              }
+              
             })
             .html(function(d) {
               let gene = d.GeneFamily.split("|")

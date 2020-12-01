@@ -1,4 +1,4 @@
-Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInputFullT.csv'),d3.csv('./data/flatHeatMapConditionSuperSmall.csv')]).then(([data,data2,data3]) =>
+Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInputFullT.csv'),d3.csv('./data/flatHeatMapConditionSuperSmall.csv'),d3.csv('./data/pathabundance_stratifiedFINAL.csv')]).then(([data,data2,data3,data4]) =>
      {
 
         console.log('Loading Data')
@@ -8,6 +8,8 @@ Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInp
         console.log(data2)
         console.log('flatHeatmapDataSmall.csv')
         console.log(data3)
+        console.log('pathabundance_stratifiedFINAL.csv')
+        console.log(data4)
 
         //prepare a universal color mapping
 
@@ -32,9 +34,9 @@ Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInp
         const phyloTree = new Tree(data, data2, updateLevel, color); 
         const sunburst = new Sunburst(data, data2, updateLevel, color);
         const barChart = new sBar(data2,updateSunburstChart, color);
-        const heatMap = new HeatMap(data, data3,updateViolinChart);
+        const heatMap = new HeatMap(data, data3, data4, updateViolinChart);
         const sampleGene = {GeneFamily: "UniRef90_A0A062X980|g__Lactobacillus.s__Lactobacillus_murinus", Sample: "NoMonarch_Wild_260", Value: "28.3265682948", Condition: "No-Monarch"}
-        const violinPlot = new ViolinPlot(data, data3);
+        const violinPlot = new ViolinPlot(data, data3, data4);
 
         phyloTree.drawTree()
         //sunburst.drawSunburst('Monarch_Wild_248')
