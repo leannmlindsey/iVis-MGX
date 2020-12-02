@@ -35,7 +35,7 @@ Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInp
         const sunburst = new Sunburst(data, data2, updateLevel, color);
         const barChart = new sBar(data2,updateSunburstChart, color);
         const heatMap = new HeatMap(data, data3, data4, updateViolinChart);
-        const sampleGene = {GeneFamily: "UniRef90_A0A062X980|g__Lactobacillus.s__Lactobacillus_murinus", Sample: "NoMonarch_Wild_260", Value: "28.3265682948", Condition: "No-Monarch"}
+        const sampleGene = {GeneFamily: "UniRef90_A0A210TJH7|g__Yersinia.s__Yersinia_entomophaga", Sample: "NoMonarch_Wild_260", Value: "28.3265682948", Condition: "No-Monarch"}
         const violinPlot = new ViolinPlot(data, data3, data4);
         
         //load page drawing phylogenetic tree

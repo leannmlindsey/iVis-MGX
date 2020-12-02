@@ -59,7 +59,7 @@ label {
 }
 
 .phylo_text{
-  height: 120px;
+  height: 150px;
   width: 880px;
   background:lightgrey;
   padding: 2px;
@@ -67,7 +67,7 @@ label {
 }
 
 .stack_text{
-  height: 120px;
+  height: 150px;
   width: 700px;
   background:lightgrey;
   padding: 2px;
@@ -75,7 +75,7 @@ label {
 }
 
 .heat_text{
-  height: 120px;
+  height: 150px;
   width: 880px;
   background:lightgrey;
   padding: 2px;
@@ -83,7 +83,7 @@ label {
 }
 
 .violin_text{
-  height: 120px;
+  height: 150px;
   width: 700px;
   background:lightgrey;
   padding: 2px;
