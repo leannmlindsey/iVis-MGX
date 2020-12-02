@@ -163,7 +163,6 @@ updateChart(level){
             .order(d3.stackOrderNone) 
             (this.select_subset)
 
-        console.log('stackedData', d3.keys(stackedData)) //just prints 0-7
 
         //show the bars
         let rects = d3.select('.stack-svg').select('.bars') //.append('g')

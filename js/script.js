@@ -1,4 +1,4 @@
-Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInputFullT.csv'),d3.csv('./data/flatHeatMapConditionSuperSmall.csv'),d3.csv('./data/pathabundance_stratifiedFINAL.csv')]).then(([data,data2,data3,data4]) =>
+Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInputFullT_FINAL.csv'),d3.csv('./data/flatHeatMapConditionSuperSmall.csv'),d3.csv('./data/pathabundance_stratifiedFINAL.csv')]).then(([data,data2,data3,data4]) =>
      {
 
         console.log('Loading Data')
