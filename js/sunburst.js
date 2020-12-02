@@ -17,7 +17,7 @@ class Sunburst {
       this.width = 1000 - this.margin.left - this.margin.right;
       this.height = 650 - this.margin.top - this.margin.bottom;
 
-      this.radius = (Math.min(this.width, this.height) / 2) - 10;
+      this.radius = (Math.min(this.width, this.height) / 2); //-10);
       this.updateLevel = updateLevel;
       this.subgroups = []
       this.formatNumber = d3.format(",d");
@@ -89,60 +89,32 @@ class Sunburst {
           .attr("d", this.arc)
           .attr("class", "cladeArc")
           .attr("id", function(d,i) { return "cladeArc_"+i; })
-          .style("fill", function(d) {
+          .style("fill", function(d) { console.log(d);
             return that.color((d.children ? d : d.parent).data.id); })
           .on("click", click);
 
-    // //create a group for all of the paths for the hidden path
-    // let hiddenPathGroup =svg.append('g') //do in constructor so it doesn't append
-    
-    
-    //   hiddenPathGroup.selectAll('path')
-    //     .data(this.partition(root).descendants())
-    //     .enter().append("path")
-    //     .attr('class', 'hidden-arc')
-    //     .attr('id', function(d,i) { return "hiddenArc_"+i; })
-    //     .attr('d', function(d) {
-        
-    //       //this formula creates the parallel hidden arc
-    //       // created by vasturiano
-    //       //https://gist.github.com/vasturiano/12da9071095fbd4df434e60d52d2d58d 
 
-    //       const halfPi = Math.PI/2;
-    //       const angles = [that.x(d.x0) - halfPi, that.x(d.x1) - halfPi];
-    //       const r = Math.max(0, (that.y(d.y0) + that.y(d.y1)) / 2);
+    //create  a group for all of the text elements
+    let textGroup =svg.append('g'); //do in constructor so it doesn't append
 
-    //       const middleAngle = (angles[1] + angles[0]) / 2;
-    //       const invertDirection = middleAngle > 0 && middleAngle < Math.PI; // On lower quadrants write text ccw
-    //       if (invertDirection) { angles.reverse(); }
-
-    //       const path = d3.path();
-    //       path.arc(0, 0, r, angles[0], angles[1], invertDirection);
-    //       return path.toString();
-    //     })
-    //     .attr('opacity',0)
-    //     .on("click", click);
-
-    // //create  a group for all of the text elements
-    // let textGroup =svg.append('g'); //do in constructor so it doesn't append
-
-    //   textGroup.selectAll('text')
-    //     .data(this.partition(root).descendants())
-    //     .enter().append('text')
-    //     .attr("class", "cladeText")
-    //     .append("textPath")
-    //       .attr("startOffset","50%")
-    //       .style("text-anchor","middle")
-    //       .attr("xlink:href",function(d,i){return "#cladeArc_"+i;})
-    //       //.attr("xlink:href",function(d,i) {return "#hiddenArc_" +i;})
-    //         .text(function(d) {
-    //           let clade = d.data.id.split(".").slice(-1)
-    //           let percentage = parseInt(d.data.data[that.sample])
-    //           return percentage > 15 ? clade : "" })
-    //         .attr("fill", 'black')
-    //         .attr("stroke", "grey")
-    //         .attr("stroke-width", "0.2px")
-    //         .attr("font-size", '16px');
+      textGroup.selectAll('text')
+        .data(this.partition(root).descendants())
+        .enter().append('text')
+        .attr("class", "cladeText")
+        .attr("dy", 14)
+        .append("textPath")
+          //.attr("startOffset","15%")
+          .style("text-anchor","start")
+          .attr("xlink:href",function(d,i){return "#cladeArc_"+i;})
+          //.attr("xlink:href",function(d,i) {return "#hiddenArc_" +i;})
+            .text(function(d) {
+              let clade = d.data.id.split(".").slice(-1)
+              let percentage = parseInt(d.data.data[that.sample])
+              return percentage > 15 ? clade : "" })
+            .attr("fill", 'black')
+            .attr("stroke", "grey")
+            .attr("stroke-width", "0.2px")
+            .attr("font-size", '16px');
 
     //click function to zoom into levels
     //contains code to re-draw arc labels
@@ -163,57 +135,31 @@ class Sunburst {
           yr = d3.interpolate(that.y.range(), [d.y0 ? 20 : 0, that.radius]);
         return function(t) { that.x.domain(xd(t)); that.y.domain(yd(t)).range(yr(t)); };
       }) 
-        //.selectAll(".cladeArc")
         .selectAll("path")
-          .attrTween("d", function(d) { return function() { return that.arc(d); }; })
+          .attrTween("d", function(d) { console.log(d); return function() { return that.arc(d); }; })
+      
+      textGroup.selectAll('text')
+          .data(this.partition(root).descendants())
+          .exit().remove()
+
+      textGroup
+          .enter().append('text')
+          .attr("class", "cladeText")
+          .attr("dy", 14)
+          .append("textPath")
+            .attr("startOffset","-20%")
+            .style("text-anchor","start")
+            .attr("xlink:href",function(d,i){return "#cladeArc_"+i;})
+              .text(function(d) {
+                let clade = d.data.id.split(".").slice(-1)
+                let percentage = parseInt(d.data.data[that.sample])
+                return percentage > 15 ? clade : "" })
+              .attr("fill", 'black')
+              .attr("stroke", "grey")
+              .attr("stroke-width", "0.2px")
+              .attr("font-size", '16px');
+
         
-
-        //   let hiddenPathGroup =svg.append('g') //do in constructor so it doesn't append
-    
-    
-        //   hiddenPathGroup.selectAll('path')
-        //     .data(this.partition(root).descendants())
-        //     .enter().append("path")
-        //     .attr('class', 'hidden-arc')
-        //     .attr('id', function(d,i) { return "hiddenArc_"+i; })
-        //     .attr('d', function(d) {
-            
-        //       //this formula creates the parallel hidden arc
-        //       // created by vasturiano
-        //       //https://gist.github.com/vasturiano/12da9071095fbd4df434e60d52d2d58d 
-    
-        //       const halfPi = Math.PI/2;
-        //       const angles = [that.x(d.x0) - halfPi, that.x(d.x1) - halfPi];
-        //       const r = Math.max(0, (that.y(d.y0) + that.y(d.y1)) / 2);
-    
-        //       const middleAngle = (angles[1] + angles[0]) / 2;
-        //       const invertDirection = middleAngle > 0 && middleAngle < Math.PI; // On lower quadrants write text ccw
-        //       if (invertDirection) { angles.reverse(); }
-    
-        //       const path = d3.path();
-        //       path.arc(0, 0, r, angles[0], angles[1], invertDirection);
-        //       return path.toString();
-        //     })
-        //     .attr('opacity',0)
-        //     .on("click", click);
-
-        // //fix text
-        // let textGroup =svg.append('g');
-        //   textGroup.selectAll('text')
-        //     .data(that.partition(root).descendants())
-        //     .enter().append('text')
-        //     .attr("class", "cladeText")
-        //     .append("textPath")
-        //     .attr("startOffset","50%")
-        //     .style("text-anchor","middle")
-        //     //.attr("xlink:href",function(d,i){return "#cladeArc_"+i;})
-        //     .attr("xlink:href",function(d,i) {return "#hiddenArc_" +i;})
-        //     .text(function(d) {
-        //       let clade = d.data.id.split(".").slice(-1)
-        //       let percentage = parseInt(d.data.data[that.sample])
-        //       return percentage > 15 ? clade : "" })
-        //     .attr("fill", 'black')
-        //     .attr("font-size", '16px');
     }
 
     //Add the tooltip labels on mouseover
@@ -226,6 +172,17 @@ class Sunburst {
          tooltip.transition()
              .duration(200)
              .style("opacity", .9);
+         tooltip.html(that.tooltipRender(d) + "<br/>")
+             .style("left", (d3.event.pageX) + "px")
+             .style("top", (d3.event.pageY - 28) + "px");
+        });
+    pathGroup.selectAll('path')
+        .on('mouseout', function(d) {
+
+        //show tooltip
+         tooltip.transition()
+             .duration(200)
+             .style("opacity", 0);
          tooltip.html(that.tooltipRender(d) + "<br/>")
              .style("left", (d3.event.pageX) + "px")
              .style("top", (d3.event.pageY - 28) + "px");
@@ -244,59 +201,6 @@ class Sunburst {
     return text;
      
     }
-    // redrawText(root) {
-    //   console.log('made it to redraw text')
-    //   let that=this;
-      
-    //   let svg = d3.select(".sunburst-svg")
-    //     //.attr("transform", "translate(" + this.width / 2 + "," + (this.height / 2) + ")")
-    //   let hiddenPathGroup =svg.append('g') //do in constructor so it doesn't append
-
-    //   hiddenPathGroup.selectAll('path')
-    //   .data(this.partition(root).descendants())
-    //   .enter().append("path")
-    //   .attr('class', 'hidden-arc')
-    //   .attr('id', function(d,i) { return "hiddenArc_"+i; })
-    //   .attr('d', function(d) {
-        
-    //     //this formula creates the parallel hidden arc
-    //     // created by vasturiano
-    //     //https://gist.github.com/vasturiano/12da9071095fbd4df434e60d52d2d58d 
-
-    //     const halfPi = Math.PI/2;
-    //     const angles = [that.x(d.x0) - halfPi, that.x(d.x1) - halfPi];
-    //     const r = Math.max(0, (that.y(d.y0) + that.y(d.y1)) / 2);
-
-    //     const middleAngle = (angles[1] + angles[0]) / 2;
-    //     const invertDirection = middleAngle > 0 && middleAngle < Math.PI; // On lower quadrants write text ccw
-    //     if (invertDirection) { angles.reverse(); }
-
-    //     const path = d3.path();
-    //     path.arc(0, 0, r, angles[0], angles[1], invertDirection);
-    //     return path.toString();
-    //   })
-    //   .attr('opacity',0.2)
-    //   .on("click", click)
-
-    //   //create  a group for all of the text elements
-    //   let textGroup =svg.append('g') //do in constructor so it doesn't append
-
-    //   textGroup.selectAll('text')
-    //     .data(this.partition(root).descendants())
-    //     .enter().append('text')
-    //     .attr("class", "cladeText")
-    //     .append("textPath")
-    //       .attr("startOffset","50%")
-    //       .style("text-anchor","middle")
-    //       //.attr("xlink:href",function(d,i){return "#cladeArc_"+i;})
-    //       .attr("xlink:href",function(d,i) {return "#hiddenArc_" +i;})
-    //         .text(function(d) {
-    //           let clade = d.data.id.split(".").slice(-1)
-    //           let percentage = parseInt(d.data.data[that.sample])
-    //           return percentage > 15 ? clade : "" })
-    //         .attr("fill", 'white')
-    //         .attr("font-size", '16px')
-
-    // }
+    
 }
 
