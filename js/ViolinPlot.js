@@ -149,7 +149,7 @@ updateViolinPlot(gene){
        .datum(function(d){return(d.value)})     // So now we are working bin per bin
        .join('path')
        .style("stroke", "none")
-       .style("fill", function(d,i){ return that.myColor(d)})
+       .style("fill", function(v,i){ console.log(v); console.log(that.myColor(v)); return that.myColor(v)}) //should be d.Condition but that gives undefined.
         .style("opacity", "0.6")
          .attr("d", d3.area()
              .x0(function(d){ return(xNum(-d.length)) } )
