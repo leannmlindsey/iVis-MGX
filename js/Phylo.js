@@ -97,10 +97,7 @@ class Tree {
                      that.subgroups.push(that.data[i].id)
                  }  
             };
-            // //reset the color scale to align with new level 
-            // that.color = d3.scaleOrdinal()
-            //     .domain(that.subgroups) 
-            //     .range(["#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#98df8a","#ff9896","#9467bd","#c5b0d5","#e377c2","#f7b6d2", "#dbdb8d", "#17becf", "#9edae5", "#bcbd22",]);
+            
         }
 
         function update(source) {
@@ -163,16 +160,31 @@ class Tree {
                 //.style("fill", d => d._children ? "#aec7e8" : "#fff") //old node coloring system
                 //.style("fill", d => d._children ? that.color(d.id): "#fff") //nodes colored to match the stacked bar
                 .style("fill", d => {
-                    if (d._children) {
-                        if (d.depth == maxDepth){
-                            //console.log(d.depth)
-                            return that.color(d.id)
-                        } else {
-                        return '#aec7e8'
-                        }
+                    if(d._children) {
+                        return that.color(d.id)
                     } else {
-                        return "#fff"
+                        //check if the species level, and if so keep node colored
+                        //even though it has no children and would normally be colored white
+                        //in the collapsed tree
+                        if(d.depth==maxDepth){
+                            return that.color(d.id);
+                        } else {
+                            return "#fff";
+                        }
+                        
                     }
+                    
+                    // if (d._children) {
+                        
+                    //     if (d.depth == maxDepth){
+                    //         console.log(d.depth)
+                    //         return that.color(d.id)
+                    //     } else {
+                    //     return '#aec7e8'
+                    //     }
+                    // } else {
+                    //     return "#fff"
+                    // }
                     
                 })
                 .attr('cursor', 'pointer');
