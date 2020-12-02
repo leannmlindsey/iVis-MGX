@@ -138,7 +138,7 @@ class HeatMap {
             let geneNameParsed = d.GeneFamily.split("|")
             let speciesNameParsed = d.GeneFamily.split("_")
             //console.log(speciesNameParsed)
-            let line1 = "<h2>Gene: " + geneNameParsed[0] + "</h2>";
+            let line1 = "<h1>Gene: " + geneNameParsed[0] + "</h1>";
             let line2 = "<h2>Species: " + speciesNameParsed[5] + "_" + speciesNameParsed[6] + "</h2>";
             let line3 = "<h2>Sample: " + d.Sample + "</h2>";
             let line4 = "<h2>Value: "  + Math.round(d.Value)+ "</h2>";

@@ -174,27 +174,24 @@ updateViolinPlot(gene){
    .style("fill", function(d){ return(that.myColor(d.Condition))})
      .attr("stroke", "white")
      .on("mouseover", function(d){
-       console.log(d);
        tooltip.style("opacity", 0.9)
        d3.select(this)
         .style("opacity", 0.9)
      })
      .on("mousemove", function(d){
       tooltip              
-      .html("Sample: " + d.Sample + "Value: " + d.Value)
+      .html("<h1>" + d.Sample + "</h1>" + "</h2>Value: " + d.Value + "</h2>")
       .style("left", (d3.event.pageX) + "px")
       .style("top", (d3.event.pageY - 28) + "px");
     })
      .on("mouseleave", function(d){
       tooltip.style("opacity", 0)
                  d3.select(this)
-                    .style("stroke", "none")
                     .style("opacity", 0.8)
     })
-
-
+    
     //create tooltip with information about which sample 
-    var tooltip = d3.select(".violin-svg")
+    var tooltip = d3.select("#violinplot")
                  .append("div")
                  .style("opacity", 0)
                  .attr("class", "tooltip")
@@ -240,7 +237,7 @@ updateViolinPlot(gene){
           .data(subsetGene)
           .text(d => {
             let gene = d.GeneFamily.split("|")
-            return "Gene: " + gene[0]})
+            return "Gene/Pathway: " + gene[0]})
   let vlabelTextS = "Species: "
   let vlevelLabelS=d3.select('#violinLabelSpecies')
           .data(subsetGene)
