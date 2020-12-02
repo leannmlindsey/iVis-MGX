@@ -14,7 +14,7 @@ class Sunburst {
       this.data = data;
       this.data2 = data2;
       this.margin = { top: 100, right: 200, bottom: 30, left: 30}
-      this.width = 1100 - this.margin.left - this.margin.right;
+      this.width = 1000 - this.margin.left - this.margin.right;
       this.height = 650 - this.margin.top - this.margin.bottom;
 
       this.radius = (Math.min(this.width, this.height) / 2) - 10;
