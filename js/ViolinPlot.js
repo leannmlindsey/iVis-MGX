@@ -160,14 +160,14 @@ updateViolinPlot(gene){
       
     
 // Add individual points with jitter
- var jitterWidth = 30
+ var jitterWidth = 15
  var circles = d3.select(".violin-svg")
    .selectAll("circle")
    .data(subsetGene)
    .join("circle")
    .attr("transform", function(d){ return("translate(" + that.margin.left +" ," + that.margin.top + ")") } ) // Translation on the right to be at the group position
    .attr("cx", function(d){
-       return(that.x(d.Condition) + 2.3*that.x.bandwidth()/4 -( Math.random()*(2*jitterWidth)-2 ))})
+       return(that.x(d.Condition) + 2.2*that.x.bandwidth()/4 -( Math.random()*(2*jitterWidth)-2 ))})
    .attr("cy", function(d){
        return(that.y(parseInt(d.Value)))})
    .attr("r", 5)

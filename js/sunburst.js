@@ -43,6 +43,14 @@ class Sunburst {
       this.stratify = d3.stratify()
         .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
 
+      this.middleArcLine = d => {
+        console.log('middleArcLine called')
+        
+
+        //this function created by vasturiano
+        //https://gist.github.com/vasturiano/12da9071095fbd4df434e60d52d2d58d 
+      }
+
 
   }
   drawSunburst(sample) {
@@ -55,6 +63,8 @@ class Sunburst {
     let labelText = this.sample
     let levelLabel=d3.select('#sunburstLabel')
             .text("Sunburst for Sample:  " + labelText)
+
+    
 
     d3.select("#Phylo")
           .append('div')
@@ -100,49 +110,34 @@ class Sunburst {
         .style("fill", function(d) {
           return that.color((d.children ? d : d.parent).data.id); })
         .on("click", click)
-      .append("title")
-        .text(function(d) {
-        return d.data.id + "\n" + that.formatNumber(d.data[this.sample])
-      });
 
-    // pathGroup.selectAll("path")
-    //   .each(function(d,i) { console.log(d3.select(this).attr("d"))
-    //     //Note: the following code is from this tutorial
-    //     //http://bl.ocks.org/nbremer/7b051187fe329d705ee9
-    //     //to put text on a curved path in the center of the path
-    //     //
-    //     //First create a path that mimics the shape of the path but lower in the circle
-    //     //
-		// 		//A regular expression that captures all in between the start of a string (denoted by ^) and a capital letter L
-		// 		//The letter L denotes the start of a line segment
-		// 		//The "all in between" is denoted by the .+? 
-		// 		//where the . is a regular expression for "match any single character except the newline character"
-		// 		//the + means "match the preceding expression 1 or more times" (thus any single character 1 or more times)
-		// 		//the ? has to be added to make sure that it stops at the first L it finds, not the last L 
-		// 		//It thus makes sure that the idea of ^.*L matches the fewest possible characters
-		// 		//For more information on regular expressions see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-		// 		var firstArcSection = /(^.+?)L/; 
-					
-		// 		//Grab everything up to the first Line statement
-		// 		//The [1] gives back the expression between the () (thus not the L as well) which is exactly the arc statement
-		// 		var newArc = firstArcSection.exec(d3.select(this).attr("d"))[1];
-		// 		//Replace all the comma's so that IE can handle it -_-
-		// 		//The g after the / is a modifier that "find all matches rather than stopping after the first match"
-    //     newArc = newArc.replace(/,/g , " ");
-        
-    //   let textPathGroup = svg.append('g')
-    //     //Create a new invisible arc that the text can flow along
-    //     textPathGroup.selectAll("path")
-    //     .data(this.partition(root).descendants())
-    //     .enter().append("path")
-    //     .attr("class", "textPathGroup")
-    //     .attr("id", "nodeArc"+i)
-    //     .attr("d", newArc)
-    //     .style("fill", "black");
-    // });
+      //create a group for all of the paths for the hidden path
+    let hiddenPathGroup =svg.append('g') //do in constructor so it doesn't append
+
+    hiddenPathGroup.selectAll('path')
+      .data(this.partition(root).descendants())
+      .enter().append("path")
+      .attr('class', 'hidden-arc')
+      .attr('id', function(d,i) { return "hiddenArc_"+i; })
+      .attr('d', function(d) {
+        console.log('transformation')
+        const halfPi = Math.PI/2;
+        const angles = [that.x(d.x0) - halfPi, that.x(d.x1) - halfPi];
+        const r = Math.max(0, (that.y(d.y0) + that.y(d.y1)) / 2);
+
+        const middleAngle = (angles[1] + angles[0]) / 2;
+        const invertDirection = middleAngle > 0 && middleAngle < Math.PI; // On lower quadrants write text ccw
+        if (invertDirection) { angles.reverse(); }
+
+        const path = d3.path();
+        path.arc(0, 0, r, angles[0], angles[1], invertDirection);
+        return path.toString();
+      })
+      .attr('opacity',0)
+      .on("click", click)
 
       //create  a group for all of the text elements
-      let textGroup =svg.append('g') //do in constructor so it doesn't append
+    let textGroup =svg.append('g') //do in constructor so it doesn't append
 
       textGroup.selectAll('text')
         .data(this.partition(root).descendants())
@@ -150,21 +145,21 @@ class Sunburst {
         .attr("class", "cladeText")
         //.attr("dy", -13)
         .append("textPath")
-          //.attr("startOffset","50%")
-          //.style("text-anchor","middle")
-          .attr("xlink:href",function(d,i){return "#cladeArc_"+i;})
-          //.attr("xlink:href",function(d,i) {return "#nodeArc_" +i;})
+          .attr("startOffset","50%")
+          .style("text-anchor","middle")
+          //.attr("xlink:href",function(d,i){return "#cladeArc_"+i;})
+          .attr("xlink:href",function(d,i) {return "#hiddenArc_" +i;})
             .text(function(d) {
               let clade = d.data.id.split(".").slice(-1)
               let percentage = parseInt(d.data.data[that.sample])
-              return percentage > 20 ? clade : "" })
-            .attr("fill", 'black')
-            .attr("font-size", '14px')
+              return percentage > 15 ? clade : "" })
+            .attr("fill", 'white')
+            .attr("font-size", '16px')
 
     function click(d) {
 
       let level = d.data.data.id.split(".").length
-      that.updateLevel(level)
+      that.updateLevel(level) //updates the stacked bar chart to the appropriate level 
       svg.transition()
         .duration(750)
         .tween("scale", function() {
@@ -176,32 +171,36 @@ class Sunburst {
         .selectAll("path")
         .attrTween("d", function(d) { return function() { return that.arc(d); }; });
     }
+
     //Add the tooltip labels on mouseover
-    // let tooltip = d3.select('#Phylo').append('div').classed('tooltip', true).style("opacity",0);
- 
-    //     pathGroup.on('mouseover', function(d) {
+    let tooltip = d3.select('#Phylo').append('div').classed('tooltip', true).style("opacity",0);
+    
+    hiddenPathGroup.selectAll('path')
+        .on('mouseover', function(d) {
+          console.log(d)
 
-    //     //show tooltip
-    //      tooltip.transition()
-    //          .duration(200)
-    //          .style("opacity", .9);
-    //      tooltip.html(that.tooltipRender(d) + "<br/>")
-    //          .style("left", (d3.event.pageX) + "px")
-    //          .style("top", (d3.event.pageY - 28) + "px");
-    //     });  
+        //show tooltip
+         tooltip.transition()
+             .duration(200)
+             .style("opacity", .9);
+         tooltip.html(that.tooltipRender(d) + "<br/>")
+             .style("left", (d3.event.pageX) + "px")
+             .style("top", (d3.event.pageY - 28) + "px");
+        });
+         
   }
-  // tooltipRender(d) {
-  //   let that = this;
-  //   console.log(d)
-  //   console.log(d.data.data.id)
-  //   console.log(d.value)
-  //   let taxon = d.data.data.id.split(".")
-  //   console.log(taxon)
-  //   let abundance = d.value
+  tooltipRender(d) {
+    let that = this;
+    // console.log(d)
+    // console.log(d.data.data.id)
+    // console.log(d.value)
+    let taxon = d.data.data.id.split(".")
+    // console.log(taxon)
+    let abundance = d.value
 
-  //   let text = "<h1>" + taxon.slice(-1) + "</h1>" + "<h2>" + "Abundance: "+ abundance + "%" + "</h2>";
-  //   return text;
+    let text = "<h1>" + taxon.slice(-1) + "</h1>" + "<h2>" + "Abundance: "+ abundance + "%" + "</h2>";
+    return text;
      
-  //   }
+    }
 }
 

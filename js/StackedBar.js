@@ -8,9 +8,9 @@ class sBar{
         
 
         //set margins and dimensions
-        this.margin = ({top: 10, right: 30, bottom: 100, left: 70});
+        this.margin = ({top: 10, right: 30, bottom: 220, left: 100});
         this.width = 450 - this.margin.left - this.margin.right;//used to be 760
-        this.height = 800 - this.margin.top - this.margin.bottom;
+        this.height = 750 - this.margin.top - this.margin.bottom;
         this.padding = 40;
 
         //an array to keep track of which species will be filtered out of the dataset
