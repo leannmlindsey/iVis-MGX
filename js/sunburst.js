@@ -66,12 +66,7 @@ class Sunburst {
           .attr("width", this.width + this.margin.left + this.margin.right)
           .attr("height", this.height + this.margin.top + this.margin.bottom)
           .append('g')
-<<<<<<< HEAD
-          .attr("transform", "translate(" + this.width / 2 + "," + (this.height / 2) + ")")
-    
-=======
           .attr("transform", "translate(" + this.width / 2 + "," + (this.height / 2) + ")");
->>>>>>> 5e4ba345f8fb4ad050f3a0b4ceeb1316deb3d1d5
 
       //convert this.data into a heirarchy
       var root= this.stratify(this.data)
@@ -121,21 +116,12 @@ class Sunburst {
           const invertDirection = middleAngle > 0 && middleAngle < Math.PI; // On lower quadrants write text ccw
           if (invertDirection) { angles.reverse(); }
 
-<<<<<<< HEAD
-        const path = d3.path();
-        path.arc(0, 0, r, angles[0], angles[1], invertDirection);
-        return path.toString();
-      })
-      .attr('opacity',0.2)
-      .on("click", click)
-=======
           const path = d3.path();
           path.arc(0, 0, r, angles[0], angles[1], invertDirection);
           return path.toString();
         })
         .attr('opacity',0)
         .on("click", click);
->>>>>>> 5e4ba345f8fb4ad050f3a0b4ceeb1316deb3d1d5
 
     //create  a group for all of the text elements
     let textGroup =svg.append('g'); //do in constructor so it doesn't append
@@ -180,42 +166,6 @@ class Sunburst {
         //.selectAll(".cladeArc")
         .selectAll("path")
           .attrTween("d", function(d) { return function() { return that.arc(d); }; })
-<<<<<<< HEAD
-          
-      //that.redrawText(root)
-          
-=======
-      
-      //CAN THIS BE DELETED?
-        // .selectAll(".hiddenPathGroup")
-        //   .attrTween('d', function(d) {
-        
-        //   //this formula creates the parallel hidden arc
-        //   // created by vasturiano
-        //   //https://gist.github.com/vasturiano/12da9071095fbd4df434e60d52d2d58d 
-  
-        //   const halfPi = Math.PI/2;
-        //   const angles = [that.x(d.x0) - halfPi, that.x(d.x1) - halfPi];
-        //   const r = Math.max(0, (that.y(d.y0) + that.y(d.y1)) / 2);
-  
-        //   const middleAngle = (angles[1] + angles[0]) / 2;
-        //   const invertDirection = middleAngle > 0 && middleAngle < Math.PI; // On lower quadrants write text ccw
-        //   if (invertDirection) { angles.reverse(); }
-  
-        //   const path = d3.path();
-        //   path.arc(0, 0, r, angles[0], angles[1], invertDirection);
-        //   return path.toString();
-        //   })
-        //   .attr('opacity',0)
-        // .selectAll(".cladeText")
-        //   .attr("xlink:href",function(d,i) {return "#hiddenArc_" +i;})
-          //.attrTween("d", function(d) { return function() { return that.arc(d); }; });
-        
-        //text doesn't work with Tween, so remove text and redraw
-        
-          //remove previous labels
-          svg.selectAll("text").remove()
-        //re-draw labels
         let textGroup =svg.append('g');
           textGroup.selectAll('text')
             .data(that.partition(root).descendants())
@@ -232,7 +182,6 @@ class Sunburst {
               return percentage > 15 ? clade : "" })
             .attr("fill", 'black')
             .attr("font-size", '16px');
->>>>>>> 5e4ba345f8fb4ad050f3a0b4ceeb1316deb3d1d5
     }
 
     //Add the tooltip labels on mouseover
