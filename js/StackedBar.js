@@ -197,7 +197,14 @@ updateChart(level){
                 .attr('width', 12)
                 .attr('height', 12)
                 .attr("fill", function(d){  //add if filtered then grey three lists keys on level and filtered and subset
-                return that.color(d);   //keys on level used to make legend filtered grey subset to draw bars
+                    
+                    let taxon = d.split(".").slice(-1);
+                    if (taxon == 'group'){
+                        return 'white'
+                    } else {
+                        return that.color(d); //keys on level used to make legend filtered grey subset to draw bars
+                    }
+                    
                 })
                 .attr("class", function(d){return "legendRect " + d.split(".").slice(-1)})
                 
@@ -221,7 +228,12 @@ updateChart(level){
                 .data(subgroups[1])
                 .join('text')
                 .text(function(d){
-                    return d.split(".").slice(-1);
+                    let taxon = d.split(".").slice(-1);
+                    if (taxon == 'group'){
+                        return ''
+                    } else {
+                        return taxon 
+                    }
                 })
                 .attr('x', 18)
                 .attr('y', function(d, i){
