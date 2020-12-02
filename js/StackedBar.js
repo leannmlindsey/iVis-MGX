@@ -4,7 +4,6 @@ class sBar{
         this.updateSunburstChart = updateSunburstChart;
         this.color = color;
         this.select_subset=data;
-         
 
         //set margins and dimensions
         this.margin = ({top: 10, right: 30, bottom: 220, left: 100});

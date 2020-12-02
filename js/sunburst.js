@@ -147,7 +147,7 @@ class Sunburst {
             .attr("fill", 'black')
             .attr("stroke", "grey")
             .attr("stroke-width", "0.2px")
-            .attr("font-size", '12px');
+            .attr("font-size", '16px');
 
     //click function to zoom into levels
     //contains code to re-draw arc labels
