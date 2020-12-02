@@ -43,11 +43,6 @@ class Sunburst {
       this.stratify = d3.stratify()
         .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
 
-  
-        //this function created by vasturiano
-        //https://gist.github.com/vasturiano/12da9071095fbd4df434e60d52d2d58d 
-     
-
 
   }
   drawSunburst(sample) {
@@ -81,9 +76,7 @@ class Sunburst {
           .attr("height", this.height + this.margin.top + this.margin.bottom)
           .append('g')
           .attr("transform", "translate(" + this.width / 2 + "," + (this.height / 2) + ")")
-          // .call(d3.zoom().on("zoom", function() {
-          //   svg.attr("transform", d3.event.transform)
-          // }))
+    
 
       var root= this.stratify(this.data)
         .sort(function(a, b) { return (a.height - b.height) || a.id.localeCompare(b.id); });
@@ -134,7 +127,7 @@ class Sunburst {
         path.arc(0, 0, r, angles[0], angles[1], invertDirection);
         return path.toString();
       })
-      .attr('opacity',0)
+      .attr('opacity',0.2)
       .on("click", click)
 
       //create  a group for all of the text elements
@@ -160,59 +153,25 @@ class Sunburst {
 
       let level = d.data.data.id.split(".").length
       that.updateLevel(level) //updates the stacked bar chart to the appropriate level 
+      
+      //hiddenPathGroup.remove()
+      //textGroup.selectAll("text")
+    
+
       svg.transition()
-        .duration(750)
-        .tween("scale", function() {
-          var xd = d3.interpolate(that.x.domain(), [d.x0, d.x1]),
-            yd = d3.interpolate(that.y.domain(), [d.y0, 1]),
-            yr = d3.interpolate(that.y.range(), [d.y0 ? 20 : 0, that.radius]);
-          return function(t) { that.x.domain(xd(t)); that.y.domain(yd(t)).range(yr(t)); };
-        })
+      .duration(750)
+      .tween("scale", function() {
+        var xd = d3.interpolate(that.x.domain(), [d.x0, d.x1]),
+          yd = d3.interpolate(that.y.domain(), [d.y0, 1]),
+          yr = d3.interpolate(that.y.range(), [d.y0 ? 20 : 0, that.radius]);
+        return function(t) { that.x.domain(xd(t)); that.y.domain(yd(t)).range(yr(t)); };
+      }) 
+        //.selectAll(".cladeArc")
         .selectAll("path")
           .attrTween("d", function(d) { return function() { return that.arc(d); }; })
-        // .selectAll(".hiddenPathGroup")
-        //   .attrTween('d', function(d) {
-        
-        //   //this formula creates the parallel hidden arc
-        //   // created by vasturiano
-        //   //https://gist.github.com/vasturiano/12da9071095fbd4df434e60d52d2d58d 
-  
-        //   const halfPi = Math.PI/2;
-        //   const angles = [that.x(d.x0) - halfPi, that.x(d.x1) - halfPi];
-        //   const r = Math.max(0, (that.y(d.y0) + that.y(d.y1)) / 2);
-  
-        //   const middleAngle = (angles[1] + angles[0]) / 2;
-        //   const invertDirection = middleAngle > 0 && middleAngle < Math.PI; // On lower quadrants write text ccw
-        //   if (invertDirection) { angles.reverse(); }
-  
-        //   const path = d3.path();
-        //   path.arc(0, 0, r, angles[0], angles[1], invertDirection);
-        //   return path.toString();
-        //   })
-        //   .attr('opacity',0)
-        // .selectAll(".cladeText")
-        //   .attr("xlink:href",function(d,i) {return "#hiddenArc_" +i;})
-          //.attrTween("d", function(d) { return function() { return that.arc(d); }; });
-        
-        //text doesn't work with Tween, so remove text and redraw
-        
-          svg.selectAll("text").remove()
-          let textGroup =svg.append('g')
-          textGroup.selectAll('text')
-            .data(that.partition(root).descendants())
-            .enter().append('text')
-            .attr("class", "cladeText")
-            .append("textPath")
-            .attr("startOffset","50%")
-            .style("text-anchor","middle")
-            //.attr("xlink:href",function(d,i){return "#cladeArc_"+i;})
-            .attr("xlink:href",function(d,i) {return "#hiddenArc_" +i;})
-            .text(function(d) {
-              let clade = d.data.id.split(".").slice(-1)
-              let percentage = parseInt(d.data.data[that.sample])
-              return percentage > 15 ? clade : "" })
-            .attr("fill", 'white')
-            .attr("font-size", '16px')
+          
+      //that.redrawText(root)
+          
     }
 
     //Add the tooltip labels on mouseover
@@ -245,5 +204,59 @@ class Sunburst {
     return text;
      
     }
+    // redrawText(root) {
+    //   console.log('made it to redraw text')
+    //   let that=this;
+      
+    //   let svg = d3.select(".sunburst-svg")
+    //     //.attr("transform", "translate(" + this.width / 2 + "," + (this.height / 2) + ")")
+    //   let hiddenPathGroup =svg.append('g') //do in constructor so it doesn't append
+
+    //   hiddenPathGroup.selectAll('path')
+    //   .data(this.partition(root).descendants())
+    //   .enter().append("path")
+    //   .attr('class', 'hidden-arc')
+    //   .attr('id', function(d,i) { return "hiddenArc_"+i; })
+    //   .attr('d', function(d) {
+        
+    //     //this formula creates the parallel hidden arc
+    //     // created by vasturiano
+    //     //https://gist.github.com/vasturiano/12da9071095fbd4df434e60d52d2d58d 
+
+    //     const halfPi = Math.PI/2;
+    //     const angles = [that.x(d.x0) - halfPi, that.x(d.x1) - halfPi];
+    //     const r = Math.max(0, (that.y(d.y0) + that.y(d.y1)) / 2);
+
+    //     const middleAngle = (angles[1] + angles[0]) / 2;
+    //     const invertDirection = middleAngle > 0 && middleAngle < Math.PI; // On lower quadrants write text ccw
+    //     if (invertDirection) { angles.reverse(); }
+
+    //     const path = d3.path();
+    //     path.arc(0, 0, r, angles[0], angles[1], invertDirection);
+    //     return path.toString();
+    //   })
+    //   .attr('opacity',0.2)
+    //   .on("click", click)
+
+    //   //create  a group for all of the text elements
+    //   let textGroup =svg.append('g') //do in constructor so it doesn't append
+
+    //   textGroup.selectAll('text')
+    //     .data(this.partition(root).descendants())
+    //     .enter().append('text')
+    //     .attr("class", "cladeText")
+    //     .append("textPath")
+    //       .attr("startOffset","50%")
+    //       .style("text-anchor","middle")
+    //       //.attr("xlink:href",function(d,i){return "#cladeArc_"+i;})
+    //       .attr("xlink:href",function(d,i) {return "#hiddenArc_" +i;})
+    //         .text(function(d) {
+    //           let clade = d.data.id.split(".").slice(-1)
+    //           let percentage = parseInt(d.data.data[that.sample])
+    //           return percentage > 15 ? clade : "" })
+    //         .attr("fill", 'white')
+    //         .attr("font-size", '16px')
+
+    // }
 }
 
