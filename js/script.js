@@ -37,25 +37,32 @@ Promise.all([d3.csv('./data/taxonomyInputFile.csv'),d3.csv('./data/stackedBarInp
         const heatMap = new HeatMap(data, data3, data4, updateViolinChart);
         const sampleGene = {GeneFamily: "UniRef90_A0A062X980|g__Lactobacillus.s__Lactobacillus_murinus", Sample: "NoMonarch_Wild_260", Value: "28.3265682948", Condition: "No-Monarch"}
         const violinPlot = new ViolinPlot(data, data3, data4);
-
+        
+        //load page drawing phylogenetic tree
         phyloTree.drawTree()
-        //sunburst.drawSunburst('Monarch_Wild_248')
+        
+        //draw stacked bar chart
         barChart.drawChart()
         barChart.updateChart(2)
+
+        //draw heatmap
         heatMap.drawHeatmap();
+
+        //draw violin plot
         violinPlot.drawViolinPlot();
         updateViolinChart(sampleGene)
 
+        //draw phylo or sunburst according to radio button click
         const buttons = d3.selectAll('#chooseview-radio').selectAll('input');
         buttons.on('change', function(d) {
-          console.log('button changed to ' + this.value);
+          //console.log('button changed to ' + this.value);
           const selection = this.value;
           if (selection == 'Phylo') {
               phyloTree.drawTree()
           } else if (selection == 'Sunburst') {
               sunburst.drawSunburst("Monarch_Wild_248")
           }
-      });
+        });
         
         //functions that need to be available to all .js scripts 
         //these functions enable the interactivity between graphs

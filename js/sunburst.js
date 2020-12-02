@@ -14,7 +14,7 @@ class Sunburst {
       this.data = data;
       this.data2 = data2;
       this.margin = { top: 100, right: 200, bottom: 30, left: 30}
-      this.width = 1200 - this.margin.left - this.margin.right;
+      this.width = 1100 - this.margin.left - this.margin.right;
       this.height = 650 - this.margin.top - this.margin.bottom;
 
       this.radius = (Math.min(this.width, this.height) / 2) - 10;
@@ -53,92 +53,83 @@ class Sunburst {
   drawSunburst(sample) {
 
     this.sample = sample;
-    console.log('drawSunburst was called with ')
-    console.log(this.sample)
     let that = this;
 
-    let labelText = this.sample
+    let labelText = this.sample;
     let levelLabel=d3.select('#sunburstLabel')
-            .text("Sunburst for Sample:  " + labelText)
-
-    
-
-    d3.select("#Phylo")
-          .append('div')
-          .attr('class', 'tooltip')
-          .style('opacity', 0)
+            .text("Sunburst for Sample:  " + labelText);
 
     //Remove tree if one exists and remove old sunburst before drawing new one
-
      d3.select('#Phylo').selectAll('path').remove()
      d3.select('#Phylo').selectAll('text').remove()
      d3.select('#Phylo').selectAll('.tooltip').remove()
      d3.select('#Phylo').selectAll('svg').remove()
 
+    //draw sunburst
     let svg = d3.select('#Phylo').append('svg')
           .classed('sunburst-svg', true)
           .attr("width", this.width + this.margin.left + this.margin.right)
           .attr("height", this.height + this.margin.top + this.margin.bottom)
           .append('g')
-          .attr("transform", "translate(" + this.width / 2 + "," + (this.height / 2) + ")")
-          // .call(d3.zoom().on("zoom", function() {
-          //   svg.attr("transform", d3.event.transform)
-          // }))
+          .attr("transform", "translate(" + this.width / 2 + "," + (this.height / 2) + ")");
 
+      //convert this.data into a heirarchy
       var root= this.stratify(this.data)
         .sort(function(a, b) { return (a.height - b.height) || a.id.localeCompare(b.id); });
+  
+        root = d3.hierarchy(root);
 
-    root = d3.hierarchy(root);
-    root.sum(function(d) {
-      return !d.children || d.children.length === 0 ? parseInt(d.data[that.sample]) :0; });
-
-    console.log('root',root)
+      //sum all taxons to 100%-accumulator-takes the value of sum of children in a tree
+      root.sum(function(d) {
+        return !d.children || d.children.length === 0 ? parseInt(d.data[that.sample]) :0; });
 
     //create a group for all of the paths
-    let pathGroup =svg.append('g') //do in constructor so it doesn't append
+    let pathGroup =svg.append('g'); //do in constructor so it doesn't append
+    
+      //create arcs and style them
+      pathGroup.selectAll('path')
+        .data(this.partition(root).descendants())
+        .attr('class','pathGroup')
+        .enter().append('path')
+          .attr("d", this.arc)
+          .attr("class", "cladeArc")
+          .attr("id", function(d,i) { return "cladeArc_"+i; })
+          .style("fill", function(d) {
+            return that.color((d.children ? d : d.parent).data.id); })
+          .on("click", click);
 
-    pathGroup.selectAll('path')
-      .data(this.partition(root).descendants())
-      .attr('class','pathGroup')
-      .enter().append('path')
-        .attr("d", this.arc)
-        .attr("class", "cladeArc")
-        .attr("id", function(d,i) { return "cladeArc_"+i; })
-        .style("fill", function(d) {
-          return that.color((d.children ? d : d.parent).data.id); })
-        .on("click", click)
-
-      //create a group for all of the paths for the hidden path
+    //create a group for all of the paths for the hidden path
     let hiddenPathGroup =svg.append('g') //do in constructor so it doesn't append
-
-    hiddenPathGroup.selectAll('path')
-      .data(this.partition(root).descendants())
-      .enter().append("path")
-      .attr('class', 'hidden-arc')
-      .attr('id', function(d,i) { return "hiddenArc_"+i; })
-      .attr('d', function(d) {
+    
+    
+      hiddenPathGroup.selectAll('path')
+        .data(this.partition(root).descendants())
+        .enter().append("path")
+        .attr('class', 'hidden-arc')
+        .attr('id', function(d,i) { return "hiddenArc_"+i; })
+        .attr('d', function(d) {
         
-        //this formula creates the parallel hidden arc
-        // created by vasturiano
-        //https://gist.github.com/vasturiano/12da9071095fbd4df434e60d52d2d58d 
+          //this formula creates the parallel hidden arc
+          // created by vasturiano
+          //https://gist.github.com/vasturiano/12da9071095fbd4df434e60d52d2d58d 
 
-        const halfPi = Math.PI/2;
-        const angles = [that.x(d.x0) - halfPi, that.x(d.x1) - halfPi];
-        const r = Math.max(0, (that.y(d.y0) + that.y(d.y1)) / 2);
+          const halfPi = Math.PI/2;
+          const angles = [that.x(d.x0) - halfPi, that.x(d.x1) - halfPi];
+          const r = Math.max(0, (that.y(d.y0) + that.y(d.y1)) / 2);
 
-        const middleAngle = (angles[1] + angles[0]) / 2;
-        const invertDirection = middleAngle > 0 && middleAngle < Math.PI; // On lower quadrants write text ccw
-        if (invertDirection) { angles.reverse(); }
+          const middleAngle = (angles[1] + angles[0]) / 2;
+          const invertDirection = middleAngle > 0 && middleAngle < Math.PI; // On lower quadrants write text ccw
+          if (invertDirection) { angles.reverse(); }
 
-        const path = d3.path();
-        path.arc(0, 0, r, angles[0], angles[1], invertDirection);
-        return path.toString();
-      })
-      .attr('opacity',0)
-      .on("click", click)
+          const path = d3.path();
+          path.arc(0, 0, r, angles[0], angles[1], invertDirection);
+          return path.toString();
+        })
+        .attr('opacity',0)
+        .on("click", click);
 
-      //create  a group for all of the text elements
-    let textGroup =svg.append('g') //do in constructor so it doesn't append
+    //create  a group for all of the text elements
+    let textGroup =svg.append('g'); //do in constructor so it doesn't append
 
       textGroup.selectAll('text')
         .data(this.partition(root).descendants())
@@ -153,9 +144,13 @@ class Sunburst {
               let clade = d.data.id.split(".").slice(-1)
               let percentage = parseInt(d.data.data[that.sample])
               return percentage > 15 ? clade : "" })
-            .attr("fill", 'white')
-            .attr("font-size", '16px')
+            .attr("fill", 'black')
+            .attr("stroke", "grey")
+            .attr("stroke-width", "0.2px")
+            .attr("font-size", '12px');
 
+    //click function to zoom into levels
+    //contains code to re-draw arc labels
     function click(d) {
 
       let level = d.data.data.id.split(".").length
@@ -170,6 +165,8 @@ class Sunburst {
         })
         .selectAll("path")
           .attrTween("d", function(d) { return function() { return that.arc(d); }; })
+      
+      //CAN THIS BE DELETED?
         // .selectAll(".hiddenPathGroup")
         //   .attrTween('d', function(d) {
         
@@ -196,8 +193,10 @@ class Sunburst {
         
         //text doesn't work with Tween, so remove text and redraw
         
+          //remove previous labels
           svg.selectAll("text").remove()
-          let textGroup =svg.append('g')
+        //re-draw labels
+        let textGroup =svg.append('g');
           textGroup.selectAll('text')
             .data(that.partition(root).descendants())
             .enter().append('text')
@@ -211,8 +210,8 @@ class Sunburst {
               let clade = d.data.id.split(".").slice(-1)
               let percentage = parseInt(d.data.data[that.sample])
               return percentage > 15 ? clade : "" })
-            .attr("fill", 'white')
-            .attr("font-size", '16px')
+            .attr("fill", 'black')
+            .attr("font-size", '16px');
     }
 
     //Add the tooltip labels on mouseover
@@ -220,7 +219,6 @@ class Sunburst {
     
     hiddenPathGroup.selectAll('path')
         .on('mouseover', function(d) {
-      
 
         //show tooltip
          tooltip.transition()
@@ -232,13 +230,11 @@ class Sunburst {
         });
          
   }
+  //tooltip function
   tooltipRender(d) {
     let that = this;
-    // console.log(d)
-    // console.log(d.data.data.id)
-    // console.log(d.value)
+
     let taxon = d.data.data.id.split(".")
-    // console.log(taxon)
     let abundance = d.value
 
     let text = "<h1>" + taxon.slice(-1) + "</h1>" + "<h2>" + "Abundance: "+ abundance + "%" + "</h2>";

@@ -5,7 +5,6 @@ class sBar{
         this.color = color;
         this.select_subset=data;
          
-        
 
         //set margins and dimensions
         this.margin = ({top: 10, right: 30, bottom: 220, left: 100});
@@ -20,24 +19,21 @@ class sBar{
         //an array with all of the species listed, used for color mapping and for filtering for legend
        
        
-        
-
         //List of experimental sample type(x-axis)
         this.groups = d3.map(this.select_subset, function(d){
             return(d.group)}).keys();
-
+        
+        //x scale
         this.x = d3.scaleBand()
             .domain(this.groups)
             .range([0, this.width])
             .padding([0.2]);
-
+        
+        //y scale
         this.y = d3.scaleLinear()
             .domain([0,100])
             .range([this.height, 0]);
-        
-
-        
-
+          
     }
 
 drawChart(){
@@ -62,17 +58,14 @@ drawChart(){
          .attr("font-family", "Work Sans")
          .attr("class", function(d){return "xAxisText " + d})
          .on("mouseover", function (d) {
-           
+
             d3.selectAll(".xAxisText")
                   .style("opacity",.2)
                   
-            
-           
             //Decrease opacity of text being hovered over
             d3.selectAll("."+ d)
                 .style("opacity",1)
-                .style("font-size","16px")
-                
+                .style("font-size","16px")        
                         
         })
          .on("mouseout", function (d) {
@@ -82,16 +75,15 @@ drawChart(){
        })
         
          .on('click', function(d){
-            console.log("Sample Chosen for Sunburst:", d) 
+            //console.log("Sample Chosen for Sunburst:", d) 
             that.updateSunburstChart(d)
          });
-        // ;
 
     //Draw y-axis
     stack_svg.append('g')
         .call(d3.axisLeft(this.y));
 
-    //Add Y axis title
+    //Add y axis title
     stack_svg.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 0 - this.margin.left)
@@ -102,8 +94,9 @@ drawChart(){
         .style("font-family", "Work Sans")
         .text("Taxon Abundance"); 
 
+    //create svg for bars
     let rects = d3.select('.stack-svg').append('g').classed('bars', true)
-        .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")")
+        .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
     
     //svg for legend
     let legend = d3.select('#stacked-barchart').append('svg')
@@ -165,12 +158,11 @@ updateChart(level){
 
 
         //show the bars
-        let rects = d3.select('.stack-svg').select('.bars') //.append('g')
+        let rects = d3.select('.stack-svg').select('.bars') 
             .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")")
             .selectAll('g')
             //enter in stack data, loop key per key, group per group
             .data(stackedData)
-            //.enter().append('g')
             .join('g')
                 .attr("fill", function(d){
                     //console.log(d.key)
@@ -194,7 +186,7 @@ updateChart(level){
                  .attr("height", function(d){ return that.y(d[0])- that.y(d[1]); })
                  .attr("width", that.x.bandwidth());
                 
-            let legend = d3.select('.legend');
+        let legend = d3.select('.legend');
 
             legend.selectAll('rect')
                 .data(subgroups[1])
@@ -227,51 +219,48 @@ updateChart(level){
                 ;
             
             legend.selectAll('text')
-            .data(subgroups[1])
-            .join('text')
-            .text(function(d){
-            return d.split(".").slice(-1);
-            })
-            .attr('x', 18)
-            .attr('y', function(d, i){
-            return i * 18;
-             })
-            .attr('text-anchor', 'start')
-            .attr('alignment-baseline', 'hanging')
-            .attr("class", function(d){return "legendText " + d.split(".").slice(-1)})
-            .on("mouseover", function (d) {
+                .data(subgroups[1])
+                .join('text')
+                .text(function(d){
+                    return d.split(".").slice(-1);
+                })
+                .attr('x', 18)
+                .attr('y', function(d, i){
+                    return i * 18;
+                })
+                .attr('text-anchor', 'start')
+                .attr('alignment-baseline', 'hanging')
+                .attr("class", function(d){return "legendText " + d.split(".").slice(-1)})
+                .on("mouseover", function (d) {
               
-                let taxon = d.split(".").slice(-1);
-                //console.log(taxon[1])
+                    let taxon = d.split(".").slice(-1);
+                    //console.log(taxon[1])
 
-                d3.selectAll(".legendText")
-                  .style("opacity",1)
+                    d3.selectAll(".legendText")
+                        .style("opacity",1)
                        
-                //lower opacity of rect being hovered over
-                d3.selectAll("."+ taxon)
-                  .style("opacity",0.2)
-           })
-            .on("mouseout", function (d) {
-                d3.selectAll(".legendRect")
-                  .style("opacity", 1)
-                d3.selectAll(".myRect")
-                  .style("opacity", 1)
+                    //lower opacity of rect being hovered over
+                    d3.selectAll("."+ taxon)
+                        .style("opacity",0.2)
+                })
+                .on("mouseout", function (d) {
+                    d3.selectAll(".legendRect")
+                        .style("opacity", 1)
 
+                    d3.selectAll(".myRect")
+                        .style("opacity", 1)
 
-                d3.selectAll("text")
-                   .transition()
-                   .duration(1000)
-                   .style("opacity", 1)
-           })
-            .on('click', click);
+                    d3.selectAll("text")
+                        .transition()
+                        .duration(1000)
+                        .style("opacity", 1)
+                })
+                .on('click', click);
 
         function click(d) {
-                    //console.log(d)
-                    //that.updateChart(level)
                     let taxon = d.split(".").slice(-1);
                     let taxonFull = d
-                    //console.log('test')
-                    //console.log(that.filtered.includes(taxonFull))
+
                     //first check to see if the taxon is already filtered
                     if (that.filtered.includes(taxonFull)) {
                         d3.selectAll("." + taxon)
@@ -325,10 +314,9 @@ updateChart(level){
                 tooltip.html(that.tooltipRender(d, subgroupName, subgroupValue))
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px");
-        
 
-  
                 });
+
             //hover function for circle selection
             rects.on("mouseout", function (d) {
 
@@ -343,6 +331,7 @@ updateChart(level){
                     .style("opacity", 0);
             });
 }
+//tooltip function
 tooltipRender(stackedData,subgroupName, subgroupValue) {
     let abundance = subgroupValue //stackedData[1] - stackedData[0]; old way commented out
 

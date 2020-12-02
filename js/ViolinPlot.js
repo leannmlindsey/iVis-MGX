@@ -160,7 +160,7 @@ updateViolinPlot(gene){
       
     
 // Add individual points with jitter
- var jitterWidth = 15
+ var jitterWidth = 17
  var circles = d3.select(".violin-svg")
    .selectAll("circle")
    .data(subsetGene)

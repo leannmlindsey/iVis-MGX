@@ -90,6 +90,14 @@ label {
   border-radius: 8px;
 }
 
+.saved_genes_text{
+  height: auto;
+  width: 700px;
+  background:lightgrey;
+  padding: 2px;
+  border-radius: 8px;
+}
+
 .acknowlege_text{
   height: auto;
   width: 1600px;
@@ -164,6 +172,10 @@ label {
 
 }
 
+.stack-svg{
+  margin-top: 50px;
+}
+
 div.tooltip {
   position: absolute;
   text-align: center;
@@ -193,7 +205,9 @@ div.tooltip {
 }
 
 .legend-svg{
+  margin-top: 52px;
   float:right;
+  overflow: scroll;
 }
 
 input[type='radio'] { 
@@ -206,5 +220,10 @@ input[type='radio'] {
 h1, h2, h3, h4, h5, h6{
   margin-top:10px;
   margin-bottom:5px;
+}
+
+/* Sunburst Styling */
+.sunburst-svg{
+  margin-top: 45px;
 }
 
