@@ -158,33 +158,23 @@ class Tree {
             nodeUpdate.select('circle.node')
                 .attr('r', 10)
                 //.style("fill", d => d._children ? "#aec7e8" : "#fff") //old node coloring system
-                //.style("fill", d => d._children ? that.color(d.id): "#fff") //nodes colored to match the stacked bar
-                .style("fill", d => {
-                    if(d._children) {
-                        return that.color(d.id)
-                    } else {
-                        //check if the species level, and if so keep node colored
-                        //even though it has no children and would normally be colored white
-                        //in the collapsed tree
-                        if(d.depth==maxDepth){
-                            return that.color(d.id);
-                        } else {
-                            return "#fff";
-                        }
+                .style("fill", d => d._children ? that.color(d.id): "#fff") //nodes colored to match the stacked bar
+                // .style("fill", d => {
+                //     if(d._children) {
+                //         return that.color(d.id)
+                //     } else {
+                //         check if the species level, and if so keep node colored
+                //         even though it has no children and would normally be colored white
+                //         in the collapsed tree
+                //         if(d.depth==maxDepth){
+                //             return that.color(d.id);
+                //         } else {
+                //             return "#fff";
+                //         }
                         
-                    }
+                //     }
                     
-                    // if (d._children) {
-                        
-                    //     if (d.depth == maxDepth){
-                    //         console.log(d.depth)
-                    //         return that.color(d.id)
-                    //     } else {
-                    //     return '#aec7e8'
-                    //     }
-                    // } else {
-                    //     return "#fff"
-                    // }
+                   
                     
                 })
                 .attr('cursor', 'pointer');
