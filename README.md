@@ -1,10 +1,11 @@
 # DataVisFinalProject-Visualization of Metagenomic Data 
 
-Note:  
-
 LINK TO THE LIVE SITE:
 https://leannmlindsey.github.io/dataviscourse-pr-Visualization-of-Metagenomic-Data/FinalProject.html
 
+LINK TO SCREENCAST:
+The instructional video link is on the top left corner of the visualization, but it is also here:
+https://youtu.be/HRD0133kAhM
 
 The Process Book and the Feedback from the Peer Review are saved in the cs6630-reports directory
 
@@ -13,10 +14,13 @@ https://github.com/leannmlindsey/metagenomicProcessingPipeline
 
 Python and R scripts written specifically for this visualization are in /data/preprocessingScripts
 
-Before we started the process book, we used the wiki on this repository to brainstorm and collect relevant links and other reading material for the group, as well as assignments.
+We did not use any libraries outside of d3 in this project.
 
-The instructional video link is on the top left corner of the visualization, but it is also here:
-https://youtu.be/HRD0133kAhM
+
+
+
+
+
 
 
 
