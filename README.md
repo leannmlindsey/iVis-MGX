@@ -2,6 +2,10 @@
 
 Note:  
 
+LINK TO THE LIVE SITE:
+https://leannmlindsey.github.io/dataviscourse-pr-Visualization-of-Metagenomic-Data/FinalProject.html
+
+
 The Process Book and the Feedback from the Peer Review are saved in the cs6630-reports directory
 
 Metagenomic Preprocessing Scripts for Humann3 and Metaphlan are in a separate repository 
