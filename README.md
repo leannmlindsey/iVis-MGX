@@ -95,7 +95,7 @@ You can then open the samples.txt file in excel to create your sampleNames and c
 <span class="gu">$ python3 iVis-MGX-preprocessing.py </span>
 </code></pre></div></div>
 
-Alternately, you can use the provided jupyter notebook
+Alternately, you can use the provided jupyter notebook to preprocess your data.
 
 * [iVis-MGX-preprocessing.ipynb](https://github.com/leannmlindsey/iVis-MGX/blob/main/data/preprocessingScripts/DataVisProject_FinalScripts.ipynb)
 
