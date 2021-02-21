@@ -13,9 +13,10 @@ https://leannmlindsey.github.io/dataviscourse-pr-Visualization-of-Metagenomic-Da
 
 ## Installation Instructions
 0. Run metaphlan 3.0 and humann 3.0 following the instructions from the Huttenhower website. 
-
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">[Humann 3.0 Tutorial, Software & Handbook](https://huttenhower.sph.harvard.edu/humann)</span>
-<span class="gu"> Metaphlan 3.0 Tutorial, Software & Handbook </span>
+[Humann 3.0 Tutorial, Software & Handbook](https://huttenhower.sph.harvard.edu/humann)
+[Metaphlan 3.0 Tutorial, Software & Handbook](https://huttenhower.sph.harvard.edu/metaphlan)
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"></span>
+<span class="gu">  </span>
 </code></pre></div></div>
 
 2. Create a file, samples.txt, which maps your sampleIDs to a sampleName (shorter usually than the sampleID and better for web visualization) and the experimental condition and save in iVis-Meta/data/raw/
