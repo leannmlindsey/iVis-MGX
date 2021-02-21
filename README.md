@@ -42,7 +42,7 @@ Then, merge the metaphlan output files.
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">https://github.com/leannmlindsey/iVis-MGX.git</span>
 </code></pre></div></div>
 
-![]()
+![GitSetup](https://github.com/leannmlindsey/iVis-MGX/blob/main/images/GitSetup.png)
 
 
 **2. Clone repository onto your local computer**
