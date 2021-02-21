@@ -34,7 +34,14 @@ Then, merge the metaphlan output files.
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="gu">$ merge_metaphlan_tables.py *_profile.txt > merged_abundance_table.txt</span>
 </code></pre></div></div>
-1. Create a new github repository in your personal github account and import code from the iVis-MGX repository
+1. Create a new github repository in your personal github account at www.github.com and import code from the iVis-MGX repository
+* Choose create new repository
+* Give your repository a name
+* Choose the last option, "...or, import code from another repository" and click "import code" and then type 
+* 
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ git clone https://github.com/leannmlindsey/iVis-MGX.git</span>
+</code></pre></div></div>
+
 
 2. Clone repository onto your local computer 
 
