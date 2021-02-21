@@ -9,7 +9,10 @@ iVis-MGX is a tool that transforms the output of the metagenomic processing tool
 ## Examples of Live Sites
 https://leannmlindsey.github.io/dataviscourse-pr-Visualization-of-Metagenomic-Data/FinalProject.html
 
-
+## Requirements
+1. [GitHub](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) - You will need to have a GitHub account and have GitHub installed on your local machine.
+2. [Humann 3.0 Tutorial, Software & Handbook](https://huttenhower.sph.harvard.edu/humann) - Humann 3.0 can be installed via conda or docker
+3. [Metaphlan 3.0 Tutorial, Software & Handbook](https://huttenhower.sph.harvard.edu/metaphlan) - Metaphlan 3.0 can be installed via conda or docker
 
 ## Installation Instructions
 0. Run metaphlan 3.0 and humann 3.0 following the instructions from the Huttenhower website.
