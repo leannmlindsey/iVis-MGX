@@ -16,10 +16,10 @@ https://leannmlindsey.github.io/dataviscourse-pr-Visualization-of-Metagenomic-Da
 1. Create a file, samples.txt, which maps your sampleIDs to a sampleName (shorter usually than the sampleID and better for web visualization) and the experimental condition
 2. Clone the github repository
 3. Copy the following output files into iVis-Meta/data/raw/
-samples.txt (file created in step 1 that maps sampleIDs to experimental condition)
-combined_genefamilies.tsv (humann 3.0 output)
-combined_genepathways.tsv (humann 3.0 output)
-merged_abundance.txt (metaphlan 3.0 output)
+* samples.txt (file created in step 1 that maps sampleIDs to experimental condition)
+* combined_genefamilies.tsv (humann 3.0 output)
+* combined_genepathways.tsv (humann 3.0 output)
+* merged_abundance.txt (metaphlan 3.0 output)
 
 
 ## Video Instructional 
