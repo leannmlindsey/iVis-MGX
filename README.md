@@ -34,12 +34,11 @@ Then, merge the metaphlan output files.
 <span class="gu">$ merge_metaphlan_tables.py *_profile.txt > merged_abundance_table.txt</span>
 </code></pre></div></div>
 
-2. Create a file, samples.txt, which maps your sampleIDs to a sampleName (shorter usually than the sampleID and better for web visualization) and the experimental condition and save in iVis-Meta/data/raw/.  Multiple experimental conditions are accepted by the tool, each experimental condition should be a separate column and labeled Condition_1, Condition_2, etc.  An example of the formate of the samples.txt file is below.
+2. Create a tab delimited file, samples.txt, which should have at a minimum 3 columns.  SampleID, SampleName, Condition_0.  This file maps your sampleIDs to a sampleName (shorter usually than the sampleID and better for web visualization) and experimental conditions and save in iVis-Meta/data/raw/.  Multiple experimental conditions are accepted by the tool, each experimental condition should be a separate column and labeled Condition_1, Condition_2, etc.  An example of the formate of the samples.txt file is below.
 
 * [samples.txt](https://github.com/leannmlindsey/iVis-MGX/blob/main/data/raw/samples.txt)
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
-<span class="gu">$ merge_metaphlan_tables.py *_profile.txt > merged_abundance_table.txt</span>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">mv samples.txt ./iVis-MGX/data/raw/</span>
 </code></pre></div></div>
 
 4. Clone the github repository into your personal github account and then clone repository onto your local computer 
