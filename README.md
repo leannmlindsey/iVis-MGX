@@ -16,13 +16,16 @@ https://leannmlindsey.github.io/dataviscourse-pr-Visualization-of-Metagenomic-Da
  
 * [Humann 3.0 Tutorial, Software & Handbook](https://huttenhower.sph.harvard.edu/humann)
 * [Metaphlan 3.0 Tutorial, Software & Handbook](https://huttenhower.sph.harvard.edu/metaphlan)
-* 
+
+The following instructions are taken from the Metaphlan 3.0 Tutorial.  First, run metaphlan on all samples.
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ for i in SRS*.fasta.gz
 > do
 >     metaphlan $i --input_type fasta --nproc 4 > ${i%.fasta.gz}_profile.txt
 > done</span>
 <span class="gu">  </span>
 </code></pre></div></div>
+
+Then, merge the metaphlan output files.
 
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
 <span class="gu">$ merge_metaphlan_tables.py *_profile.txt > merged_abundance_table.txt</span>
