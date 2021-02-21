@@ -31,8 +31,7 @@ The following instructions are taken from the end of the Metaphlan 3.0 Tutorial,
 
 Then, merge the metaphlan output files.
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="gu">$ merge_metaphlan_tables.py *_profile.txt > merged_abundance_table.txt</span>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gu">$ merge_metaphlan_tables.py *_profile.txt > merged_abundance_table.txt</span>
 </code></pre></div></div>
 
 ###1. Create a new github repository in your personal github account at www.github.com and import code from the iVis-MGX repository
