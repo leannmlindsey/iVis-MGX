@@ -97,7 +97,7 @@ The heatmap in the lower section of the screen will display the entire file that
 </code></pre></div></div>
 
 Your visualization will then be active on your local machine by going to a browser on the same local machine and typing 
-localhost:8080/iVis-MGX.html
+localhost:8080/iVis-MGX.html 
 
 Note:  on mac computers php is already installed.  If running on a computer without php, you will have to install php.
 
