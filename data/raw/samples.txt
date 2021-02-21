@@ -1,0 +1,61 @@
+SampleID	SamplePrefix	Condition_0	Condition_1	Condition_2
+Phylo-BM987_S26_L001_R1R2_001_Abundance-RPKs	Phylo_BM987	Creosote	N. lepida	Big Morongo
+Phylo-BM988_S34_L001_R1R2_001_Abundance-RPKs	Phylo_BM988	Creosote	N. lepida	Big Morongo
+Phylo-BM992_S42_L001_R1R2_001_Abundance-RPKs	Phylo_BM992	Creosote	N. lepida	Big Morongo
+Phylo-BM993_S2_L001_R1R2_001_Abundance-RPKs	Phylo_BM993	Other	N. macrotis	Big Morongo
+Phylo-BM994_S10_L001_R1R2_001_Abundance-RPKs	Phylo_BM994	Other	N. macrotis	Big Morongo
+Phylo-BM996_S18_L001_R1R2_001_Abundance-RPKs	Phylo_BM996	Other	N. macrotis	Big Morongo
+Phylo-CW1040_S4_L001_R1R2_001_Abundance-RPKs	Phylo_CW1040	Other	N. bryanti 	Casper's
+Phylo-CW1046_S12_L001_R1R2_001_Abundance-RPKs	Phylo_CW1046	Other	N. bryanti 	Casper's
+Phylo-CW1048_S20_L001_R1R2_001_Abundance-RPKs	Phylo_CW1048	Other	N. bryanti 	Casper's
+Phylo-CW1050_S28_L001_R1R2_001_Abundance-RPKs	Phylo_CW1050	Other	N. macrotis	Casper's
+Phylo-CW1051_S36_L001_R1R2_001_Abundance-RPKs	Phylo_CW1051	Other	N. macrotis	Casper's
+Phylo-CW1052_S44_L001_R1R2_001_Abundance-RPKs	Phylo_CW1052	Other	N. macrotis	Casper's
+Phylo-DC1126_S37_L001_R1R2_001_Abundance-RPKs	Phylo_DC1126	Other	N. lepida	Deep Canyon
+Phylo-DC1127_S29_L001_R1R2_001_Abundance-RPKs	Phylo_DC1127	Other	N. lepida	Deep Canyon
+Phylo-DC1132_S45_L001_R1R2_001_Abundance-RPKs	Phylo_DC1132	Other	N. lepida	Deep Canyon
+Phylo-EN1235_S30_L001_R1R2_001_Abundance-RPKs	Phylo_EN1235	Other	N. lepida	Enterprise
+Phylo-FC1166_S53_L001_R1R2_001_Abundance-RPKs	Phylo_FC1166	Other	N. lepida	Furnace Creek 
+Phylo-FC1170_S69_L001_R1R2_001_Abundance-RPKs	Phylo_FC1170	Other	N. lepida	Furnace Creek 
+Phylo-FC1171_S61_L001_R1R2_001_Abundance-RPKs	Phylo_FC1171	Other	N. lepida	Furnace Creek 
+Phylo-HP969_S25_L001_R1R2_001_Abundance-RPKs	Phylo_HP969	Creosote	N. lepida	Hoopa
+Phylo-HP971_S33_L001_R1R2_001_Abundance-RPKs	Phylo_HP971	Creosote	N. lepida	Hoopa
+Phylo-HP972_S41_L001_R1R2_001_Abundance-RPKs	Phylo_HP972	Creosote	N. lepida	Hoopa
+Phylo-IS1212_S93_L001_R1R2_001_Abundance-RPKs	Phylo_IS1212	Creosote	N. lepida	Indian Springs
+Phylo-IS1214_S85_L001_R1R2_001_Abundance-RPKs	Phylo_IS1214	Creosote	N. lepida	Indian Springs
+Phylo-KC1219_S6_L001_R1R2_001_Abundance-RPKs	Phylo_KC1219	Other	N. lepida	Kyle Canyon
+Phylo-KC1225_S14_L001_R1R2_001_Abundance-RPKs	Phylo_KC1225	Other	N. lepida	Kyle Canyon
+Phylo-KC1227_S22_L001_R1R2_001_Abundance-RPKs	Phylo_KC1227	Other	N. lepida	Kyle Canyon
+Phylo-LR1102_S13_L001_R1R2_001_Abundance-RPKs	Phylo_LR1102	Creosote	N. lepida	Lytle Ranch 
+Phylo-LR1103_S21_L001_R1R2_001_Abundance-RPKs	Phylo_LR1103	Creosote	N. lepida	Lytle Ranch 
+Phylo-LR1105_S5_L001_R1R2_001_Abundance-RPKs	Phylo_LR1105	Creosote	N. lepida	Lytle Ranch 
+Phylo-OC1061_S52_L001_R1R2_001_Abundance-RPKs	Phylo_OC1061	Creosote	N. lepida	Ocotillo Wells
+Phylo-OC1067_S68_L001_R1R2_001_Abundance-RPKs	Phylo_OC1067	Creosote	N. lepida	Ocotillo Wells
+Phylo-PT1028_S51_L001_R1R2_001_Abundance-RPKs	Phylo_PT1028	Other	N. lepida	Pioneertown
+Phylo-PT1029_S59_L001_R1R2_001_Abundance-RPKs	Phylo_PT1029	Other	N. lepida	Pioneertown
+Phylo-PT1033_S67_L001_R1R2_001_Abundance-RPKs	Phylo_PT1033	Other	N. lepida	Pioneertown
+Phylo-PT1034_S75_L001_R1R2_001_Abundance-RPKs	Phylo_PT1034	Other	N. lepida	Pioneertown
+Phylo-PT1035_S83_L001_R1R2_001_Abundance-RPKs	Phylo_PT1035	Other	N. bryanti	Pioneertown Reserve
+Phylo-PT1036_S91_L001_R1R2_001_Abundance-RPKs	Phylo_PT1036	Other	N. bryanti	Pioneertown Reserve
+Phylo-RL1017_S27_L001_R1R2_001_Abundance-RPKs	Phylo_RL1017	Other	N. bryanti	Redlands
+Phylo-RL1023_S35_L001_R1R2_001_Abundance-RPKs	Phylo_RL1023	Other	N. bryanti	Redlands
+Phylo-RL1024_S43_L001_R1R2_001_Abundance-RPKs	Phylo_RL1024	Other	N. bryanti	Redlands
+Phylo-RM953_S1_L001_R1R2_001_Abundance-RPKs	Phylo_RM953	Other	N. cinerea	"Rio Mesa, UT"
+Phylo-RM954_S9_L001_R1R2_001_Abundance-RPKs	Phylo_RM954	Other	N. cinerea	"Rio Mesa, UT"
+Phylo-RM955_S17_L001_R1R2_001_Abundance-RPKs	Phylo_RM955	Other	N. cinerea	"Rio Mesa, UT"
+Phylo-WR1094_S84_L001_R1R2_001_Abundance-RPKs	Phylo_WR1094	Other	N. lepida	White Rock 
+Phylo-WR1095_S92_L001_R1R2_001_Abundance-RPKs	Phylo_WR1095	Other	N. lepida	White Rock 
+Phylo-WU1003_S50_L001_R1R2_001_Abundance-RPKs	Phylo_WU1003	Other	N. stephensi 	Wupatki Cliffs
+Phylo-WU1004_S58_L001_R1R2_001_Abundance-RPKs	Phylo_WU1004	Other	N. stephensi 	Wupatki Cliffs
+Phylo-WU1008_S66_L001_R1R2_001_Abundance-RPKs	Phylo_WU1008	Other	N. stephensi 	Wupatki Cliffs
+Phylo-WU1010_S74_L001_R1R2_001_Abundance-RPKs	Phylo_WU1010	Other	N. albigula	Wupatki Cliffs
+Phylo-WU1011_S82_L001_R1R2_001_Abundance-RPKs	Phylo_WU1011	Other	N. albigula	Wupatki Cliffs
+Phylo-WU1013_S90_L001_R1R2_001_Abundance-RPKs	Phylo_WU1013	Other	N. albigula	Wupatki Cliffs
+Phylo-WU1014_S3_L001_R1R2_001_Abundance-RPKs	Phylo_WU1014	Other	N. devia	Wupatki Cliffs
+Phylo-WU1015_S11_L001_R1R2_001_Abundance-RPKs	Phylo_WU1015	Other	N. devia	Wupatki Cliffs
+Phylo-WU1016_S19_L001_R1R2_001_Abundance-RPKs	Phylo_WU1016	Other	N. devia	Wupatki Cliffs
+Phylo-WW978_S73_L001_R1R2_001_Abundance-RPKs	Phylo_WW978	Creosote	N. bryanti	White Water
+Phylo-WW979_S49_L001_R1R2_001_Abundance-RPKs	Phylo_WW979	Creosote	N. lepida	White Water
+Phylo-WW981_S81_L001_R1R2_001_Abundance-RPKs	Phylo_WW981	Creosote	N. bryanti	White Water
+Phylo-WW984_S89_L001_R1R2_001_Abundance-RPKs	Phylo_WW984	Creosote	N. bryanti	White Water
+Phylo-WW985_S57_L001_R1R2_001_Abundance-RPKs	Phylo_WW985	Creosote	N. lepida	White Water
