@@ -27,7 +27,7 @@ The following instructions are taken from the Metaphlan 3.0 Tutorial.  First, ru
 
 Then, merge the metaphlan output files.
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="gu">$ merge_metaphlan_tables.py *_profile.txt > merged_abundance_table.txt</span>
 </code></pre></div></div>
 
