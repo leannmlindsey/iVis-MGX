@@ -20,17 +20,58 @@ https://leannmlindsey.github.io/dataviscourse-pr-Visualization-of-Metagenomic-Da
 </code></pre></div></div>
 
 2. Create a file, samples.txt, which maps your sampleIDs to a sampleName (shorter usually than the sampleID and better for web visualization) and the experimental condition and save in iVis-Meta/data/raw/
-3. Clone the github repository into your personal github account and then clone repository onto your local computer 
-4. Copy the following output files from Humann 3.0 and Metaphlan 3.0 into iVis-Meta/data/raw/
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
+<span class="gu">## This is an &lt;h2&gt; tag</span>
+<span class="gu">###### This is an &lt;h6&gt; tag</span>
+</code></pre></div></div>
+
+4. Clone the github repository into your personal github account and then clone repository onto your local computer 
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
+<span class="gu">## This is an &lt;h2&gt; tag</span>
+<span class="gu">###### This is an &lt;h6&gt; tag</span>
+</code></pre></div></div>
+
+6. Copy the following output files from Humann 3.0 and Metaphlan 3.0 into iVis-Meta/data/raw/
 * samples.txt (file created in step 1 that maps sampleIDs to experimental condition)
 * combined_genefamilies.tsv (humann 3.0 output)
 * combined_genepathways.tsv (humann 3.0 output)
 * merged_abundance.txt (metaphlan 3.0 output)
 
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
+<span class="gu">## This is an &lt;h2&gt; tag</span>
+<span class="gu">###### This is an &lt;h6&gt; tag</span>
+</code></pre></div></div>
+
 4. Run the python program to format the data properly for visualization.  This can be done on the command line, or in a jupyter notebook.
-5. Optional, reduce the size of the gene_pathways.tsv file by choosing differntialy expressed genes and save as gene_pathways_heatmap.tsv
-6. Push local changes to github repository
-7. Run the visualization locally by going to the command line, cd into the repository folder and typing php -S localhost:8080
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
+<span class="gu">## This is an &lt;h2&gt; tag</span>
+<span class="gu">###### This is an &lt;h6&gt; tag</span>
+</code></pre></div></div>
+
+6. Optional, reduce the size of the gene_pathways.tsv file by choosing differntialy expressed genes and save as gene_pathways_heatmap.tsv
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
+<span class="gu">## This is an &lt;h2&gt; tag</span>
+<span class="gu">###### This is an &lt;h6&gt; tag</span>
+</code></pre></div></div>
+
+8. Push local changes to github repository
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
+<span class="gu">## This is an &lt;h2&gt; tag</span>
+<span class="gu">###### This is an &lt;h6&gt; tag</span>
+</code></pre></div></div>
+
+10. Run the visualization locally by going to the command line, cd into the repository folder and typing php -S localhost:8080
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
+<span class="gu">## This is an &lt;h2&gt; tag</span>
+<span class="gu">###### This is an &lt;h6&gt; tag</span>
+</code></pre></div></div>
+
 
 Your visualization will then be active on your local machine by going to a browser and typing 
 localhost:8080/iVis-MGX.html
