@@ -96,7 +96,7 @@ If you use this site for any proposals or publications, please cite:
 
 Lindsey L, Vasquez L, Truong K, Zhou Y, iVis-Meta, an Interactive Visualization Tool for Metagenomic Data, Spring 2021, https://github.com/leannmlindsey/iVis-MGX
 
-Note: Humann 3.0 and Metaphlan 3.0 are software tools developed by the Huttenhower Lab, Dept of Statistics, Harvard School of Public Health.  
+Note: [Humann 3.0](https://huttenhower.sph.harvard.edu/humann) and [Metaphlan 3.0](https://huttenhower.sph.harvard.edu/metaphlan) are software tools developed by the Huttenhower Lab, Dept of Statistics, Harvard School of Public Health.  
 
 Franzosa EA*, McIver LJ*, Rahnavard G, Thompson LR, Schirmer M, Weingart G, Schwarzberg Lipson K, Knight R, Caporaso JG, Segata N, Huttenhower C. Species-level functional profiling of metagenomes and metatranscriptomes. Nat Methods 15: 962-968 (2018).
 
