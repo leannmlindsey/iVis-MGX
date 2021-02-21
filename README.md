@@ -1,4 +1,4 @@
-# iVis-Meta, beta version 
+# iVis-MBX, beta version 
 
 iVis-Meta stands for Interactive Visualization of Metagenomic Data.  It is currently in Beta testing.
 
