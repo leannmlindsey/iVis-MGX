@@ -130,7 +130,11 @@ Note:  on mac computers php is already installed.  If running on a computer with
 
 **9. Create a live public website by setting up GitHub Pages**
 
-Go to your github repository and click on Settings (the wheel icon on the right hand side).  Scroll down to GitHub Pages, choose a name for the website and select main and save.
+Go to your github repository and click on Settings (the wheel icon on the right hand side).  
+
+![GitPagesSettings](https://github.com/leannmlindsey/iVis-MGX/blob/main/images/GitPagesSettings.png)
+
+Scroll down to GitHub Pages, choose a name for the website and select main and save.
 
 Your website will then be active at the url listed under GitHub Pages.  It takes about 10 minutes to load after you click save on GitHub Pages.
 
