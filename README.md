@@ -72,13 +72,17 @@ Then, merge the metaphlan output files.
 <span class="gu">$ python3 iVis-MGX-preprocessing.py </span>
 </code></pre></div></div>
 
-6. Optional, reduce the size of the gene_pathways.tsv file by choosing differntialy expressed genes and save as gene_pathways_heatmap.tsv
+Alternately, you can use the provided jupyter notebook
+
+* [iVis-MGX-preprocessing.ipynb](https://github.com/leannmlindsey/iVis-MGX/blob/main/data/preprocessingScripts/DataVisProject_FinalScripts.ipynb)
+
+5. Optional, reduce the size of the gene_pathways.tsv file by choosing differntialy expressed genes and save as gene_pathways_heatmap.tsv
 
 The heatmap in the lower section of the screen will display the entire file that it is given.  The genepathways.tsv file is usually extremely large and takes too long to load.  You can look at a partial section of the file, or you can run some differential expression analysis software to reduce the number of lines in the file.  An example file diff.R is provided in ./iVis-MGX/data/preprocessingScripts/
 
 * [diff.R](https://github.com/leannmlindsey/iVis-MGX/blob/main/data/preprocessingScripts/diff.R)
 
-8. Push local changes to github repository
+6. Push local changes to github repository
 
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ cd ./iVis-MGX/</span>
 <span class="gu">git status</span>
@@ -90,7 +94,7 @@ The heatmap in the lower section of the screen will display the entire file that
 <span class="gu">git push</span>
 </code></pre></div></div>
 
-10. Run the visualization locally by setting up a local php server
+7. Run the visualization locally by setting up a local php server
 
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ cd ./iVis-MGX/</span>
 <span class="gu">php 0S localhost:8080</span>
