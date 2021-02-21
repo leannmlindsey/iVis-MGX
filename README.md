@@ -24,7 +24,12 @@ https://leannmlindsey.github.io/dataviscourse-pr-Visualization-of-Metagenomic-Da
 4. Run the python program to format the data properly for visualization.  This can be done on the command line, or in a jupyter notebook.
 5. Optional, reduce the size of the gene_pathways.tsv file by choosing differntialy expressed genes and save as gene_pathways_heatmap.tsv
 6. Push local changes to github repository
-7. Run the visualization locally 
+7. Run the visualization locally by going to the command line, cd into the repository folder and typing php -S localhost:8080
+
+Your visualization will then be active on your local machine by going to a browser and typing 
+localhost:8080/iVis-MGX.html
+
+Note:  on mac computers php is already installed.  If running on a computer without php, you will have to install php.
 
 or
 
