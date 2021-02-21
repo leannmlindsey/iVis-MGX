@@ -92,7 +92,7 @@ The instructional video link is on the top left corner of the visualization, but
 https://youtu.be/HRD0133kAhM
 
 ## Citations
-If you use this site for any proposals or publications, please cite:
+If you use [iVis-MGX](https://github.com/leannmlindsey/iVis-MGX) for any proposals or publications, please cite:
 
 Lindsey L, Vasquez L, Truong K, Zhou Y, iVis-Meta, an Interactive Visualization Tool for Metagenomic Data, Spring 2021, https://github.com/leannmlindsey/iVis-MGX
 
