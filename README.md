@@ -21,7 +21,19 @@ https://leannmlindsey.github.io/dataviscourse-pr-Visualization-of-Metagenomic-Da
 * [Humann 3.0 Tutorial, Software & Handbook](https://huttenhower.sph.harvard.edu/humann)
 * [Metaphlan 3.0 Tutorial, Software & Handbook](https://huttenhower.sph.harvard.edu/metaphlan)
 
-The following instructions are taken from the end of the Metaphlan 3.0 Tutorial, the portion on running multiple samples.  First, run metaphlan on all samples.
+The following instructions are take from the end of the [Humann 3.0 Tutorial](https://github.com/biobakery/biobakery/wiki/humann3#3-manipulating-humann-output-tables), the portion on running multiple samples.  First, run Humann 3.0 on all samples.
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ for f in *.fasta; do humann -i $f -o hmp_subset; done</span>
+</code></pre></div></div>
+
+Then merge the output files into two tables, genepathways.tsv and genefamilies.tsv.
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ humann_join_tables -i input_dir -o genefamilies.tsv --file_name genefamilies</span>
+<span class="gh">$ humann_join_tables -i input_dir -o genepathways.tsv --file_name genepathways</span>
+</code></pre></div></div>
+
+
+The following instructions are taken from the end of the [Metaphlan 3.0 Tutorial](https://github.com/biobakery/biobakery/wiki/metaphlan3), the portion on running multiple samples.  First, run metaphlan on all samples.
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ for i in SRS*.fasta.gz
 > do
 >     metaphlan $i --input_type fasta --nproc 4 > ${i%.fasta.gz}_profile.txt
@@ -47,7 +59,7 @@ Then, merge the metaphlan output files.
 </code></pre></div></div>
 
 **2. Clone repository onto your local computer**
-* You can find the clone address for your github repository by clicking on the green button labeled "Code" on the repository home page, and then copying the http// link in the pop up box.  In the box below, replace https://github.com/repositorynamehere.git with your github https:// address.
+* You can find the clone address for your github repository by clicking on the green button labeled "Code" on the repository home page, and then copying the http// link in the pop up box.  In the box below, replace https://github.com/repositorynamehere.git with the github https:// address that you created in step 1.
 
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ git clone https://github.com/repositorynamehere.git</span>
 </code></pre></div></div>
