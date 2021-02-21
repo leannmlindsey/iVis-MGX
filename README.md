@@ -44,17 +44,13 @@ Then, merge the metaphlan output files.
 
 * [samples.txt](https://github.com/leannmlindsey/iVis-MGX/blob/main/data/raw/samples.txt)
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ mv samples.txt ./iVis-MGX/data/raw/</span>
-</code></pre></div></div>
-
-
 4. Copy the following output files from Humann 3.0 and Metaphlan 3.0 into iVis-Meta/data/raw/
 * samples.txt (file created in step 1 that maps sampleIDs to experimental condition)
 * combined_genefamilies.tsv (humann 3.0 output)
 * combined_genepathways.tsv (humann 3.0 output)
 * merged_abundance.txt (metaphlan 3.0 output)
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ cp combined_genefamilies.tsv ./iVis-MGX/data/raw/</span>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ mv samples.txt ./iVis-MGX/data/raw/</span><span class="gh">$ cp combined_genefamilies.tsv ./iVis-MGX/data/raw/</span>
 <span class="gu">$ cp combined_genepathways.tsv ./iVis-MGX/data/raw/</span>
 <span class="gu">$ cp merged_abundance.txt ./iVis-MGX/data/raw/</span>
 </code></pre></div></div>
