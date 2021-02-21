@@ -51,9 +51,16 @@ Then, merge the metaphlan output files.
 
 **3. Create a tab delimited file, samples.txt, which should have at a minimum 3 columns.  SampleID, SampleName, Condition_0.**  
 
-This file maps your sampleIDs to a sampleName (shorter usually than the sampleID and better for web visualization) and experimental conditions and save in iVis-Meta/data/raw/.  Multiple experimental conditions are accepted by the tool, each experimental condition should be a separate column and labeled Condition_1, Condition_2, etc.  An example of the format of the samples.txt file is below.  The file can be created in excel and saved as a tab delimited file with the name samples.txt.
+This file maps your sampleIDs to a sampleName and experimental conditions.  Multiple experimental conditions are accepted by the tool, each experimental condition should be a separate column and labeled Condition_1, Condition_2, etc.  An example of the format of the samples.txt file is below.  The file can be created in excel and saved as a tab delimited file with the name samples.txt.
 
 * [samples.txt](https://github.com/leannmlindsey/iVis-MGX/blob/main/data/raw/samples.txt)
+
+It is important that the sampleID names *exactly match* the headers in the combined_genefamilies.tsv and combined_genepathways.tsv files.  An example of a command line script that you can run to capture these exact names is included below.
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ head -1 combined_genefamilies.tsv | tr "\t" "\n" > samples.txt</span>
+</code></pre></div></div>
+
+You can then open the samples.txt file in excel to create your sampleNames and condition_0 columns.  Then save as a tab delimited file.  Alternately you can create this file in any text editor and save as a tab delimited file.
 
 **4. Copy the following output files from Humann 3.0 and Metaphlan 3.0 into iVis-Meta/data/raw/**
 * samples.txt (file created in step 1 that maps sampleIDs to experimental condition)
