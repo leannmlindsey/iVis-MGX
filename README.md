@@ -30,7 +30,7 @@ https://youtu.be/HRD0133kAhM
 ## Citations
 If you use this site for any proposals or publications, please cite:
 
-Lindsey L, Vasquez L, Truong K,
+Lindsey L, Vasquez L, Truong K, Zhou Y, iVis-Meta, an Interactive Visualization Tool for Metagenomic Data, Spring 2021
 
 Note: Humann 3.0 and Metaphlan 3.0 are software tools developed by the Huttenhower Lab, Dept of Statistics, Harvard School of Public Health.  
 
