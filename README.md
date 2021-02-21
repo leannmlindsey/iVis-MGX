@@ -28,7 +28,12 @@ https://leannmlindsey.github.io/dataviscourse-pr-Visualization-of-Metagenomic-Da
 
 or
 
-8. Create a live public website by using 
+8. Create a live public website by setting up GitHub Pages
+
+Go to your github repository and click on Settings (the wheel icon on the right hand side).  Scroll down to GitHub Pages and select main and save.
+
+Your website will then be active at the url listed under GitHub Pages.  It takes about 10 minutes to load after you click save on GitHub Pages.
+
 ## Video Instructional 
 LINK TO SCREENCAST:
 The instructional video link is on the top left corner of the visualization, but it is also here:
