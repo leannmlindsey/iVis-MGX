@@ -37,13 +37,14 @@ Then, merge the metaphlan output files.
 **1. Create a new github repository in your personal github account at www.github.com and import code from the iVis-MGX repository**
 * Choose create new repository
 * Give your repository a name
-* Choose the last option, "...or, import code from another repository" and click "import code" and then type 
+* Choose the last option, "...or, import code from another repository" and click "import code" and then type the https address of iVis-MGX (provided below)
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">https://github.com/leannmlindsey/iVis-MGX.git</span>
-</code></pre></div></div>
+
 
 ![GitSetup](https://github.com/leannmlindsey/iVis-MGX/blob/main/images/GitSetup.png)
 
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">https://github.com/leannmlindsey/iVis-MGX.git</span>
+</code></pre></div></div>
 
 **2. Clone repository onto your local computer**
 * You can find the clone address for your github repository by clicking on the green button labeled "Code" on the repository home page, and then copying the http// link in the pop up box.  In the box below, replace https://github.com/repositorynamehere.git with your github https:// address.
