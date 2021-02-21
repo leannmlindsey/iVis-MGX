@@ -37,14 +37,14 @@ Then, merge the metaphlan output files.
 
 2. Clone repository onto your local computer 
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">git clone https://github.com/leannmlindsey/iVis-MGX.git</span>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ git clone https://github.com/leannmlindsey/iVis-MGX.git</span>
 </code></pre></div></div>
 
 3. Create a tab delimited file, samples.txt, which should have at a minimum 3 columns.  SampleID, SampleName, Condition_0.  This file maps your sampleIDs to a sampleName (shorter usually than the sampleID and better for web visualization) and experimental conditions and save in iVis-Meta/data/raw/.  Multiple experimental conditions are accepted by the tool, each experimental condition should be a separate column and labeled Condition_1, Condition_2, etc.  An example of the format of the samples.txt file is below.  The file can be created in excel and saved as a tab delimited file with the name samples.txt.
 
 * [samples.txt](https://github.com/leannmlindsey/iVis-MGX/blob/main/data/raw/samples.txt)
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">mv samples.txt ./iVis-MGX/data/raw/</span>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ mv samples.txt ./iVis-MGX/data/raw/</span>
 </code></pre></div></div>
 
 
@@ -54,9 +54,9 @@ Then, merge the metaphlan output files.
 * combined_genepathways.tsv (humann 3.0 output)
 * merged_abundance.txt (metaphlan 3.0 output)
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">cp combined_genefamilies.tsv ./iVis-MGX/data/raw/</span>
-<span class="gu">cp combined_genepathways.tsv ./iVis-MGX/data/raw/</span>
-<span class="gu">cp merged_abundance.txt ./iVis-MGX/data/raw/</span>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ cp combined_genefamilies.tsv ./iVis-MGX/data/raw/</span>
+<span class="gu">$ cp combined_genepathways.tsv ./iVis-MGX/data/raw/</span>
+<span class="gu">$ cp merged_abundance.txt ./iVis-MGX/data/raw/</span>
 </code></pre></div></div>
 
 4. Run the python program to format the data properly for visualization.  This can be done on the command line, or in a jupyter notebook.
