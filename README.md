@@ -43,7 +43,7 @@ Then, merge the metaphlan output files.
 
 4. Clone the github repository into your personal github account and then clone repository onto your local computer 
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">git clone https://github.com/leannmlindsey/iVis-MGX.git</span>
 <span class="gu">## This is an &lt;h2&gt; tag</span>
 <span class="gu">###### This is an &lt;h6&gt; tag</span>
 </code></pre></div></div>
