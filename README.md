@@ -13,9 +13,15 @@ https://leannmlindsey.github.io/dataviscourse-pr-Visualization-of-Metagenomic-Da
 
 ## Installation Instructions
 0. Run metaphlan 3.0 and humann 3.0 following the instructions from the Huttenhower website. 
-1. Create a file, samples.txt, which maps your sampleIDs to a sampleName (shorter usually than the sampleID and better for web visualization) and the experimental condition and save in iVis-Meta/data/raw/
-2. Clone the github repository into your personal github account and then clone repository onto your local computer 
-3. Copy the following output files from Humann 3.0 and Metaphlan 3.0 into iVis-Meta/data/raw/
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
+<span class="gu">## This is an &lt;h2&gt; tag</span>
+<span class="gu">###### This is an &lt;h6&gt; tag</span>
+</code></pre></div></div>
+
+2. Create a file, samples.txt, which maps your sampleIDs to a sampleName (shorter usually than the sampleID and better for web visualization) and the experimental condition and save in iVis-Meta/data/raw/
+3. Clone the github repository into your personal github account and then clone repository onto your local computer 
+4. Copy the following output files from Humann 3.0 and Metaphlan 3.0 into iVis-Meta/data/raw/
 * samples.txt (file created in step 1 that maps sampleIDs to experimental condition)
 * combined_genefamilies.tsv (humann 3.0 output)
 * combined_genepathways.tsv (humann 3.0 output)
