@@ -78,7 +78,7 @@ Alternately, you can use the provided jupyter notebook
 
 5. Optional, reduce the size of the gene_pathways.tsv file by choosing differntialy expressed genes and save as gene_pathways_heatmap.tsv
 
-The heatmap in the lower section of the screen will display the entire file that it is given.  The genepathways.tsv file is usually extremely large and takes too long to load.  You can look at a partial section of the file, or you can run some differential expression analysis software to reduce the number of lines in the file.  An example file diff.R is provided in ./iVis-MGX/data/preprocessingScripts/
+The heatmap in the lower section of the screen will display the entire file that it is given.  The genepathways.tsv file is usually extremely large and takes too long to load.  You can look at a partial section of the file, or you can run some differential expression analysis software to reduce the number of lines in the file.  An example file diff.R is provided in [./iVis-MGX/data/preprocessingScripts/](https://github.com/leannmlindsey/iVis-MGX/blob/main/data/preprocessingScripts/diff.R)
 
 * [diff.R](https://github.com/leannmlindsey/iVis-MGX/blob/main/data/preprocessingScripts/diff.R)
 
@@ -97,7 +97,7 @@ The heatmap in the lower section of the screen will display the entire file that
 7. Run the visualization locally by setting up a local php server
 
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ cd ./iVis-MGX/</span>
-<span class="gu">php 0S localhost:8080</span>
+<span class="gu">$ php -S localhost:8080</span>
 </code></pre></div></div>
 
 Your visualization will then be active on your local machine by going to a browser on the same local machine and typing 
