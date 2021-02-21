@@ -68,7 +68,7 @@ Then, merge the metaphlan output files.
 
 4. Run the python program to format the data properly for visualization.  This can be done on the command line, or in a jupyter notebook.
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">cd ./iVis-MGX/</span>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ cd ./iVis-MGX/</span>
 <span class="gu">$ python3 iVis-MGX-preprocessing.py </span>
 </code></pre></div></div>
 
