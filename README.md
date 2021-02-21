@@ -74,10 +74,7 @@ Then, merge the metaphlan output files.
 
 6. Optional, reduce the size of the gene_pathways.tsv file by choosing differntialy expressed genes and save as gene_pathways_heatmap.tsv
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
-<span class="gu">## This is an &lt;h2&gt; tag</span>
-<span class="gu">###### This is an &lt;h6&gt; tag</span>
-</code></pre></div></div>
+The heatmap in the lower section of the screen will display the entire file that it is given.  The genepathways.tsv file is usually extremely large and takes too long to load.  You can look at a partial section of the file, or you can run some differential expression analysis software to reduce the number of lines in the file.  An example file diff.R is provided in 
 
 8. Push local changes to github repository
 
