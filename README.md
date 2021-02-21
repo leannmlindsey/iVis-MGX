@@ -1,10 +1,12 @@
 # iVis-MGX, beta version 
 
-iVis-Meta stands for Interactive Visualization of Metagenomic Data.  It is currently in Beta testing.
+iVis-MGX stands for Interactive Visualization of Metagenomic Data.  It is currently in Beta testing.
 
-iVis-Meta is a tool that transforms the output of the metagenomic processing tools Humann 3.0 and Metaphlan 3.0 into a live website that a researcher can use to visualize and interact with their data.
+iVis-MGX is a tool that transforms the output of the metagenomic processing tools Humann 3.0 and Metaphlan 3.0 into a live website that a researcher can use to visualize and interact with their data.
 
-Note: Humann 3.0 and Metaphlan 3.0 are software tools developed by the Huttenhower Lab, Dept of Statistics, Harvard School of Public Health.  If used, please cite
+Note: Humann 3.0 and Metaphlan 3.0 are software tools developed by the Huttenhower Lab, Dept of Statistics, Harvard School of Public Health.  
+
+If used, please cite
 
 Franzosa EA*, McIver LJ*, Rahnavard G, Thompson LR, Schirmer M, Weingart G, Schwarzberg Lipson K, Knight R, Caporaso JG, Segata N, Huttenhower C. Species-level functional profiling of metagenomes and metatranscriptomes. Nat Methods 15: 962-968 (2018).
 
@@ -17,6 +19,14 @@ https://leannmlindsey.github.io/dataviscourse-pr-Visualization-of-Metagenomic-Da
 
 
 ## Installation Instructions
+0. Run metaphlan 3.0 and humann 3.0 following the instructions from the Huttenhower website. 
+1. Create a file, samples.txt, which maps your sampleIDs to a sampleName (shorter usually than the sampleID and better for web visualization) and the experimental condition
+2. Clone the github repository
+3. Copy the following output files into iVis-Meta/data/raw/
+samples.txt (file created in step 1 that maps sampleIDs to experimental condition)
+combined_genefamilies.tsv (humann 3.0 output)
+combined_genepathways.tsv (humann 3.0 output)
+merged_abundance.txt (metaphlan 3.0 output)
 
 
 ## Video Instructional 
