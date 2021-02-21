@@ -74,7 +74,9 @@ Then, merge the metaphlan output files.
 
 6. Optional, reduce the size of the gene_pathways.tsv file by choosing differntialy expressed genes and save as gene_pathways_heatmap.tsv
 
-The heatmap in the lower section of the screen will display the entire file that it is given.  The genepathways.tsv file is usually extremely large and takes too long to load.  You can look at a partial section of the file, or you can run some differential expression analysis software to reduce the number of lines in the file.  An example file diff.R is provided in 
+The heatmap in the lower section of the screen will display the entire file that it is given.  The genepathways.tsv file is usually extremely large and takes too long to load.  You can look at a partial section of the file, or you can run some differential expression analysis software to reduce the number of lines in the file.  An example file diff.R is provided in ./iVis-MGX/data/preprocessingScripts/
+
+* [diff.R](https://github.com/leannmlindsey/iVis-MGX/blob/main/data/preprocessingScripts/diff.R)
 
 8. Push local changes to github repository
 
