@@ -50,7 +50,8 @@ Then, merge the metaphlan output files.
 * combined_genepathways.tsv (humann 3.0 output)
 * merged_abundance.txt (metaphlan 3.0 output)
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ mv samples.txt ./iVis-MGX/data/raw/</span><span class="gh">$ cp combined_genefamilies.tsv ./iVis-MGX/data/raw/</span>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ mv samples.txt ./iVis-MGX/data/raw/</span>
+<span class="gh">$ cp combined_genefamilies.tsv ./iVis-MGX/data/raw/</span>
 <span class="gu">$ cp combined_genepathways.tsv ./iVis-MGX/data/raw/</span>
 <span class="gu">$ cp merged_abundance.txt ./iVis-MGX/data/raw/</span>
 </code></pre></div></div>
