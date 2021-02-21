@@ -59,9 +59,9 @@ Then, merge the metaphlan output files.
 </code></pre></div></div>
 
 **2. Clone repository onto your local computer**
-* You can find the clone address for your github repository by clicking on the green button labeled "Code" on the repository home page, and then copying the http// link in the pop up box.  In the box below, replace https://github.com/repositorynamehere.git with the github https:// address that you created in step 1.
+* You can find the clone address for your github repository by clicking on the green button labeled "Code" on the repository home page, and then copying the http// link in the pop up box.  In the box below, replace https://github.com/leannmlindsey/trial.git with the github https:// address that you created in step 1.
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ git clone https://github.com/repositorynamehere.git</span>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ git clone https://github.com/leannmlindsey/trial.git</span>
 </code></pre></div></div>
 
 **3. Create a tab delimited file, samples.txt, which should have at a minimum 3 columns.  SampleID, SampleName, Condition_0.**  
