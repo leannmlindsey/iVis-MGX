@@ -17,11 +17,13 @@ https://leannmlindsey.github.io/dataviscourse-pr-Visualization-of-Metagenomic-Da
 
 ## Installation Instructions
 **0. Run Metaphlan 3.0 and Humann 3.0 on your metagenomic samples, following the instructions from the Huttenhower Lab website.**
- 
+
+If you already have merged your Metaphlan files and combined your genepathways and genefamilies output files from Humann 3.0, then you can skip step 0 and move directly to step 1.
+
 * [Humann 3.0 Tutorial, Software & Handbook](https://huttenhower.sph.harvard.edu/humann)
 * [Metaphlan 3.0 Tutorial, Software & Handbook](https://huttenhower.sph.harvard.edu/metaphlan)
 
-The following instructions are take from the end of the [Humann 3.0 Tutorial](https://github.com/biobakery/biobakery/wiki/humann3#3-manipulating-humann-output-tables), the portion on running multiple samples.  First, run Humann 3.0 on all samples.
+The following instructions are taken from the end of the [Humann 3.0 Tutorial](https://github.com/biobakery/biobakery/wiki/humann3#3-manipulating-humann-output-tables), the portion on running multiple samples.  First, run Humann 3.0 on all samples.
 
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ for f in *.fasta; do humann -i $f -o hmp_subset; done</span>
 </code></pre></div></div>
@@ -47,6 +49,7 @@ Then, merge the metaphlan output files.
 </code></pre></div></div>
 
 To be clear, we have no affiliation with the Huttenhower Lab, this is just an alternative way to visualize the output processed with their tools.
+
 **1. Create a new github repository in your personal github account at www.github.com and import code from the iVis-MGX repository**
 * Choose create new repository
 * Give your repository a name
