@@ -56,7 +56,7 @@ Then, merge the metaphlan output files.
 
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">cp combined_genefamilies.tsv ./iVis-MGX/data/raw/</span>
 <span class="gu">cp combined_genepathways.tsv ./iVis-MGX/data/raw/</span>
-<span class="gu"cp merged_abundance.txt ./iVis-MGX/data/raw/</span>
+<span class="gu">cp merged_abundance.txt ./iVis-MGX/data/raw/</span>
 </code></pre></div></div>
 
 4. Run the python program to format the data properly for visualization.  This can be done on the command line, or in a jupyter notebook.
