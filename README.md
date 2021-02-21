@@ -134,9 +134,11 @@ Go to your github repository and click on Settings (the wheel icon on the right 
 
 ![GitPagesSettings](https://github.com/leannmlindsey/iVis-MGX/blob/main/images/GitPagesSettings.png)
 
-Scroll down to GitHub Pages, choose a name for the website and select main and save.
+Scroll down to GitHub Pages, under "Source", select main and save.
+![GitHubSource](https://github.com/leannmlindsey/iVis-MGX/blob/main/images/GitHubPagesSource.png)
 
-Your website will then be active at the url listed under GitHub Pages.  It takes about 10 minutes to load after you click save on GitHub Pages.
+Your website will then be active at the url listed under GitHub Pages after you save.  It takes about 10 minutes to load after you click save on GitHub Pages.
+![GitHubSource](https://github.com/leannmlindsey/iVis-MGX/blob/main/images/GitHubPagesSite.png)
 
 ## Video Instructional 
 LINK TO SCREENCAST:
