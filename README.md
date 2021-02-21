@@ -68,9 +68,8 @@ Then, merge the metaphlan output files.
 
 4. Run the python program to format the data properly for visualization.  This can be done on the command line, or in a jupyter notebook.
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
-<span class="gu">## This is an &lt;h2&gt; tag</span>
-<span class="gu">###### This is an &lt;h6&gt; tag</span>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">cd ./iVis-MGX/</span>
+<span class="gu">$ python3 iVis-MGX-preprocessing.py </span>
 </code></pre></div></div>
 
 6. Optional, reduce the size of the gene_pathways.tsv file by choosing differntialy expressed genes and save as gene_pathways_heatmap.tsv
