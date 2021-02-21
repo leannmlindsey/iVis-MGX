@@ -45,9 +45,9 @@ Then, merge the metaphlan output files.
 
 
 2. Clone repository onto your local computer 
-* You can find the clone address for your github repository by clicking on the green button labeled "Code" on the repository home page, and then copying the http// link in the pop up box.
+* You can find the clone address for your github repository by clicking on the green button labeled "Code" on the repository home page, and then copying the http// link in the pop up box.  In the box below, replace https://github.com/repositorynamehere.git with your github https:// address.
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ git clone {https://github.com/repositorynamehere.git}</span>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ git clone https://github.com/repositorynamehere.git</span>
 </code></pre></div></div>
 
 3. Create a tab delimited file, samples.txt, which should have at a minimum 3 columns.  SampleID, SampleName, Condition_0.  This file maps your sampleIDs to a sampleName (shorter usually than the sampleID and better for web visualization) and experimental conditions and save in iVis-Meta/data/raw/.  Multiple experimental conditions are accepted by the tool, each experimental condition should be a separate column and labeled Condition_1, Condition_2, etc.  An example of the format of the samples.txt file is below.  The file can be created in excel and saved as a tab delimited file with the name samples.txt.
