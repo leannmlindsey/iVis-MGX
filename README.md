@@ -15,12 +15,12 @@ https://leannmlindsey.github.io/dataviscourse-pr-Visualization-of-Metagenomic-Da
 3. [Metaphlan 3.0](https://huttenhower.sph.harvard.edu/metaphlan) - Metaphlan 3.0 can be installed via conda or docker
 
 ## Installation Instructions
-0. Run metaphlan 3.0 and humann 3.0 following the instructions from the Huttenhower website.
+0. Run Metaphlan 3.0 and Humann 3.0 on your metagenomic samples, following the instructions from the Huttenhower Lab website.
  
 * [Humann 3.0 Tutorial, Software & Handbook](https://huttenhower.sph.harvard.edu/humann)
 * [Metaphlan 3.0 Tutorial, Software & Handbook](https://huttenhower.sph.harvard.edu/metaphlan)
 
-The following instructions are taken from the Metaphlan 3.0 Tutorial.  First, run metaphlan on all samples.
+The following instructions are taken from the end of the Metaphlan 3.0 Tutorial, the portion on running multiple samples.  First, run metaphlan on all samples.
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ for i in SRS*.fasta.gz
 > do
 >     metaphlan $i --input_type fasta --nproc 4 > ${i%.fasta.gz}_profile.txt
