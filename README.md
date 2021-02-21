@@ -80,29 +80,30 @@ The heatmap in the lower section of the screen will display the entire file that
 
 8. Push local changes to github repository
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
-<span class="gu">## This is an &lt;h2&gt; tag</span>
-<span class="gu">###### This is an &lt;h6&gt; tag</span>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ cd ./iVis-MGX/</span>
+<span class="gu">git status</span>
+<span class="gu">git add data/raw/samples.txt</span>
+<span class="gu">git add data/raw/combined_genefamilies.tsv</span>
+<span class="gu">git add data/raw/combined_genepathways.tsv</span>
+<span class="gu">git add data/raw/merged_abundance.txt</span>
+<span class="gu">git commit</span>
+<span class="gu">git push</span>
 </code></pre></div></div>
 
-10. Run the visualization locally by going to the command line, cd into the repository folder and typing php -S localhost:8080
+10. Run the visualization locally by setting up a local php server
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># This is an &lt;h1&gt; tag</span>
-<span class="gu">## This is an &lt;h2&gt; tag</span>
-<span class="gu">###### This is an &lt;h6&gt; tag</span>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">$ cd ./iVis-MGX/</span>
+<span class="gu">php 0S localhost:8080</span>
 </code></pre></div></div>
 
-
-Your visualization will then be active on your local machine by going to a browser and typing 
+Your visualization will then be active on your local machine by going to a browser on the same local machine and typing 
 localhost:8080/iVis-MGX.html
 
 Note:  on mac computers php is already installed.  If running on a computer without php, you will have to install php.
 
-or
-
 8. Create a live public website by setting up GitHub Pages
 
-Go to your github repository and click on Settings (the wheel icon on the right hand side).  Scroll down to GitHub Pages and select main and save.
+Go to your github repository and click on Settings (the wheel icon on the right hand side).  Scroll down to GitHub Pages, choose a name for the website and select main and save.
 
 Your website will then be active at the url listed under GitHub Pages.  It takes about 10 minutes to load after you click save on GitHub Pages.
 
